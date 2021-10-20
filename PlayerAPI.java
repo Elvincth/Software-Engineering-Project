@@ -31,7 +31,4 @@ public interface PlayerAPI {
 
     public int currentRound(); //Return the user current round
 
-
 }
-
-const squares = []
