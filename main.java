@@ -14,4 +14,8 @@ class GFG {
         System.out.println(num1 + num2);
     }
 }
+<<<<<<< HEAD
 //jhgf
+=======
+//kjhgfdfkjehgfe
+>>>>>>> 2fe13d4c0873bcd101b8a5e0b7ca282ef0592c8b
