@@ -1,5 +1,4 @@
-
-import org.json.simple.JSONObject;
+import org.json.JSONObject;
 
 public class GameData {
     public boolean save(JSONObject data, String path, String name) {
