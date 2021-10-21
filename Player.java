@@ -8,6 +8,7 @@ public class Player implements PlayerAPI {
     private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
     private String name = "";
     private String token = "";
+    private ArrayList<PropertySquare> ownedProperty; /**/ 
     
 
     Player(String name, String token) {
@@ -28,11 +29,6 @@ public class Player implements PlayerAPI {
     }
 
     public String getToken() {
-
-        return null;
-    }
-
-    public String getID() {
 
         return null;
     }
@@ -62,8 +58,7 @@ public class Player implements PlayerAPI {
     }
 
     public ArrayList<PropertySquare> getProperty() {
-
-        return null;
+        return ownedProperty;
     }
 
     public void addProperty(PropertySquare property) {

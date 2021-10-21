@@ -19,7 +19,7 @@ public class Square {
     }
 
     public int getPosition() {
-        return 0;
+        return position;
     }
 
 }

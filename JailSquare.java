@@ -4,8 +4,9 @@ public class JailSquare extends Square {
         super(name, position);
     }
 
-    public void GoToJail(){} //send player to jail
+    public void GoToJail(Player player) {
+    } // send player to jail
 
-    public void JustVisit(){} // not effect
-
+    public void effectTo(Player player) {
+    }
 }

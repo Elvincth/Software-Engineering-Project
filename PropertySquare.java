@@ -2,7 +2,7 @@ public class PropertySquare extends Square {
     public String name = "";
     public int price = 0;
     public int rent = 0;
-    public String owner = "";
+    public Player owner; // ** */
     public EColor color = EColor.BLUE;
 
     PropertySquare(String name, int position, int price, int rent, EColor color) {
@@ -25,8 +25,8 @@ public class PropertySquare extends Square {
         return 0;
     } // return the rent of the property
 
-    public String getOwner() {
-        return "";
+    public Player getOwner() {
+        return owner; /** */
     }// return the owner of the property
 
     public EColor getColor() { // return the color of the property

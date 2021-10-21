@@ -11,10 +11,6 @@ public interface PlayerAPI {
 
   public String getToken();
 
-  // private String generateID();// generate an unique id for player
-
-  public String getID(); // Return player ID
-
   public int getPosition(); // Return player position
 
   public void setPosition(int pos); // move to a square position
