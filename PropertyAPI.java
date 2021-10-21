@@ -1,10 +1,5 @@
-enum Color {
-    DARK_BLUE, BLUE, YELLOW, RED
-}
-
 public interface PropertyAPI {
-
-    public String propertyName = "";
+    public String name = "";
     public int price = 0;
     public int rent = 0;
     public String owner = "";
@@ -14,11 +9,13 @@ public interface PropertyAPI {
 
     public int getPrice();
 
-    public int setRent();
-
     public int getRent();
 
+    public int setRent(int rent); //User need to pay how much rent
+
     public String getOwner();
+
+    public void setOwner(Player owner);
 
     public boolean haveOwner();
 
