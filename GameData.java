@@ -1,12 +1,12 @@
 
-// import org.json.simple.JSONObject;   
+import org.json.simple.JSONObject;
 
-// public class GameData {
-//     public boolean save(JSONObject data) {
-//         return false;
-//     }
+public class GameData {
+    public boolean save(JSONObject data, String path, String name) {
+        return false;
+    }
 
-//     public boolean load() {
-//         return false;
-//     }
-// }
+    public boolean load(String path) {
+        return false;
+    }
+}

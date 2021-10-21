@@ -1,4 +1,3 @@
-
 public class PropertySquare extends Square {
     public String name = "";
     public int price = 0;

@@ -11,5 +11,5 @@ public class GameBoard {
     }
 
     public void display() {
-    }
+    };
 }

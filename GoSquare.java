@@ -1,4 +1,3 @@
-
 public class GoSquare extends Square{
         
     GoSquare(String name, int position){

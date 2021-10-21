@@ -1,4 +1,3 @@
-
 public class ChanceSquare extends Square{
     public String name = "";
     
