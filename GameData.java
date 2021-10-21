@@ -1,7 +1,7 @@
 import org.json.JSONObject;
 
 public class GameData {
-    public boolean save(JSONObject data, String path, String name) {
+    public boolean save(JSONObject data, String path) {
         return false;
     }
 
