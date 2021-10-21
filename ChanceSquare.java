@@ -1,8 +1,9 @@
+
 public class ChanceSquare extends Square{
     public String name = "";
     
-    ChanceSquare(String name){
-        super(name);
+    ChanceSquare(String name, int position){
+        super(name, position);
         this.name = name;
     }
 

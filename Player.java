@@ -1,76 +1,82 @@
+
 import java.util.ArrayList;
 
 public class Player implements PlayerAPI {
 
-    @Override
+    private int balance = 0; // User current bank balance
+    private int position = 0; // Current position of the user
+    private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
+    private String name = "";
+    private String token = "";
+    
+
+    Player(String name, String token) {
+        this.name = name;
+        this.token = token;
+    }
+
     public String getName() {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
-    @Override
-    public String setName() {
-        // TODO Auto-generated method stub
+    public void setName(String name) {
+    }
+
+    public void setToken(String token) {
+
+    }
+
+    public String getToken() {
+
         return null;
     }
 
-    @Override
     public String getID() {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
-    @Override
     public int getPosition() {
-        // TODO Auto-generated method stub
+
         return 0;
     }
 
-    @Override
-    public void moveTo(int pos) {
-        // TODO Auto-generated method stub
+    public void setPosition(int pos) {
 
     }
 
-    @Override
     public int getBalance() {
-        // TODO Auto-generated method stub
+
         return 0;
     }
 
-    @Override
-    public int addBalance() {
-        // TODO Auto-generated method stub
+    public int addBalance(int num) {
+
         return 0;
     }
 
-    @Override
-    public int deductBalance() {
-        // TODO Auto-generated method stub
+    public int deductBalance(int num) {
+
         return 0;
     }
 
-    @Override
     public ArrayList<PropertySquare> getProperty() {
-        // TODO Auto-generated method stub
+
         return null;
     }
 
-    @Override
     public void addProperty(PropertySquare property) {
-        // TODO Auto-generated method stub
 
     }
 
-    @Override
     public boolean isInJail() {
-        // TODO Auto-generated method stub
+
         return false;
     }
 
-    @Override
     public int getJailRound() {
-        // TODO Auto-generated method stub
+
         return 0;
     }
 

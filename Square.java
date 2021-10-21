@@ -1,8 +1,10 @@
 public class Square {
     private String name;
+    private int position;
 
-    Square(String name) {
+    Square(String name, int position) {
         this.name = name;
+        this.position = position;
     }
 
     public String getName() {
@@ -14,6 +16,10 @@ public class Square {
 
     public String getType() {
         return name;
+    }
+
+    public int getPosition() {
+        return 0;
     }
 
 }

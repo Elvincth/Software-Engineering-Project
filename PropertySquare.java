@@ -1,3 +1,4 @@
+
 public class PropertySquare extends Square {
     public String name = "";
     public int price = 0;
@@ -5,8 +6,8 @@ public class PropertySquare extends Square {
     public String owner = "";
     public EColor color = EColor.BLUE;
 
-    PropertySquare(String name, int price, int rent, EColor color) {
-        super(name);
+    PropertySquare(String name, int position, int price, int rent, EColor color) {
+        super(name, position);
         this.name = name;
         this.price = price;
         this.rent = rent;
@@ -33,11 +34,11 @@ public class PropertySquare extends Square {
         return color;
     }
 
-    public void setOwner(Player owner){
+    public void setOwner(Player owner) {
 
     } // set the owner of the property
 
-    public boolean haveOwner(){
+    public boolean haveOwner() {
         return true;
     }// check whether the property has owner or not
 }

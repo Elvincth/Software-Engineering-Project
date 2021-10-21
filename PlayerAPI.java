@@ -1,36 +1,36 @@
+
 import java.util.ArrayList;
 
 public interface PlayerAPI {
-   // private int balance = 0; //User current bank balance
-   // private int position = 0; //Current position of the user
-   // private int inJailRound = 0; //Will reset after the user out of jail, start counting when the user is in jail
 
-    public String getName();
+  public void setName(String name);
 
-    public String setName();
+  public String getName();
 
-    private String generateID() {
-        return "";
-    } // generate an unique id for player
+  public void setToken(String token);
 
-    public String getID(); // Return player ID
+  public String getToken();
 
-    public int getPosition(); // Return player position  
+  // private String generateID();// generate an unique id for player
 
-    public void moveTo(int pos); // move to a square position
+  public String getID(); // Return player ID
 
-    public int getBalance(); // Return player balance
+  public int getPosition(); // Return player position
 
-    public int addBalance(); // Use to add player balance
+  public void setPosition(int pos); // move to a square position
 
-    public int deductBalance(); // Will deduct the balance of the player
+  public int getBalance(); // Return player balance
 
-    public ArrayList<PropertySquare> getProperty(); // get property belong to the user
+  public int addBalance(int num); // Use to add player balance **
 
-    public void addProperty (PropertySquare property); // add the property to user after they bought 
+  public int deductBalance(int num); // Will deduct the balance of the player **
 
-    public boolean isInJail(); //Check is user in jail or not
+  public ArrayList<PropertySquare> getProperty(); // get property belong to the user
 
-    public int getJailRound(); //Get current user jail round
+  public void addProperty(PropertySquare property); // add the property to user after they bought
+
+  public boolean isInJail(); // Check is user in jail or not
+
+  public int getJailRound(); // Get current user in jail round (IF any)
 
 }
