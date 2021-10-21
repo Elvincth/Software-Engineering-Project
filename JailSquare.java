@@ -1,10 +1,11 @@
-public class Jail extends Square{
-    
-    Jail(String name){
+public class JailSquare extends Square {
+
+    JailSquare(String name) {
         super(name);
     }
 
-    public void GoToJail();
-    public void JustVisit();
-    
+    public void GoToJail(){}
+
+    public void JustVisit(){}
+
 }
