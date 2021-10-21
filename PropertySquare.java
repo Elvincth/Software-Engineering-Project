@@ -15,17 +15,17 @@ public class PropertySquare extends Square {
 
     public String getPropertyName();
 
-    public int getPrice();
+    public int getPrice(); //return the price of the property
 
-    public int getRent();
+    public int getRent(); //return the rent of the property
 
-    public String getOwner();
+    public String getOwner();  // return the owner of the property
 
-    public EColor getColor(){
+    public EColor getColor(){ // return the color of the property
         return color;
     }
 
-    public void setOwner(Player owner);
+    public void setOwner(Player owner); // set the owner of the property
 
-    public boolean haveOwner();
+    public boolean haveOwner(); //check whether the property has owner or not
 }  

@@ -1,7 +1,6 @@
-public class IncomeTaxSquare extends Square{
+public class TaxSquare extends Square{
     
-    
-    IncomeTaxSquare(String name){
+    TaxSquare(String name){
         super(name)
     }
 
