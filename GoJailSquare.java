@@ -1,4 +1,4 @@
-public class GoJailSquare extends Square {
+public class GoJailSquare extends Square implements EffectSquareAPI {
 
     GoJailSquare(String name, int position) {
         super(name, position);

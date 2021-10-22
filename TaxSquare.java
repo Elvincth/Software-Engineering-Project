@@ -1,4 +1,4 @@
-public class TaxSquare extends Square{
+public class TaxSquare extends Square implements EffectSquareAPI {
     
     TaxSquare(String name, int position){
         super(name, position);

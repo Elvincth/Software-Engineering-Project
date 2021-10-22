@@ -1,9 +1,9 @@
-public class PropertySquare extends Square {
-    public String name = "";
-    public int price = 0;
-    public int rent = 0;
-    public Player owner; // ** */
-    public EColor color = EColor.BLUE;
+public class PropertySquare extends Square implements EffectSquareAPI {
+    private String name = "";
+    private int price = 0;
+    private int rent = 0;
+    private Player owner = null; // ** */
+    private EColor color = EColor.BLUE;
 
     PropertySquare(String name, int position, int price, int rent, EColor color) {
         super(name, position);
@@ -13,8 +13,8 @@ public class PropertySquare extends Square {
         this.color = color;
     }
 
-    public String getPropertyName() {
-        return "";
+    public String getName() {
+        return name;
     }
 
     public int getPrice() {
@@ -33,11 +33,14 @@ public class PropertySquare extends Square {
         return color;
     }
 
-    public void setOwner(Player owner) {
+    private void setOwner(Player owner) {
 
     } // set the owner of the property
 
-    public boolean haveOwner() {
-        return true;
+    private boolean haveOwner() {
+        return owner != null;
     }// check whether the property has owner or not
+
+    public void effectTo(Player player) {
+    }
 }
