@@ -14,10 +14,6 @@ public class Square {
     public void setName(String name) {
     }
 
-    public String getType() {
-        return name;
-    }
-
     public int getPosition() {
         return position;
     }
