@@ -1,16 +1,12 @@
 import java.util.ArrayList;
 //https://github.com/dialex/JColor
 //https://github.com/iNamik/java_text_tables
-import javax.management.ValueExp;
 
-import com.diogonunes.jcolor.AnsiFormat;
-import com.diogonunes.jcolor.Attribute;
 import com.inamik.text.tables.SimpleTable;
 import com.inamik.text.tables.grid.Border;
 import com.inamik.text.tables.grid.Util;
 import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
-import com.diogonunes.jcolor.Attribute;
 
 public class Monopoly extends GameData {
     private int currentRound = 0;
@@ -43,8 +39,22 @@ public class Monopoly extends GameData {
 
     // Start the game
     public void start() {
-        display();
-        players.add(new Player("x", "x"));
+        System.out.println("Welcome To Monopoly!");
+        String[] choices = { "1", "2" };
+        String[] choicesDescriptions = { "Start Game", "Load the game" };
+        Menu startMenu = new Menu("Enter a choice", choices, choicesDescriptions);
+        String userChoice = startMenu.ask();
+
+        if (userChoice == choices[0]) {
+            addPlayers();
+        }
+
+        // display();
+        // players.add(new Player("x", "x"));
+    }
+
+    private void addPlayers() {
+
     }
 
     public int getCurrentRound() {
