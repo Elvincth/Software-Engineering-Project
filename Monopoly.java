@@ -55,6 +55,7 @@ public class Monopoly extends GameData {
 
         if (userChoice.equals(choices[0])) {
             addPlayers();
+            display();
         }
 
         // display();
@@ -123,6 +124,8 @@ public class Monopoly extends GameData {
     public int getCurrentRound() {
         return currentRound;
     }
+
+    private int ArrayList<Players> 
 
     // For display the game board
     public void display() {
