@@ -6,6 +6,11 @@ public class Monopoly extends GameData {
     private ArrayList<Player> players;
     private String playerTokenTurn = ""; // Used to store current turn player's token //**? */
 
+    // Start the game
+    private void start() {
+
+    }
+
     public int getCurrentRound() {
         return currentRound;
     }
