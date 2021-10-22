@@ -7,7 +7,7 @@ import com.diogonunes.jcolor.Attribute;
 import com.inamik.text.tables.SimpleTable;
 import com.inamik.text.tables.grid.Border;
 import com.inamik.text.tables.grid.Util;
-import com.inamik.text.tables.Cell;
+import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
 
 public class Monopoly extends GameData {
@@ -22,7 +22,7 @@ public class Monopoly extends GameData {
         squares[2] = new PropertySquare("Wan Chai", 2, 700, 65, EColor.BLUE);
         squares[3] = new TaxSquare("INCOME TAX", 3);
         squares[4] = new PropertySquare("Stanley", 4, 600, 60, EColor.BLUE);
-        squares[5] = new JailSquare("JAIL/JUST VISITING", 5);
+        squares[5] = new JailSquare("JAIL", 5); // JAIL/JUST VISITING
         squares[6] = new PropertySquare("Shek O", 6, 400, 10, EColor.RED);
         squares[7] = new PropertySquare("Mong Kok", 7, 500, 40, EColor.RED);
         squares[8] = new ChanceSquare("Chance", 8);
@@ -68,47 +68,41 @@ public class Monopoly extends GameData {
         // NOTE: Apply vertical alignment FIRST !
         //
 
-        int height = 10;
-        int width = 20;
+        int height = 3;
+        int width = 8;
 
-        SimpleTable s = SimpleTable.of().nextRow().nextCell().addLine("Left").addLine("Top")
-                .applyToCell(Cell.Functions.TOP_ALIGN.withHeight(height))
-                .applyToCell(Cell.Functions.LEFT_ALIGN.withWidth(width).withChar('^')).nextCell().addLine("Center")
-                .addLine("Top").applyToCell(Cell.Functions.TOP_ALIGN.withHeight(height))
-                .applyToCell(Cell.Functions.HORIZONTAL_CENTER.withWidth(width)).nextCell().addLine("Right")
-                .addLine("Top").applyToCell(Cell.Functions.TOP_ALIGN.withHeight(height))
-                .applyToCell(Cell.Functions.RIGHT_ALIGN.withWidth(width)).nextRow().nextCell().addLine("Left")
-                .addLine("Center").applyToCell(Cell.Functions.VERTICAL_CENTER.withHeight(height))
-                .applyToCell(Cell.Functions.LEFT_ALIGN.withWidth(width)).nextCell().addLine("Center").addLine("Center")
-                .applyToCell(Cell.Functions.VERTICAL_CENTER.withHeight(height))
-                .applyToCell(Cell.Functions.HORIZONTAL_CENTER.withWidth(width).withChar('.')).nextCell()
-                .addLine("Right").addLine("Center").applyToCell(Cell.Functions.VERTICAL_CENTER.withHeight(height))
-                .applyToCell(Cell.Functions.RIGHT_ALIGN.withWidth(width)).nextRow().nextCell().addLine("Left")
-                .addLine("Bottom").applyToCell(Cell.Functions.BOTTOM_ALIGN.withHeight(height))
-                .applyToCell(Cell.Functions.LEFT_ALIGN.withWidth(width)).nextCell().addLine("Center").addLine("Bottom")
-                .applyToCell(Cell.Functions.BOTTOM_ALIGN.withHeight(height))
-                .applyToCell(Cell.Functions.HORIZONTAL_CENTER.withWidth(width)).nextCell().addLine("Right")
-                .addLine("Bottom").applyToCell(Cell.Functions.BOTTOM_ALIGN.withHeight(height))
-                .applyToCell(Cell.Functions.RIGHT_ALIGN.withWidth(width).withChar('_'));
+        Square[][] boardSquare = { { squares[13], squares[14], squares[15], squares[16], squares[17], squares[18] },
+                { squares[9], null, null, null, null, squares[16] },
+                { squares[8], null, null, null, null, squares[17] },
+                { squares[7], null, null, null, null, squares[18] },
+                { squares[6], null, null, null, null, squares[19] },
+                { squares[5], squares[4], squares[3], squares[2], squares[1], squares[0] } };
 
-        //
-        // NOTE: SimpleTable makes creating the table easy, but you will need to convert
-        // it
-        // into a GridTable in order to perform further operations
-        // (like adding a border or printing)
-        //
+        SimpleTable table = SimpleTable.of();
 
-        // Convert to grid
-        //
-        GridTable g = s.toGrid();
+        table.nextRow();
 
-        // Add simple border
-        //
-        g = Border.of(Border.Chars.of('+', '-', '|')).apply(g);
+        for (int i = 0; i < boardSquare.length; ++i) {
 
-        // Print the table to System.out
-        //
+            for (int j = 0; j < boardSquare[i].length; ++j) {
+                Square square = boardSquare[i][j];
+                boolean isSquare = square != null;
 
-        System.out.println( Util.asString(g));
+                table.nextCell().addLine(isSquare ? square.getName() : "")
+                        .applyToCell(Functions.VERTICAL_CENTER.withHeight(height))
+                        .applyToCell(Functions.HORIZONTAL_CENTER.withWidth(width));
+            }
+
+            if (i != 5) {
+                table.nextRow();
+            }
+
+        }
+
+        GridTable gridTable = table.toGrid();
+
+        gridTable = Border.SINGLE_LINE.apply(gridTable);
+
+        System.out.println(Util.asString(gridTable));
     };
 }
