@@ -10,12 +10,12 @@ public class Monopoly extends GameData {
         squares[0] = new GoSquare("GO", 0);
         squares[1] = new PropertySquare("Central", 1, 800, 100, EColor.BLUE);
         squares[2] = new PropertySquare("Wan Chai", 2, 700, 65, EColor.BLUE);
-        squares[3] = new TaxSquare("INCOME TAX",3);
+        squares[3] = new TaxSquare("INCOME TAX", 3);
     }
 
     // Start the game
     public void start() {
-
+        display();
     }
 
     public int getCurrentRound() {
@@ -24,6 +24,8 @@ public class Monopoly extends GameData {
 
     // For display the game board
     public void display() {
+        System.out.print(String.format("%-5s%-5d|", "|", 7));
+        System.out.print(String.format("%-5s%-5d|", "|", 7));
         System.out.print(String.format("%-5s%-5d|", "|", 7));
     };
 }
