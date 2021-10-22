@@ -14,4 +14,8 @@ public class Monopoly extends GameData {
     public int getCurrentRound() {
         return currentRound;
     }
+
+    //For display the game board
+    public void display() {
+    };
 }
