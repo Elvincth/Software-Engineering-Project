@@ -1,5 +1,6 @@
 import java.util.ArrayList;
-
+//https://github.com/dialex/JColor
+//https://github.com/iNamik/java_text_tables
 import javax.management.ValueExp;
 
 import com.diogonunes.jcolor.AnsiFormat;
@@ -9,6 +10,7 @@ import com.inamik.text.tables.grid.Border;
 import com.inamik.text.tables.grid.Util;
 import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
+import com.diogonunes.jcolor.Attribute;
 
 public class Monopoly extends GameData {
     private int currentRound = 0;
@@ -50,28 +52,10 @@ public class Monopoly extends GameData {
 
     // For display the game board
     public void display() {
-        // for (int i = 0; i < squares.length; i++) {
-        // int price = -1;
-        // String priceDisplay = "";
+        int height = 4;
+        int width = 18;
 
-        // if (squares[i] instanceof PropertySquare) {
-        // price = ((PropertySquare) squares[i]).getPrice();
-        // priceDisplay = " HKD:" + price;
-        // }
-
-        // AnsiFormat fNormal = new AnsiFormat(Attribute.MAGENTA_BACK(),
-        // Attribute.YELLOW_TEXT());
-
-        // System.out.println(fNormal.format(squares[i].getName() + priceDisplay));
-
-        // }
-        // NOTE: Apply vertical alignment FIRST !
-        //
-
-        int height = 3;
-        int width = 8;
-
-        Square[][] boardSquare = { { squares[13], squares[14], squares[15], squares[16], squares[17], squares[18] },
+        Square[][] boardSquare = { { squares[10], squares[11], squares[12], squares[13], squares[14], squares[15] },
                 { squares[9], null, null, null, null, squares[16] },
                 { squares[8], null, null, null, null, squares[17] },
                 { squares[7], null, null, null, null, squares[18] },
@@ -88,12 +72,28 @@ public class Monopoly extends GameData {
                 Square square = boardSquare[i][j];
                 boolean isSquare = square != null;
 
-                table.nextCell().addLine(isSquare ? square.getName() : "")
-                        .applyToCell(Functions.VERTICAL_CENTER.withHeight(height))
+                table.nextCell();
+
+                // Split the name into parts by \n
+                // So we can use addLine
+                if (isSquare) {
+                    String[] splitString = square.getName().split("\n");
+
+                    for (String s : splitString) {
+                        table.addLine("📕" + s);
+                    }
+                }
+
+                // Add price label
+                if (isSquare && square instanceof PropertySquare) {
+                    table.addLine("HKD " + ((PropertySquare) square).getPrice());
+                }
+
+                table.applyToCell(Functions.VERTICAL_CENTER.withHeight(height))
                         .applyToCell(Functions.HORIZONTAL_CENTER.withWidth(width));
             }
 
-            if (i != 5) {
+            if (i != 5) { // Skip the last row, no need to insert
                 table.nextRow();
             }
 
