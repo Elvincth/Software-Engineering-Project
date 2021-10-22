@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 
-import com.jakewharton.fliptables.FlipTable;
-
 public class Monopoly extends GameData {
     private int currentRound = 0;
     private Square[] squares = new Square[20];
@@ -14,7 +12,7 @@ public class Monopoly extends GameData {
         squares[2] = new PropertySquare("Wan Chai", 2, 700, 65, EColor.BLUE);
         squares[3] = new TaxSquare("INCOME TAX", 3);
         squares[4] = new PropertySquare("Stanley", 4, 600, 60, EColor.BLUE);
-        squares[5] = new JailSquare("JailSquare", 5);
+        squares[5] = new JailSquare("JAIL / JUST VISITING", 5);
         squares[6] = new PropertySquare("Shek O", 6, 400, 10, EColor.RED);
         squares[7] = new PropertySquare("Mong Kok", 7, 500, 40, EColor.RED);
         squares[8] = new ChanceSquare("Chance", 8);
@@ -40,20 +38,20 @@ public class Monopoly extends GameData {
         return currentRound;
     }
 
-    private String getGrid(String text) {
-        String grid = "";
-
-        String.format("%-5s%-5d|", "|", 7);
-
-        return grid;
-    }
-
     // For display the game board
     public void display() {
+        for (int i = 0; i < squares.length; i++) {
+            int price = -1;
+            String priceDisplay = "";
 
-        String[] headers = { " ", " ", " " };
-        String[][] data = { { , "fff", "Bar" }, { "Kit", "fff", "Kat" } };
-        System.out.println(FlipTable.of(headers, data));
+            if (squares[i] instanceof PropertySquare) {
+                price = ((PropertySquare) squares[i]).getPrice();
+                priceDisplay = " HKD:" + price;
+            }
+
+            System.out.println(squares[i].getName() + priceDisplay);
+
+        }
 
     };
 }

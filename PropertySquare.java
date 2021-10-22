@@ -18,11 +18,11 @@ public class PropertySquare extends Square implements EffectSquareAPI {
     }
 
     public int getPrice() {
-        return 0;
+        return price;
     } // return the price of the property
 
     public int getRent() {
-        return 0;
+        return rent;
     } // return the rent of the property
 
     public Player getOwner() {
