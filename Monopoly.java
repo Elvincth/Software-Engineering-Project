@@ -1,5 +1,15 @@
 import java.util.ArrayList;
 
+import javax.management.ValueExp;
+
+import com.diogonunes.jcolor.AnsiFormat;
+import com.diogonunes.jcolor.Attribute;
+import com.inamik.text.tables.SimpleTable;
+import com.inamik.text.tables.grid.Border;
+import com.inamik.text.tables.grid.Util;
+import com.inamik.text.tables.Cell;
+import com.inamik.text.tables.GridTable;
+
 public class Monopoly extends GameData {
     private int currentRound = 0;
     private Square[] squares = new Square[20];
@@ -12,7 +22,7 @@ public class Monopoly extends GameData {
         squares[2] = new PropertySquare("Wan Chai", 2, 700, 65, EColor.BLUE);
         squares[3] = new TaxSquare("INCOME TAX", 3);
         squares[4] = new PropertySquare("Stanley", 4, 600, 60, EColor.BLUE);
-        squares[5] = new JailSquare("JAIL / JUST VISITING", 5);
+        squares[5] = new JailSquare("JAIL/JUST VISITING", 5);
         squares[6] = new PropertySquare("Shek O", 6, 400, 10, EColor.RED);
         squares[7] = new PropertySquare("Mong Kok", 7, 500, 40, EColor.RED);
         squares[8] = new ChanceSquare("Chance", 8);
@@ -40,18 +50,65 @@ public class Monopoly extends GameData {
 
     // For display the game board
     public void display() {
-        for (int i = 0; i < squares.length; i++) {
-            int price = -1;
-            String priceDisplay = "";
+        // for (int i = 0; i < squares.length; i++) {
+        // int price = -1;
+        // String priceDisplay = "";
 
-            if (squares[i] instanceof PropertySquare) {
-                price = ((PropertySquare) squares[i]).getPrice();
-                priceDisplay = " HKD:" + price;
-            }
+        // if (squares[i] instanceof PropertySquare) {
+        // price = ((PropertySquare) squares[i]).getPrice();
+        // priceDisplay = " HKD:" + price;
+        // }
 
-            System.out.println(squares[i].getName() + priceDisplay);
+        // AnsiFormat fNormal = new AnsiFormat(Attribute.MAGENTA_BACK(),
+        // Attribute.YELLOW_TEXT());
 
-        }
+        // System.out.println(fNormal.format(squares[i].getName() + priceDisplay));
 
+        // }
+        // NOTE: Apply vertical alignment FIRST !
+        //
+
+        int height = 10;
+        int width = 20;
+
+        SimpleTable s = SimpleTable.of().nextRow().nextCell().addLine("Left").addLine("Top")
+                .applyToCell(Cell.Functions.TOP_ALIGN.withHeight(height))
+                .applyToCell(Cell.Functions.LEFT_ALIGN.withWidth(width).withChar('^')).nextCell().addLine("Center")
+                .addLine("Top").applyToCell(Cell.Functions.TOP_ALIGN.withHeight(height))
+                .applyToCell(Cell.Functions.HORIZONTAL_CENTER.withWidth(width)).nextCell().addLine("Right")
+                .addLine("Top").applyToCell(Cell.Functions.TOP_ALIGN.withHeight(height))
+                .applyToCell(Cell.Functions.RIGHT_ALIGN.withWidth(width)).nextRow().nextCell().addLine("Left")
+                .addLine("Center").applyToCell(Cell.Functions.VERTICAL_CENTER.withHeight(height))
+                .applyToCell(Cell.Functions.LEFT_ALIGN.withWidth(width)).nextCell().addLine("Center").addLine("Center")
+                .applyToCell(Cell.Functions.VERTICAL_CENTER.withHeight(height))
+                .applyToCell(Cell.Functions.HORIZONTAL_CENTER.withWidth(width).withChar('.')).nextCell()
+                .addLine("Right").addLine("Center").applyToCell(Cell.Functions.VERTICAL_CENTER.withHeight(height))
+                .applyToCell(Cell.Functions.RIGHT_ALIGN.withWidth(width)).nextRow().nextCell().addLine("Left")
+                .addLine("Bottom").applyToCell(Cell.Functions.BOTTOM_ALIGN.withHeight(height))
+                .applyToCell(Cell.Functions.LEFT_ALIGN.withWidth(width)).nextCell().addLine("Center").addLine("Bottom")
+                .applyToCell(Cell.Functions.BOTTOM_ALIGN.withHeight(height))
+                .applyToCell(Cell.Functions.HORIZONTAL_CENTER.withWidth(width)).nextCell().addLine("Right")
+                .addLine("Bottom").applyToCell(Cell.Functions.BOTTOM_ALIGN.withHeight(height))
+                .applyToCell(Cell.Functions.RIGHT_ALIGN.withWidth(width).withChar('_'));
+
+        //
+        // NOTE: SimpleTable makes creating the table easy, but you will need to convert
+        // it
+        // into a GridTable in order to perform further operations
+        // (like adding a border or printing)
+        //
+
+        // Convert to grid
+        //
+        GridTable g = s.toGrid();
+
+        // Add simple border
+        //
+        g = Border.of(Border.Chars.of('+', '-', '|')).apply(g);
+
+        // Print the table to System.out
+        //
+
+        System.out.println( Util.asString(g));
     };
 }
