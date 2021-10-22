@@ -44,6 +44,7 @@ public class Monopoly extends GameData {
     // Start the game
     public void start() {
         display();
+        players.add(new Player("x", "x"));
     }
 
     public int getCurrentRound() {
@@ -77,14 +78,20 @@ public class Monopoly extends GameData {
                 // Split the name into parts by \n
                 // So we can use addLine
                 if (isSquare) {
-                    String[] splitString = square.getName().split("\n");
+                    String[] splitString;
+
+                    if (square instanceof PropertySquare) {
+                        splitString = ((PropertySquare) square).getEmojiName().split("\n");
+                    } else {
+                        splitString = square.getName().split("\n");
+                    }
 
                     for (String s : splitString) {
-                        table.addLine("📕" + s);
+                        table.addLine(s);
                     }
                 }
 
-                // Add price label
+                // Add price label if it is PropertySquare
                 if (isSquare && square instanceof PropertySquare) {
                     table.addLine("HKD " + ((PropertySquare) square).getPrice());
                 }

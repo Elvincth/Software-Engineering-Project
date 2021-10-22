@@ -17,6 +17,30 @@ public class PropertySquare extends Square implements EffectSquareAPI {
         return name;
     }
 
+    public String getEmojiName() {
+        return colorToEmoji(color) + " " + name;
+    }
+
+    private String colorToEmoji(EColor color) {
+        if (EColor.BLUE == color) {
+            return "🟦";
+        }
+
+        if (EColor.DARK_BLUE == color) {
+            return "🔵";
+        }
+
+        if (EColor.RED == color) {
+            return "🔴";
+        }
+
+        if (EColor.YELLOW == color) {
+            return "🟡";
+        }
+
+        return "";
+    }
+
     public int getPrice() {
         return price;
     } // return the price of the property
@@ -43,4 +67,5 @@ public class PropertySquare extends Square implements EffectSquareAPI {
 
     public void effectTo(Player player) {
     }
+
 }
