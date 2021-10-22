@@ -15,8 +15,10 @@ public class Monopoly extends GameData {
     private Square[] squares = new Square[20];
     private ArrayList<Player> players = new ArrayList<Player>();
     private String playerTokenTurn = ""; // Used to store current turn player's token //**? */
+    // Utils
     private Scanner scanner = new Scanner(System.in);
-    // Token choices
+    private Utils utils = new Utils();
+    // Token commands
     private ArrayList<String> tokenChoices;
     private ArrayList<String> tokenChoicesInfo;
 
@@ -48,12 +50,12 @@ public class Monopoly extends GameData {
     // Start the game
     public void start() {
         System.out.println("Welcome To Monopoly!");
-        String[] choices = { "1", "2" };
+        String[] commands = { "1", "2" };
         String[] choicesInfo = { "Start Game", "Load the game" };
-        Menu startMenu = new Menu(scanner, "Enter a choice", choices, choicesInfo);
+        Menu startMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo);
         String userChoice = startMenu.ask();
 
-        if (userChoice.equals(choices[0])) {
+        if (userChoice.equals(commands[0])) {
             addPlayers();
             display();
         }
@@ -84,7 +86,7 @@ public class Monopoly extends GameData {
 
         name = name.trim();
 
-        token = tokenMenu.ask();
+        token = tokenMenu.askChoice();
 
         // add the player to the array list
         players.add(new Player(name, token));
@@ -110,7 +112,7 @@ public class Monopoly extends GameData {
 
     }
 
-    // Remove the selected token from choices since it have been picked by other
+    // Remove the selected token from commands since it have been picked by other
     // users
     private void removeToken(String token) {
         for (int i = 0; i < tokenChoices.size(); i++) {
@@ -125,7 +127,18 @@ public class Monopoly extends GameData {
         return currentRound;
     }
 
-    private int ArrayList<Players> 
+    // Get user tokens by position
+    private ArrayList<String> getTokensByPos(int pos) {
+        ArrayList<String> tokens = new ArrayList<String>();
+
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getPosition() == pos) {
+                tokens.add(players.get(i).getToken());
+            }
+        }
+
+        return tokens;
+    }
 
     // For display the game board
     public void display() {
@@ -172,6 +185,15 @@ public class Monopoly extends GameData {
                     table.addLine("HKD " + ((PropertySquare) square).getPrice());
                 }
 
+                // Add the player tokens that currently on that square
+                if (isSquare) {
+                    ArrayList<String> tokens = getTokensByPos(square.getPosition());
+                    // If have user token
+                    if (tokens.size() > 0) {
+                        table.addLine(String.join(" ", tokens));
+                    }
+                }
+
                 table.applyToCell(Functions.VERTICAL_CENTER.withHeight(height))
                         .applyToCell(Functions.HORIZONTAL_CENTER.withWidth(width));
             }
@@ -185,6 +207,8 @@ public class Monopoly extends GameData {
         GridTable gridTable = table.toGrid();
 
         gridTable = Border.SINGLE_LINE.apply(gridTable);
+
+        utils.clearScreen();
 
         System.out.println(Util.asString(gridTable));
     };
