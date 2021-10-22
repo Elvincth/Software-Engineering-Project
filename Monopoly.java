@@ -68,7 +68,7 @@ public class Monopoly extends GameData {
         Menu tokenMenu = new Menu(scanner, "Choose a token", tokenChoices, tokenChoicesInfo);
         YesNo addPlayerQuestion = new YesNo(scanner, "Add one more player?");
 
-        System.out.printf("Enter player%s name: ", players == null ? 1 : players.size());
+        System.out.printf("Enter player%s name: ", players.size() + 1);
 
         // Enter until name is not empty
         while (scanner.hasNextLine()) {
@@ -92,7 +92,7 @@ public class Monopoly extends GameData {
         removeToken(token);
 
         // If the current number of player is less then one we MUST add another player
-        if (players.size() < 1) {
+        if (players.size() <= 1) {
             addPlayers();
             return;
         }

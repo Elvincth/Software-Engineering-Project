@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Menu {
+public class Menu extends Utils {
     private String message = "";
     private String[] choices;
     private String[] choicesDescription;
@@ -51,6 +51,7 @@ public class Menu {
     }
 
     public String ask() {
+
         String userInput = "";
 
         System.out.println(message);
@@ -65,9 +66,11 @@ public class Menu {
                 break;
             }
 
-            System.out.println("Wrong enter again");
+            System.out.println("Please enter " + String.join(", ", choices) + " only");
 
         }
+
+        clearScreen();
 
         return userInput;
     }

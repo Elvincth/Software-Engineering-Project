@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class YesNo {
+public class YesNo extends Utils {
     private String message = "";
     private Scanner scanner = null;
 
@@ -10,6 +10,7 @@ public class YesNo {
     }
 
     public boolean ask() {
+
         String userInput = "";
 
         System.out.printf("%s (y/n): ", message);
@@ -17,8 +18,7 @@ public class YesNo {
         while (scanner.hasNextLine()) {
             userInput = scanner.nextLine();
 
-            if (userInput == "Y" | userInput == "y" || userInput == "N" || userInput == "n") {
-
+            if (userInput.equals("Y") || userInput.equals("y") || userInput.equals("N") || userInput.equals("n")) {
                 break;
             }
 
@@ -26,9 +26,11 @@ public class YesNo {
 
         }
 
-        if (userInput == "Y" || userInput == "y") {
+        if (userInput.equals("Y") || userInput.equals("y")) {
             return true;
         }
+
+        clearScreen();
 
         return false;
     }
