@@ -13,6 +13,7 @@ public class Menu {
         this.message = message;
         this.choices = choices;
         this.choicesDescription = choicesDescription;
+        this.listLayout = listLayout;
 
         if (choices.length != choicesDescription.length) {
             throw new IllegalArgumentException("Each choice must have a choicesDescription");
@@ -20,7 +21,7 @@ public class Menu {
     }
 
     Menu(Scanner scanner, String message, String[] choices, String[] choicesDescription) {
-        this(scanner, message, choices, choicesDescription, false);
+        this(scanner, message, choices, choicesDescription, true);
     }
 
     Menu(Scanner scanner, String message, ArrayList<String> choices, ArrayList<String> choicesDescription,
@@ -29,7 +30,7 @@ public class Menu {
     }
 
     Menu(Scanner scanner, String message, ArrayList<String> choices, ArrayList<String> choicesDescription) {
-        this(scanner, message, choices, choicesDescription, false);
+        this(scanner, message, choices, choicesDescription, true);
     }
 
     // Check if the input work in choice
@@ -43,8 +44,9 @@ public class Menu {
     }
 
     private void displayMenu() {
+        String separator = listLayout ? "\n" : " ";
         for (int i = 0; i < choices.length; i++) {
-            System.out.printf("[%s] %s \n", choices[i], choicesDescription[i]);
+            System.out.printf("[%s] %s %s", choices[i], choicesDescription[i], separator);
         }
     }
 

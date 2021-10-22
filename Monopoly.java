@@ -13,15 +13,14 @@ import com.inamik.text.tables.GridTable;
 public class Monopoly extends GameData {
     private int currentRound = 0;
     private Square[] squares = new Square[20];
-    private ArrayList<Player> players;
+    private ArrayList<Player> players = new ArrayList<Player>();
     private String playerTokenTurn = ""; // Used to store current turn player's token //**? */
     private Scanner scanner = new Scanner(System.in);
     // Token choices
-    private ArrayList<String> tokenChoices = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6"));
-    private ArrayList<String> tokenChoicesInfo = new ArrayList<String>(Arrays.asList("A", "B", "C", "D", "E", "F"));
+    private ArrayList<String> tokenChoices;
+    private ArrayList<String> tokenChoicesInfo;
 
     Monopoly() {
-
         squares[0] = new GoSquare("GO", 0);
         squares[1] = new PropertySquare("Central", 1, 800, 90, EColor.BLUE);
         squares[2] = new PropertySquare("Wan Chai", 2, 700, 65, EColor.BLUE);
@@ -42,6 +41,8 @@ public class Monopoly extends GameData {
         squares[17] = new PropertySquare("Yuen Long", 17, 400, 25, EColor.YELLOW);
         squares[18] = new ChanceSquare("Chance", 18);
         squares[19] = new PropertySquare("Tai O", 19, 600, 25, EColor.YELLOW);
+        tokenChoices = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        tokenChoicesInfo = new ArrayList<String>(Arrays.asList("A", "B", "C", "D", "E", "F"));
     }
 
     // Start the game
@@ -63,7 +64,9 @@ public class Monopoly extends GameData {
     private void addPlayers() {
         String name = "";
         String token = "";
+        Boolean addOneMore = false;
         Menu tokenMenu = new Menu(scanner, "Choose a token", tokenChoices, tokenChoicesInfo);
+        YesNo addPlayerQuestion = new YesNo(scanner, "Add one more player?");
 
         System.out.printf("Enter player%s name: ", players == null ? 1 : players.size());
 
@@ -82,9 +85,28 @@ public class Monopoly extends GameData {
 
         token = tokenMenu.ask();
 
+        // add the player to the array list
+        players.add(new Player(name, token));
+
+        // Remove the selected token in the list
         removeToken(token);
 
-        addPlayers();
+        // If the current number of player is less then one we MUST add another player
+        if (players.size() < 1) {
+            addPlayers();
+            return;
+        }
+
+        // Ask if the user want to add one more user
+        // only ask if player number not larger then 6
+        if (players.size() < 6) {
+            addOneMore = addPlayerQuestion.ask();
+
+            if (addOneMore) {
+                addPlayers();
+            }
+        }
+
     }
 
     // Remove the selected token from choices since it have been picked by other
