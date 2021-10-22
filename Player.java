@@ -16,6 +16,12 @@ public class Player implements PlayerAPI {
         this.token = token;
     }
 
+    Player(String name, String token, int position) {
+        this.name = name;
+        this.token = token;
+        this.position = position;
+    }
+
     public String getName() {
         return name;
     }

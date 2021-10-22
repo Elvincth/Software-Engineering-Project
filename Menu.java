@@ -1,11 +1,15 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Menu {
-    String message = "";
-    String[] choices;
-    String[] choicesDescription;
+    private String message = "";
+    private String[] choices;
+    private String[] choicesDescription;
+    private Scanner scanner = null;
+    private boolean listLayout = false;
 
-    Menu(String message, String[] choices, String[] choicesDescription) {
+    Menu(Scanner scanner, String message, String[] choices, String[] choicesDescription, Boolean listLayout) {
+        this.scanner = scanner;
         this.message = message;
         this.choices = choices;
         this.choicesDescription = choicesDescription;
@@ -13,6 +17,19 @@ public class Menu {
         if (choices.length != choicesDescription.length) {
             throw new IllegalArgumentException("Each choice must have a choicesDescription");
         }
+    }
+
+    Menu(Scanner scanner, String message, String[] choices, String[] choicesDescription) {
+        this(scanner, message, choices, choicesDescription, false);
+    }
+
+    Menu(Scanner scanner, String message, ArrayList<String> choices, ArrayList<String> choicesDescription,
+            Boolean listLayout) {
+        this(scanner, message, choices.toArray(String[]::new), choicesDescription.toArray(String[]::new));
+    }
+
+    Menu(Scanner scanner, String message, ArrayList<String> choices, ArrayList<String> choicesDescription) {
+        this(scanner, message, choices, choicesDescription, false);
     }
 
     // Check if the input work in choice
@@ -32,7 +49,6 @@ public class Menu {
     }
 
     public String ask() {
-        Scanner scanner = new Scanner(System.in); // Create a Scanner object
         String userInput = "";
 
         System.out.println(message);
@@ -43,7 +59,7 @@ public class Menu {
             userInput = scanner.nextLine();
 
             if (inChoice(userInput)) {
-                scanner.close();
+
                 break;
             }
 

@@ -1,6 +1,8 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 //https://github.com/dialex/JColor
 //https://github.com/iNamik/java_text_tables
+import java.util.Scanner;
 
 import com.inamik.text.tables.SimpleTable;
 import com.inamik.text.tables.grid.Border;
@@ -13,8 +15,13 @@ public class Monopoly extends GameData {
     private Square[] squares = new Square[20];
     private ArrayList<Player> players;
     private String playerTokenTurn = ""; // Used to store current turn player's token //**? */
+    private Scanner scanner = new Scanner(System.in);
+    // Token choices
+    private ArrayList<String> tokenChoices = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6"));
+    private ArrayList<String> tokenChoicesInfo = new ArrayList<String>(Arrays.asList("A", "B", "C", "D", "E", "F"));
 
     Monopoly() {
+
         squares[0] = new GoSquare("GO", 0);
         squares[1] = new PropertySquare("Central", 1, 800, 90, EColor.BLUE);
         squares[2] = new PropertySquare("Wan Chai", 2, 700, 65, EColor.BLUE);
@@ -41,11 +48,11 @@ public class Monopoly extends GameData {
     public void start() {
         System.out.println("Welcome To Monopoly!");
         String[] choices = { "1", "2" };
-        String[] choicesDescriptions = { "Start Game", "Load the game" };
-        Menu startMenu = new Menu("Enter a choice", choices, choicesDescriptions);
+        String[] choicesInfo = { "Start Game", "Load the game" };
+        Menu startMenu = new Menu(scanner, "Enter a choice", choices, choicesInfo);
         String userChoice = startMenu.ask();
 
-        if (userChoice == choices[0]) {
+        if (userChoice.equals(choices[0])) {
             addPlayers();
         }
 
@@ -54,7 +61,41 @@ public class Monopoly extends GameData {
     }
 
     private void addPlayers() {
+        String name = "";
+        String token = "";
+        Menu tokenMenu = new Menu(scanner, "Choose a token", tokenChoices, tokenChoicesInfo);
 
+        System.out.printf("Enter player%s name: ", players == null ? 1 : players.size());
+
+        // Enter until name is not empty
+        while (scanner.hasNextLine()) {
+            name = scanner.nextLine();
+
+            if (!name.trim().isEmpty()) {
+                break;
+            }
+
+            System.out.println("Name cannot be empty");
+        }
+
+        name = name.trim();
+
+        token = tokenMenu.ask();
+
+        removeToken(token);
+
+        addPlayers();
+    }
+
+    // Remove the selected token from choices since it have been picked by other
+    // users
+    private void removeToken(String token) {
+        for (int i = 0; i < tokenChoices.size(); i++) {
+            if (token.equals(tokenChoices.get(i))) {
+                tokenChoices.remove(i);
+                tokenChoicesInfo.remove(i);
+            }
+        }
     }
 
     public int getCurrentRound() {
