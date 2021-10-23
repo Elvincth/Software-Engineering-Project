@@ -7,6 +7,6 @@ public class Dice implements DiceAPI {
     };
 
     public int getTotal() {
-        return 0;
+        return rolledDice[0] + rolledDice[1];
     };
 }
