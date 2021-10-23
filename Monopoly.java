@@ -49,6 +49,7 @@ public class Monopoly extends GameData {
 
     // Start the game
     public void start() {
+        utils.clearScreen();
         System.out.println("Welcome To Monopoly!");
         String[] commands = { "1", "2" };
         String[] choicesInfo = { "Start Game", "Load a game" };

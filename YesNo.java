@@ -26,11 +26,11 @@ public class YesNo extends Utils {
 
         }
 
+        clearScreen();
+
         if (userInput.equals("Y") || userInput.equals("y")) {
             return true;
         }
-
-        clearScreen();
 
         return false;
     }
