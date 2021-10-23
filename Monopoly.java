@@ -51,11 +51,11 @@ public class Monopoly extends GameData {
     public void start() {
         System.out.println("Welcome To Monopoly!");
         String[] commands = { "1", "2" };
-        String[] choicesInfo = { "Start Game", "Load the game" };
+        String[] choicesInfo = { "Start Game", "Load a game" };
         Menu startMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo);
-        String userChoice = startMenu.ask();
+        String userChoice = startMenu.askChoice();
 
-        if (userChoice.equals(commands[0])) {
+        if (userChoice.equals(choicesInfo[0])) {
             addPlayers();
             display();
         }
@@ -116,7 +116,7 @@ public class Monopoly extends GameData {
     // users
     private void removeToken(String token) {
         for (int i = 0; i < tokenChoices.size(); i++) {
-            if (token.equals(tokenChoices.get(i))) {
+            if (token.equals(tokenChoicesInfo.get(i))) {
                 tokenChoices.remove(i);
                 tokenChoicesInfo.remove(i);
             }
