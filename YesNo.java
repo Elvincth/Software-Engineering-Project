@@ -22,7 +22,7 @@ public class YesNo extends Utils {
                 break;
             }
 
-            System.out.println("Please enter (y/n) only");
+            System.out.println("Please enter (y/n) or (Y/N) only");
 
         }
 
