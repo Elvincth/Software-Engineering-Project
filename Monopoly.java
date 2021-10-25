@@ -207,7 +207,7 @@ public class Monopoly extends GameData {
 
         GridTable gridTable = table.toGrid();
 
-        gridTable = Border.SINGLE_LINE.apply(gridTable);
+        gridTable = Border.DOUBLE_LINE.apply(gridTable);
 
         utils.clearScreen();
 

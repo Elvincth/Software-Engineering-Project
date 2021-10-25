@@ -2,7 +2,6 @@
 import java.util.ArrayList;
 
 public class Player implements PlayerAPI {
-
     private int balance = 0; // User current bank balance
     private int position = 0; // Current position of the user
     private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
