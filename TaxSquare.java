@@ -4,6 +4,7 @@ public class TaxSquare extends Square implements EffectSquareAPI {
         super(name, position);
     }
 
-    public void effectTo(Player player){} //determine add amount or lose money
-    
+    public void effectTo(Player player){
+        player.deductBalance(player.getBalance()/10);
+    } //determine add amount or lose money 
 }

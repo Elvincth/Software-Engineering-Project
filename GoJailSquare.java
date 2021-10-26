@@ -5,5 +5,6 @@ public class GoJailSquare extends Square implements EffectSquareAPI  {
     }
 
     public void effectTo(Player player) {
+        player.setPosition(5);
     }
 }
