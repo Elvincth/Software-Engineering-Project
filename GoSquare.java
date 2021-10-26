@@ -5,6 +5,13 @@ public class GoSquare extends Square implements EffectSquareAPI {
     }
 
     public void effectTo(Player player) {
-    } // determine add amount or lose money
+        if(player.getUserCurentRound() > 0){
+            player.addBalance(1500);
+            player.AddUserCurrentRound(1);
+        }
+        else{
+            player.AddUserCurrentRound(1);
+        }
+    } // when user pass through the go square 
 
 }

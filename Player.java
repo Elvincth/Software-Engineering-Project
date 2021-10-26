@@ -5,6 +5,7 @@ public class Player implements PlayerAPI {
     private int balance = 0; // User current bank balance
     private int position = 0; // Current position of the user
     private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
+    private int currentUserRound = 0;
     private boolean inJail = false;
     private String name = "";
     private String token = "";
@@ -79,4 +80,11 @@ public class Player implements PlayerAPI {
         return inJailRound;
     }
 
+    public int getUserCurentRound() {
+        return currentUserRound;
+    }
+
+    public void AddUserCurrentRound(int round){
+        currentUserRound += 1;
+    }
 }
