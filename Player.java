@@ -84,7 +84,7 @@ public class Player implements PlayerAPI {
         return currentUserRound;
     }
 
-    public void AddUserCurrentRound(int round){
+    public void addUserCurrentRound(int round){
         currentUserRound += 1;
     }
 }
