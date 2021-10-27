@@ -11,10 +11,10 @@ public class ChanceSquare extends Square {
         int randomMoney = 0;
 
         if (addOrDeduct == 0) {
-            randomMoney = 10 * (int) (Math.random() * 31);
+            randomMoney = 10 * (int) (1 + Math.random() * 30);
             player.deductBalance(randomMoney);
         } else {
-            randomMoney = 10 * (int) (Math.random() * 21);
+            randomMoney = 10 * (int) (1 + Math.random() * 20);
             player.addBalance(randomMoney);
         }
     } // determine add amount or lose money
