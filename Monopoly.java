@@ -16,16 +16,16 @@ public class Monopoly extends GameData {
     private ArrayList<Player> players = new ArrayList<Player>();
     private int currentPlayerIndex = 0; // Current player index
     // Utils
-    private Scanner scanner = new Scanner(System.in);
+    protected Scanner scanner = new Scanner(System.in);
     private Utils utils = new Utils();
     // Token commands
-    private ArrayList<String> tokenChoices;
-    private ArrayList<String> tokenChoicesInfo;
+    private ArrayList<String> tokenChoices = new ArrayList<String>();
+    private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Dice
     private Dice dice = new Dice();
     // Settings
     final boolean DEBUG = true;
-    final int SHORT_DELAY_TIME = DEBUG ? 200 : 900;
+    final int SHORT_DELAY_TIME = DEBUG ? 50 : 900;
 
     Monopoly() {
         squares[0] = new GoSquare("GO", 0);
@@ -71,9 +71,6 @@ public class Monopoly extends GameData {
 
             nextTurn();
         }
-
-        // display();
-        // players.add(new Player("x", "x"));
     }
 
     // Handle what the user will do in the turn
@@ -238,7 +235,7 @@ public class Monopoly extends GameData {
                     String[] splitString;
 
                     if (square instanceof PropertySquare) {
-                        splitString = ((PropertySquare) square).getEmojiName().split("\n");
+                        splitString = ((PropertySquare) square).getDisplayName().split("\n");
                     } else {
                         splitString = square.getName().split("\n");
                     }

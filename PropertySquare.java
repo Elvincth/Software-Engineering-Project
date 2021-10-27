@@ -2,8 +2,9 @@ public class PropertySquare extends Square implements EffectSquareAPI {
     private String name = "";
     private int price = 0;
     private int rent = 0;
-    private Player owner = null; // ** */
+    private Player owner = null;
     private EColor color = EColor.BLUE;
+    private final String TAG = "[PROPERTY]";
 
     PropertySquare(String name, int position, int price, int rent, EColor color) {
         super(name, position);
@@ -17,8 +18,10 @@ public class PropertySquare extends Square implements EffectSquareAPI {
         return name;
     }
 
-    public String getEmojiName() {
-        return colorToEmoji(color) + " " + name;
+    // Display name for our game board
+    // * = have owner
+    public String getDisplayName() {
+        return String.format("%s %s %s", colorToEmoji(color), name, haveOwner() ? "*" : "");
     }
 
     private String colorToEmoji(EColor color) {
@@ -50,31 +53,50 @@ public class PropertySquare extends Square implements EffectSquareAPI {
     } // return the rent of the property
 
     public Player getOwner() {
-        return owner; /** */
+        return owner;
     }// return the owner of the property
 
     public EColor getColor() { // return the color of the property
         return color;
     }
 
+    // set the owner of the property
     private void buy(Player player) {
-        if (owner == null) {
+        if (!haveOwner()) {
+            owner = player;
             // buy property
             player.deductBalance(price);
             player.addProperty(this);
-            owner = player;
-            System.out.printf("You have bought %s", name);
+            System.out.printf("%s You have bought %s\n", TAG, name);
         }
-    } // set the owner of the property
+    }
 
-    private boolean haveOwner() {
+    // check whether the property have owner or not
+    public boolean haveOwner() {
         return owner != null;
-    }// check whether the property has owner or not
+    }
 
     public void effectTo(Player player, Monopoly monopoly) {
+        // If no owner we ask if the player want to buy
+        if (!haveOwner()) {
+            YesNo buyProperty = new YesNo(monopoly.scanner,
+                    String.format("%s Do you want to buy %s with HKD%d?", TAG, name, price));
+
+            // Ask if the user want to buy if yes buy it
+            if (buyProperty.ask()) {
+                buy(player);
+            }
+
+            monopoly.display();
+        }
+
         // Have owner and player is not owner
-        if (owner != null && owner.getToken() != player.getToken()) {
+        // We will get rent and pass it to the owner
+        if (haveOwner() && owner.getToken() != player.getToken()) {
+            System.out.printf("%s You have to pay rent (HKX%d) to %s\n", TAG, rent, owner.getName());
+            // PAY RENT
             player.deductBalance(rent);
+            owner.addBalance(rent);
         }
     }
 

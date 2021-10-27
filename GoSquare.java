@@ -5,13 +5,12 @@ public class GoSquare extends Square implements EffectSquareAPI {
     }
 
     public void effectTo(Player player, Monopoly monopoly) {
-        if(player.getUserCurentRound() > 0){
+        if (player.getCurrentRound() > 0) {
             player.addBalance(1500);
             player.addUserCurrentRound(1);
-        }
-        else{
+        } else {
             player.addUserCurrentRound(1);
         }
-    } // when user pass through the go square 
+    } // when user pass through the go square
 
 }

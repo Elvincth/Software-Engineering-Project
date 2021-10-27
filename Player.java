@@ -9,7 +9,7 @@ public class Player implements PlayerAPI {
     private boolean inJail = false;
     private String name = "";
     private String token = "";
-    private ArrayList<PropertySquare> ownedProperty; /**/
+    private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>();
 
     Player(String name, String token) {
         this.name = name;
@@ -17,9 +17,9 @@ public class Player implements PlayerAPI {
     }
 
     // Player(String name, String token, int position) {
-    //     this.name = name;
-    //     this.token = token;
-    //     this.position = position;
+    // this.name = name;
+    // this.token = token;
+    // this.position = position;
     // }
 
     public String getName() {
@@ -52,11 +52,13 @@ public class Player implements PlayerAPI {
 
     public int addBalance(int num) {
         balance = balance + num;
+        System.out.println("[BANK] You have gained HKD" + num);
         return balance;
     }
 
     public int deductBalance(int num) {
         balance = balance - num;
+        System.out.println("[BANK] You have been deducted HKD" + num);
         return balance;
     }
 
@@ -80,11 +82,11 @@ public class Player implements PlayerAPI {
         return inJailRound;
     }
 
-    public int getUserCurentRound() {
+    public int getCurrentRound() {
         return currentUserRound;
     }
 
-    public void addUserCurrentRound(int round){
+    public void addUserCurrentRound(int round) {
         currentUserRound += 1;
     }
 }
