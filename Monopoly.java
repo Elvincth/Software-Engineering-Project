@@ -125,6 +125,8 @@ public class Monopoly extends GameData {
         } else {
             currentPlayerIndex += 1;
         }
+
+        nextTurn();
     }
 
     private void addPlayers() {

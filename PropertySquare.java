@@ -93,7 +93,7 @@ public class PropertySquare extends Square implements EffectSquareAPI {
         // Have owner and player is not owner
         // We will get rent and pass it to the owner
         if (haveOwner() && owner.getToken() != player.getToken()) {
-            System.out.printf("%s You have to pay rent (HKX%d) to %s\n", TAG, rent, owner.getName());
+            System.out.printf("%s You have paid rent %dHKD to %s\n", TAG, rent, owner.getName());
             // PAY RENT
             player.deductBalance(rent);
             owner.addBalance(rent);
