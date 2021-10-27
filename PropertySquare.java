@@ -62,12 +62,15 @@ public class PropertySquare extends Square implements EffectSquareAPI {
 
     // set the owner of the property
     private void buy(Player player) {
-        if (!haveOwner()) {
+        if (!haveOwner() && player.getBalance() > this.price) {
             owner = player;
             // buy property
             player.deductBalance(price);
             player.addProperty(this);
             System.out.printf("%s You have bought %s\n", TAG, name);
+        }
+        else{
+            System.out.println("You do not have eought money");
         }
     }
 

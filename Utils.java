@@ -17,6 +17,6 @@ public class Utils {
         int rem = (int) value;
         int n = 10;
 
-        return (int) (Math.floor(rem / n) * n);
+        return (int) (Math.floor((rem / n) * n));
     }
 }
