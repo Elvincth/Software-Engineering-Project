@@ -24,7 +24,7 @@ public class Monopoly extends GameData {
     // Dice
     private Dice dice = new Dice();
     // Settings
-    final int SHORT_DELAY_TIME = 1000;
+    final int SHORT_DELAY_TIME = 900;
 
     Monopoly() {
         squares[0] = new GoSquare("GO", 0);
@@ -53,7 +53,7 @@ public class Monopoly extends GameData {
 
     // Start the game
     public void start() {
-        // utils.clearScreen();
+        utils.clearScreen();
         System.out.println("Welcome To Monopoly!");
         String[] commands = { "1", "2" };
         String[] choicesInfo = { "Start Game", "Load a game" };
@@ -71,6 +71,10 @@ public class Monopoly extends GameData {
 
     // Handle what the user will do in the turn
     private void nextTurn() {
+        String[] commands = { "1" };
+        String[] choicesInfo = { "End my turn" };
+        Menu turnMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo);
+        // For players
         Player currentPlayer = players.get(currentPlayerIndex);
         Square landedSquare = squares[0];// Store user landed square
 
@@ -82,18 +86,31 @@ public class Monopoly extends GameData {
         currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
         landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
 
-        // System.out.printf("You landed on %s\n", );
+        // display(); // Display the game board
 
-        display(); // Display the game board
-        dice.print(); // Tell user what he rolled
+        dice.display(); // Tell user what he rolled
 
-        String[] commands = { "1" };
-        String[] choicesInfo = { "End my turn" };
-        Menu turnMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo);
+        utils.delay(SHORT_DELAY_TIME);
+
+        utils.clearScreen();
+
+        System.out.printf("You landed on %s\n", landedSquare.getName()); // Tell where did the user landed
+
+        utils.delay(SHORT_DELAY_TIME);
+
+        utils.clearScreen();
+
+        display(); // Game board
+
+        // Check is the square is a effect square
+        if (landedSquare instanceof EffectSquareAPI) {
+            ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this);
+        }
 
         turnMenu.ask();
+
+        // Pass to next player
         nextPlayer();
-        // nextTurn();
     }
 
     // Set the player index as next player (Pass turn to next player)
@@ -127,6 +144,8 @@ public class Monopoly extends GameData {
         }
 
         name = name.trim();
+
+        utils.clearScreen();
 
         token = tokenMenu.askChoice();
 

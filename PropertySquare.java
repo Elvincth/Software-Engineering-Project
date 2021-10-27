@@ -71,7 +71,7 @@ public class PropertySquare extends Square implements EffectSquareAPI {
         return owner != null;
     }// check whether the property has owner or not
 
-    public void effectTo(Player player, Dice dice) {
+    public void effectTo(Player player, Monopoly monopoly) {
         // Have owner and player is not owner
         if (owner != null && owner.getToken() != player.getToken()) {
             player.deductBalance(rent);

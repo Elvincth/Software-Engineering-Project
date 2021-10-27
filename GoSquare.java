@@ -4,7 +4,7 @@ public class GoSquare extends Square implements EffectSquareAPI {
         super(name, position);
     }
 
-    public void effectTo(Player player, Dice dice) {
+    public void effectTo(Player player, Monopoly monopoly) {
         if(player.getUserCurentRound() > 0){
             player.addBalance(1500);
             player.addUserCurrentRound(1);

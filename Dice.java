@@ -41,8 +41,7 @@ public class Dice implements DiceAPI {
     }
 
     // Display the dice
-    public void print() {
-
+    public void display() {
         System.out.printf("◰ Dice one is %d, ◲ dice two is %d, total is %d.\n", rolledDice[0], rolledDice[1],
                 getTotal());
     }

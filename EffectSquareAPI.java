@@ -1,3 +1,3 @@
 public interface EffectSquareAPI {
-    public void effectTo(Player player, Dice dice);
+    public void effectTo(Player player, Monopoly monopoly);
 }
