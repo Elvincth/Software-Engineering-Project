@@ -23,6 +23,8 @@ public class Monopoly extends GameData {
     private ArrayList<String> tokenChoicesInfo;
     // Dice
     private Dice dice = new Dice();
+    // Settings
+    final int SHORT_DELAY_TIME = 1000;
 
     Monopoly() {
         squares[0] = new GoSquare("GO", 0);
@@ -60,7 +62,6 @@ public class Monopoly extends GameData {
 
         if (userChoice.equals(choicesInfo[0])) {
             addPlayers();
-            display();
             nextTurn();
         }
 
@@ -68,19 +69,34 @@ public class Monopoly extends GameData {
         // players.add(new Player("x", "x"));
     }
 
+    // Handle what the user will do in the turn
     private void nextTurn() {
         Player currentPlayer = players.get(currentPlayerIndex);
+        Square landedSquare = squares[0];// Store user landed square
+
         System.out.printf("It is your turn %s !\n", currentPlayer.getName());
 
-        dice.roll();
+        utils.delay(SHORT_DELAY_TIME);
+
+        dice.roll(); // Roll the dice
         currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
+        landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
 
+        // System.out.printf("You landed on %s\n", );
+
+        display(); // Display the game board
+        dice.print(); // Tell user what he rolled
+
+        String[] commands = { "1" };
+        String[] choicesInfo = { "End my turn" };
+        Menu turnMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo);
+
+        turnMenu.ask();
         nextPlayer();
-
-        nextTurn();
+        // nextTurn();
     }
 
-    // Set the player index as next player
+    // Set the player index as next player (Pass turn to next player)
     private void nextPlayer() {
         // Set to the next player
         if (currentPlayerIndex == players.size() - 1) {
@@ -216,7 +232,7 @@ public class Monopoly extends GameData {
                     ArrayList<String> tokens = getTokensByPos(square.getPosition());
                     // If have user token
                     if (tokens.size() > 0) {
-                        table.addLine(String.join(" ", tokens));
+                        table.addLine("[" + String.join(" ", tokens) + "]");
                     }
                 }
 
