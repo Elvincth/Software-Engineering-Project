@@ -13,12 +13,9 @@ public class ChanceSquare extends Square {
         if (addOrDeduct == 0) {
             randomMoney = 10 * (int) (Math.random() * 31);
             player.deductBalance(randomMoney);
-
-
         } else {
             randomMoney = 10 * (int) (Math.random() * 21);
             player.addBalance(randomMoney);
-
         }
     } // determine add amount or lose money
 }
