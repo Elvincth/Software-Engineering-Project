@@ -14,13 +14,15 @@ public class Monopoly extends GameData {
     private int currentRound = 0;
     private Square[] squares = new Square[20];
     private ArrayList<Player> players = new ArrayList<Player>();
-    private String playerTokenTurn = ""; // Used to store current turn player's token //**? */
+    private int currentPlayerIndex = 0; // Current player index
     // Utils
     private Scanner scanner = new Scanner(System.in);
     private Utils utils = new Utils();
     // Token commands
     private ArrayList<String> tokenChoices;
     private ArrayList<String> tokenChoicesInfo;
+    // Dice
+    private Dice dice = new Dice();
 
     Monopoly() {
         squares[0] = new GoSquare("GO", 0);
@@ -49,7 +51,7 @@ public class Monopoly extends GameData {
 
     // Start the game
     public void start() {
-        utils.clearScreen();
+        // utils.clearScreen();
         System.out.println("Welcome To Monopoly!");
         String[] commands = { "1", "2" };
         String[] choicesInfo = { "Start Game", "Load a game" };
@@ -59,10 +61,33 @@ public class Monopoly extends GameData {
         if (userChoice.equals(choicesInfo[0])) {
             addPlayers();
             display();
+            nextTurn();
         }
 
         // display();
         // players.add(new Player("x", "x"));
+    }
+
+    private void nextTurn() {
+        Player currentPlayer = players.get(currentPlayerIndex);
+        System.out.printf("It is your turn %s !\n", currentPlayer.getName());
+
+        dice.roll();
+        currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
+
+        nextPlayer();
+
+        nextTurn();
+    }
+
+    // Set the player index as next player
+    private void nextPlayer() {
+        // Set to the next player
+        if (currentPlayerIndex == players.size() - 1) {
+            currentPlayerIndex = 0;
+        } else {
+            currentPlayerIndex += 1;
+        }
     }
 
     private void addPlayers() {

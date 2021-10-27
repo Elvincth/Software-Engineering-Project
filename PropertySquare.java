@@ -57,15 +57,25 @@ public class PropertySquare extends Square implements EffectSquareAPI {
         return color;
     }
 
-    private void setOwner(Player owner) {
-
+    private void buy(Player player) {
+        if (owner == null) {
+            // buy property
+            player.deductBalance(price);
+            player.addProperty(this);
+            owner = player;
+            System.out.printf("You have bought %s", name);
+        }
     } // set the owner of the property
 
     private boolean haveOwner() {
         return owner != null;
     }// check whether the property has owner or not
 
-    public void effectTo(Player player) {
+    public void effectTo(Player player, Dice dice) {
+        // Have owner and player is not owner
+        if (owner != null && owner.getToken() != player.getToken()) {
+            player.deductBalance(rent);
+        }
     }
 
 }

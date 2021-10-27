@@ -1,3 +1,3 @@
 public interface EffectSquareAPI {
-    public void effectTo(Player player);
+    public void effectTo(Player player, Dice dice);
 }
