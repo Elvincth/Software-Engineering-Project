@@ -24,7 +24,8 @@ public class Monopoly extends GameData {
     // Dice
     private Dice dice = new Dice();
     // Settings
-    final int SHORT_DELAY_TIME = 900;
+    final boolean DEBUG = true;
+    final int SHORT_DELAY_TIME = DEBUG ? 200 : 900;
 
     Monopoly() {
         squares[0] = new GoSquare("GO", 0);
@@ -61,7 +62,13 @@ public class Monopoly extends GameData {
         String userChoice = startMenu.askChoice();
 
         if (userChoice.equals(choicesInfo[0])) {
-            addPlayers();
+            if (DEBUG) {
+                players.add(new Player("TEST1", "A"));
+                players.add(new Player("TEST2", "B"));
+            } else {
+                addPlayers();
+            }
+
             nextTurn();
         }
 
