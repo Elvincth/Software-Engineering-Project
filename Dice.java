@@ -2,6 +2,11 @@ public class Dice implements DiceAPI {
     private int[][] dice = { { 4, 2, 3 }, { 4, 3, 1 }, { 3, 2, 1 }, { 4, 1, 2 } };
     private int[] rolledDice = { 1, 1 };
     private Utils utils = new Utils();
+    private boolean DEBUG = false;
+
+    Dice(boolean DEBUG) {
+        this.DEBUG = DEBUG;
+    }
 
     private int rollDice() {
         int num1 = 0;
@@ -21,7 +26,7 @@ public class Dice implements DiceAPI {
                     System.out.print(a.charAt(i) + " Rolling the dice");
                 }
 
-                utils.delay(80);
+                utils.delay(DEBUG ? 10 : 80);
             }
             long now = System.currentTimeMillis();
             // stop after 0.5 seconds, say

@@ -21,11 +21,11 @@ public class Monopoly extends GameData {
     // Token commands
     private ArrayList<String> tokenChoices = new ArrayList<String>();
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
-    // Dice
-    private Dice dice = new Dice();
     // Settings
     final boolean DEBUG = true;
     final int SHORT_DELAY_TIME = DEBUG ? 50 : 900;
+    // Dice
+    private Dice dice = new Dice(DEBUG);
 
     Monopoly() {
         squares[0] = new GoSquare("GO", 0);
@@ -108,7 +108,7 @@ public class Monopoly extends GameData {
 
         // Check is the square is a effect square
         if (landedSquare instanceof EffectSquareAPI) {
-            ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this);
+            ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
         }
 
         turnMenu.ask();
