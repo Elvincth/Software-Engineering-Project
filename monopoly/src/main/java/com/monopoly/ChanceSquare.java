@@ -1,6 +1,6 @@
 package com.monopoly;
 
-public class ChanceSquare extends Square {
+public class ChanceSquare extends Square implements EffectSquareAPI {
     public String name = ""; // if random = 0 = dedect, if random = 1 = add
 
     ChanceSquare(String name, int position) {
@@ -8,7 +8,7 @@ public class ChanceSquare extends Square {
         this.name = name;
     }
 
-    public void effectTo(Player player) {
+    public void effectTo(Player player, Monopoly monopoly) {
         int addOrDeduct = (int) (Math.random() * 2); // generate a random number between 0 to 1
         int randomMoney = 0;
 

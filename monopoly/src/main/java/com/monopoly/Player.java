@@ -11,7 +11,7 @@ public class Player implements PlayerAPI {
     private String name = "";
     private String token = "";
     private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>();
-    private Utils utils = new Utils();
+    // private Utils utils = new Utils();
 
     Player(String name, String token) {
         this.name = name;

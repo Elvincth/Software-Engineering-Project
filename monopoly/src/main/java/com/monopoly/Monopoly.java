@@ -114,6 +114,7 @@ public class Monopoly extends GameData {
             ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
         }
 
+        // TODO: handle passed add money
         if (nextPosition > 19) {
             // Passed GO add 1500
             currentPlayer.addBalance(1500);
