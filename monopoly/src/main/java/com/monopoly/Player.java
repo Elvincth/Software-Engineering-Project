@@ -1,4 +1,5 @@
 package com.monopoly;
+
 import java.util.ArrayList;
 
 public class Player implements PlayerAPI {
@@ -42,11 +43,14 @@ public class Player implements PlayerAPI {
         return position;
     }
 
-    public void setPosition(int pos) {
+    public void setPosition(int pos, Monopoly monopoly) {
         int nextPosition = position + pos;
         if (nextPosition > 19) {
             position = nextPosition - 20;
-            // TODO: +1500
+
+            // Passed GO add 1500
+            addBalance(1500);
+            System.out.println("[GO] Passed GO +1500! \n");
         } else {
             position += pos;
         }

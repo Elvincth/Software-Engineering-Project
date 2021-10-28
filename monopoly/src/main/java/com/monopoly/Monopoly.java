@@ -90,7 +90,7 @@ public class Monopoly extends GameData {
         utils.delay(SHORT_DELAY_TIME);
 
         dice.roll(); // Roll the dice
-        currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
+        currentPlayer.setPosition(dice.getTotal(), this); // Set the position as the rolled dice number
         landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
 
         // display(); // Display the game board
@@ -260,7 +260,7 @@ public class Monopoly extends GameData {
 
                 // Add price label if it is PropertySquare
                 if (square instanceof PropertySquare) {
-                    table.addLine("HKD " + ((PropertySquare) square).getPrice());
+                    table.addLine("$" + ((PropertySquare) square).getPrice());
                 }
 
                 // Add the player tokens that currently on that square
@@ -290,7 +290,7 @@ public class Monopoly extends GameData {
 
         System.out.println(Util.asString(gridTable)); // Print out the table
 
-        System.out.printf("Current Player: %s, Token: %s, Balance: HKD %d, Number of property: %d\n\n",
+        System.out.printf("Current Player: %s, Token: %s, Balance: $%d, Number of property: %d\n\n",
                 currentPlayer.getName(), currentPlayer.getToken(), currentPlayer.getBalance(),
                 currentPlayer.getProperty().size());
 

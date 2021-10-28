@@ -21,6 +21,8 @@ public class Dice implements DiceAPI {
 
         long start = System.currentTimeMillis();
 
+        System.out.print("\033[2J"); // hide the cursor
+
         while (true) {
             for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 4; j++) {
@@ -37,6 +39,8 @@ public class Dice implements DiceAPI {
         }
 
         utils.clearScreen();
+
+        System.out.print("\033[?25h"); // restore the cursor
 
         return dice[num1][num2];
     }
