@@ -11,6 +11,7 @@ public class Player implements PlayerAPI {
     private String name = "";
     private String token = "";
     private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>();
+    private Utils utils = new Utils();
 
     Player(String name, String token) {
         this.name = name;
@@ -47,10 +48,8 @@ public class Player implements PlayerAPI {
         int nextPosition = position + pos;
         if (nextPosition > 19) {
             position = nextPosition - 20;
-
-            // Passed GO add 1500
-            addBalance(1500);
-            System.out.println("[GO] Passed GO +1500! \n");
+            // Passed go or at go, add current round counter
+            currentRound = currentRound + 1;
         } else {
             position += pos;
         }

@@ -7,12 +7,12 @@ public class GoSquare extends Square implements EffectSquareAPI {
     }
 
     public void effectTo(Player player, Monopoly monopoly) {
-        if (player.getCurrentRound() > 0) {
-            player.addBalance(1500);
-        }
+        // if (player.getCurrentRound() > 0) {
+        // player.addBalance(1500);
 
-        // Add current round counter
-        player.setCurrentRound(player.getCurrentRound() + 1);
+        // System.out.println("[GO] Passed GO +1500! \n");
+        // }
+
     } // when user pass through the go square
 
 }

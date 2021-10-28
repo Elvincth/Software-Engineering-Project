@@ -26,7 +26,7 @@ public class Monopoly extends GameData {
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
     final boolean DEBUG = true;
-    final int SHORT_DELAY_TIME = DEBUG ? 50 : 900;
+    final int SHORT_DELAY_TIME = DEBUG ? 500 : 900;
     // Dice
     private Dice dice = new Dice(DEBUG);
 
@@ -78,6 +78,7 @@ public class Monopoly extends GameData {
 
     // Handle what the user will do in the turn
     private void nextTurn() {
+        int nextPosition = 0;
         String[] commands = { "1" };
         String[] choicesInfo = { "End my turn" };
         Menu turnMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo);
@@ -90,6 +91,7 @@ public class Monopoly extends GameData {
         utils.delay(SHORT_DELAY_TIME);
 
         dice.roll(); // Roll the dice
+        nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed go square
         currentPlayer.setPosition(dice.getTotal(), this); // Set the position as the rolled dice number
         landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
 
@@ -105,8 +107,6 @@ public class Monopoly extends GameData {
 
         utils.delay(SHORT_DELAY_TIME);
 
-        utils.clearScreen();
-
         display(); // Game board
 
         // Check is the square is a effect square
@@ -114,6 +114,15 @@ public class Monopoly extends GameData {
             ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
         }
 
+        if (nextPosition > 19) {
+            // Passed GO add 1500
+            currentPlayer.addBalance(1500);
+            System.out.printf("[GO] %s Passed GO +1500! \n", currentPlayer.getName());
+            // Passed go or at go, add current round counter
+
+        }
+
+        // Ask for next turn
         turnMenu.ask();
 
         // Pass to next player
@@ -290,9 +299,14 @@ public class Monopoly extends GameData {
 
         System.out.println(Util.asString(gridTable)); // Print out the table
 
-        System.out.printf("Current Player: %s, Token: %s, Balance: $%d, Number of property: %d\n\n",
+        System.out.printf("Current Player: %s, Token: %s, Balance: $%d, Number of property: %d\n",
                 currentPlayer.getName(), currentPlayer.getToken(), currentPlayer.getBalance(),
                 currentPlayer.getProperty().size());
+
+        if (DEBUG) {
+            System.out.printf("[DEBUG] Dice total: %s, Player round: %s, Game round: %s\n\n", dice.getTotal(),
+                    currentPlayer.getCurrentRound(), currentRound);
+        }
 
     };
 }

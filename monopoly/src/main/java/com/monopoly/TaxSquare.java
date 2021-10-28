@@ -10,9 +10,11 @@ public class TaxSquare extends Square implements EffectSquareAPI {
 
     public void effectTo(Player player, Monopoly monopoly) {
         int tax = utils.roundDown(player.getBalance() * 0.1);
-
-        System.out.printf("%s You have paid $%d tax!\n", TAG, tax);
         player.deductBalance(tax);
-        // TODO: check if the user still have money
+
+        monopoly.display();
+
+        System.out.printf("%s You have paid $%d tax!\n\n", TAG, tax);
+
     } // determine add amount or lose money
 }
