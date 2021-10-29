@@ -247,28 +247,11 @@ public class Monopoly extends GameData {
                 if (isSquare) {
                     String[] splitString;
 
-                    if (square instanceof PropertySquare) {
-                        // For displaying property name
-                        splitString = ((PropertySquare) square).getDisplayName().split("\n");
-
-                    } else {
-                        splitString = square.getName().split("\n");
-                    }
+                    splitString = square.getDisplayName().split("\n");
 
                     for (String s : splitString) {
                         table.addLine(s);
                     }
-                }
-
-                // If property square have owner display it
-                if (square instanceof PropertySquare && ((PropertySquare) square).haveOwner()) {
-                    // Display owner name
-                    table.addLine("Owner: " + ((PropertySquare) square).getOwner().getName());
-                }
-
-                // Add price label if it is PropertySquare
-                if (square instanceof PropertySquare) {
-                    table.addLine("$" + ((PropertySquare) square).getPrice());
                 }
 
                 // Add the player tokens that currently on that square

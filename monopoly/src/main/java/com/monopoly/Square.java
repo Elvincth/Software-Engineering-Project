@@ -13,6 +13,10 @@ public class Square {
         return name;
     }
 
+    public String getDisplayName() {
+        return name;
+    }
+
     public void setName(String name) {
     }
 

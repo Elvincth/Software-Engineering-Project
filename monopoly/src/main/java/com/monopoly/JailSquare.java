@@ -5,6 +5,7 @@ public class JailSquare extends Square implements EffectSquareAPI {
         super(name, position);
     }
 
-    public void effectTo(Player player, Monopoly monopoly) {
+    public void effectTo(Player player, Monopoly monopoly ) {
+
     }
 }

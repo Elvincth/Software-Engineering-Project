@@ -24,7 +24,9 @@ public class PropertySquare extends Square implements EffectSquareAPI {
     // Display name for our game board
     // * = have owner
     public String getDisplayName() {
-        return String.format("%s %s", colorToEmoji(color), name);
+        String ownerName = haveOwner() ? "\nOwner: " + owner.getToken() : "";
+
+        return String.format("%s %s\n$%s %s", colorToEmoji(color), name, price, ownerName);
     }
 
     private String colorToEmoji(EColor color) {
