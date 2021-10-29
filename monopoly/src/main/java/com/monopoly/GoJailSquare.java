@@ -7,7 +7,7 @@ public class GoJailSquare extends Square implements EffectSquareAPI {
     }
 
     public void effectTo(Player player, Monopoly monopoly) {
-        player.setPosition(5, monopoly);
+        player.sendJail();
         monopoly.display();
     }
 }

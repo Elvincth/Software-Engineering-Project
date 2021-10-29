@@ -89,6 +89,9 @@ public class Player implements PlayerAPI {
     public int getJailRound() {
         return inJailRound;
     }
+    public void sendJail() {
+        position = 5;
+    }
 
     public int getCurrentRound() {
         return currentRound;
