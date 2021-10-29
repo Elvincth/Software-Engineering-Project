@@ -11,7 +11,7 @@ public class YesNo extends Utils {
         this.message = message;
     }
 
-    public boolean ask() {
+    public boolean ask(boolean clearScreen) {
 
         String userInput = "";
 
@@ -28,7 +28,9 @@ public class YesNo extends Utils {
 
         }
 
-        clearScreen();
+        if (clearScreen) {
+            clearScreen();
+        }
 
         if (userInput.equals("Y") || userInput.equals("y")) {
             return true;
@@ -37,4 +39,8 @@ public class YesNo extends Utils {
         return false;
     }
 
+    // Ask with clear screen as default
+    public boolean ask() {
+        return ask(true);
+    }
 }
