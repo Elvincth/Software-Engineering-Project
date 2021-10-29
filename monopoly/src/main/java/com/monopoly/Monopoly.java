@@ -109,18 +109,16 @@ public class Monopoly extends GameData {
 
         display(); // Game board
 
-        // Check is the square is a effect square
-        if (landedSquare instanceof EffectSquareAPI) {
-            ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
-        }
-
         // TODO: handle passed add money
         if (nextPosition > 19) {
             // Passed GO add 1500
-            currentPlayer.addBalance(1500);
             System.out.printf("[GO] %s Passed GO +1500! \n", currentPlayer.getName());
             // Passed go or at go, add current round counter
 
+        }
+        // Check is the square is a effect square
+        if (landedSquare instanceof EffectSquareAPI) {
+            ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
         }
 
         // Ask for next turn
