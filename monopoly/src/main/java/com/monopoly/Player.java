@@ -78,8 +78,11 @@ public class Player implements PlayerAPI {
         ownedProperty.add(property);
     }
 
-    public void setIsInJail(boolean inJail) {
-        this.inJail = inJail;
+    public void setIsInJail() {
+        inJail = true;
+    }
+    public void setIsOutJail() {
+        inJail = false;
     }
 
     public boolean isInJail() {
