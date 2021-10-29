@@ -140,6 +140,10 @@ public class Monopoly extends GameData {
         nextTurn();
     }
 
+    public Dice getDice(){
+        return dice;
+    }
+
     private void addPlayers() {
         String name = "";
         String token = "";
