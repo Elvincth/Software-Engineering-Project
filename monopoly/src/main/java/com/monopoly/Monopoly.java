@@ -138,9 +138,10 @@ public class Monopoly {
 
             // Ask for next turn
             turnMenu.ask();
+
+            // check any player was Bankrupt
+            checkPlayerLose();
         }
-        //check any player was Bankrupt
-        checkPlayerLose();
 
         // check game round
         checkGameRound();
