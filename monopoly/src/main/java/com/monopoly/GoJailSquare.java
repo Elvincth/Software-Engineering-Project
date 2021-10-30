@@ -8,12 +8,11 @@ public class GoJailSquare extends Square implements EffectSquareAPI {
     }
 
     public void effectTo(Player player, Monopoly monopoly) {
-        // Send the player in jail
-        player.setPosition(5);
 
-        // player.sendJail();
-        // monopoly.display();
-        // player.isInJail();
-        // player.addJailRound();
+        player.goToJail();
+
+        monopoly.display();
+
+        System.out.printf("%s Oh no! You have been send to jail!\n\n", TAG);
     }
 }

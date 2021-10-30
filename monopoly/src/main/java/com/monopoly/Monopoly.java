@@ -11,12 +11,11 @@ import com.inamik.text.tables.grid.Border;
 import com.inamik.text.tables.grid.Util;
 import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
-
-public class Monopoly extends GameData {
-    private int gameRound = 0;
+public class Monopoly {
+    private int gameRound = 0;// TODO: save
     private Square[] squares = new Square[20];
     private ArrayList<Player> players = new ArrayList<Player>();
-    private int currentPlayerIndex = 0; // Current player index
+    private int currentPlayerIndex = 0; // Current player index TODO: save
     private Player currentPlayer;
     // Utils
     protected Scanner scanner = new Scanner(System.in);
@@ -31,6 +30,8 @@ public class Monopoly extends GameData {
     private Dice dice = new Dice(DEBUG);
     private int roundCounter = 0;
     private int losedPlayer = 0;
+    // Game data
+   // private GameData gameData = new GameData(this);
     Monopoly() {
         squares[0] = new GoSquare("GO", 0);
         squares[1] = new PropertySquare("Central", 1, 800, 90, EColor.BLUE);
@@ -53,7 +54,7 @@ public class Monopoly extends GameData {
         squares[18] = new ChanceSquare("Chance", 18);
         squares[19] = new PropertySquare("Tai O", 19, 600, 25, EColor.YELLOW);
         tokenChoices = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        tokenChoicesInfo = new ArrayList<String>(Arrays.asList("🐶", "🐱", "🚗", "🎩", "🛳️", "🐴"));
+        tokenChoicesInfo = new ArrayList<String>(Arrays.asList("🐶", "🐱", "🚗", "🎩", "🍉", "🐴"));
     }
 
     // Start the game
@@ -69,6 +70,10 @@ public class Monopoly extends GameData {
             if (DEBUG) {
                 players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
                 players.add(new Player("TEST2", tokenChoicesInfo.get(1)));
+                // players.add(new Player("TEST3", tokenChoicesInfo.get(2)));
+                // players.add(new Player("TEST4", tokenChoicesInfo.get(3)));
+                // players.add(new Player("TEST5", tokenChoicesInfo.get(4)));
+                // players.add(new Player("TEST6", tokenChoicesInfo.get(5)));
             } else {
                 addPlayers();
             }
@@ -88,15 +93,21 @@ public class Monopoly extends GameData {
         Square landedSquare = squares[0];// Store user landed square
 
         if (!currentPlayer.getlosed()) {
-            System.out.printf("It is your turn %s !\n", currentPlayer.getName());
+        System.out.printf("It is your turn %s !\n", currentPlayer.getName());
 
-            utils.delay(SHORT_DELAY_TIME);
+        // Player not in jail, we let user roll the dice
 
-            dice.roll(); // Roll the dice
+        utils.delay(SHORT_DELAY_TIME);
+
+        dice.roll(); // Roll the dice
+
+        if (!currentPlayer.isInJail()) {
             nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed go
                                                                          // square
             currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
-            landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
+        }
+
+        landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
 
             // display(); // Display the game board
 
@@ -104,13 +115,18 @@ public class Monopoly extends GameData {
 
             utils.delay(SHORT_DELAY_TIME);
 
-            utils.clearScreen();
-
+        if (!currentPlayer.isInJail()) {
             System.out.printf("You landed on %s\n", landedSquare.getName()); // Tell where did the user landed
 
             utils.delay(SHORT_DELAY_TIME);
+        }
 
-            display(); // Game board
+            utils.delay(SHORT_DELAY_TIME);
+
+        if (nextPosition > 19 && !currentPlayer.isInJail()) {
+            // Tell the player he got 1500 at GO or passed it
+            System.out.printf("[GO] %s Passed GO +1500! \n", currentPlayer.getName());
+        }
 
             // TODO: handle passed add money
             if (nextPosition > 19) {
@@ -148,7 +164,7 @@ public class Monopoly extends GameData {
         } else {
             utils.clearScreen();
             System.out.println("The game is End \n");
-            System.out.printf("The winenr is %s \n", checkGameWinner());
+            System.out.printf("The winner is %s \n", checkGameWinner());
             // TODO add menu
         }
 
@@ -269,11 +285,25 @@ public class Monopoly extends GameData {
     }
 
     // Get user tokens by position
-    private ArrayList<String> getTokensByPos(int pos) {
+    private String getTokensByPos(int pos) {
+        String display = "";
+
+        for (int i = 0; i < players.size(); i++) {
+            // Print player that not in jail
+            if (players.get(i).getPosition() == pos && !players.get(i).isInJail()) {
+                display = players.get(i).getToken() + " " + display;
+            }
+        }
+
+        return display;
+    }
+
+    // Get user token that is in jail
+    private ArrayList<String> getJailedToken() {
         ArrayList<String> tokens = new ArrayList<String>();
 
         for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getPosition() == pos) {
+            if (players.get(i).isInJail()) {
                 tokens.add(players.get(i).getToken());
             }
         }
@@ -283,8 +313,8 @@ public class Monopoly extends GameData {
 
     // For display the game board
     public void display() {
-        int height = 4;
-        int width = 18;
+        int height = 5;
+        int width = 20;
 
         Square[][] boardSquare = { { squares[10], squares[11], squares[12], squares[13], squares[14], squares[15] },
                 { squares[9], null, null, null, null, squares[16] },
@@ -300,7 +330,7 @@ public class Monopoly extends GameData {
         for (int i = 0; i < boardSquare.length; ++i) {
 
             for (int j = 0; j < boardSquare[i].length; ++j) {
-                Square square = boardSquare[i][j];
+                Square square = boardSquare[i][j]; // Current square
                 boolean isSquare = square != null;
 
                 table.nextCell();
@@ -317,13 +347,18 @@ public class Monopoly extends GameData {
                     }
                 }
 
+                // Add jailed token to jail square if any
+                if (square instanceof JailSquare) {
+                    ArrayList<String> jailedTokens = getJailedToken();
+                    if (jailedTokens.size() > 0) {
+                        table.addLine(String.format("|%s|", String.join(" ", jailedTokens)));
+                    }
+                }
+
                 // Add the player tokens that currently on that square
                 if (isSquare) {
-                    ArrayList<String> tokens = getTokensByPos(square.getPosition());
                     // If have user token
-                    if (tokens.size() > 0) {
-                        table.addLine(String.join(" ", tokens));
-                    }
+                    table.addLine(getTokensByPos(square.getPosition()));
                 }
 
                 table.applyToCell(Functions.VERTICAL_CENTER.withHeight(height))
