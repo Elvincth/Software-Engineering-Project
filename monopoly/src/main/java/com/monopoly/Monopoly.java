@@ -25,7 +25,7 @@ public class Monopoly {
     private ArrayList<String> tokenChoices = new ArrayList<String>();
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
-    final boolean DEBUG = false;
+    final boolean DEBUG = true;
     final int SHORT_DELAY_TIME = DEBUG ? 10 : 900;
     // Dice
     private Dice dice = new Dice(DEBUG);
@@ -112,13 +112,13 @@ public class Monopoly {
 
             landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
 
-            // display(); // Display the game board
-
-            dice.display(); // Tell user what he rolled
-
-            utils.delay(SHORT_DELAY_TIME);
+            display(); // Display the game board
 
             if (!currentPlayer.isInJail()) {
+                dice.display(); // Tell user what he rolled
+
+                utils.delay(SHORT_DELAY_TIME);
+
                 System.out.printf("You landed on %s\n", landedSquare.getName()); // Tell where did the user landed
 
                 utils.delay(SHORT_DELAY_TIME);
@@ -138,8 +138,9 @@ public class Monopoly {
 
             // Ask for next turn
             turnMenu.ask();
+
+            checkPlayerLost();
         }
-        checkPlayerLose();
 
         // check game round
         checkGameRound();
@@ -239,7 +240,6 @@ public class Monopoly {
         } else {
             roundCounter++;
         }
-        ;
         return gameRound;
     }
 
@@ -271,7 +271,7 @@ public class Monopoly {
         }
     }
 
-    private void checkPlayerLose() {
+    private void checkPlayerLost() {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getBalance() < 0) {
                 Player lostPlayer = players.get(i);
