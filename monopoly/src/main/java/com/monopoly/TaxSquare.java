@@ -14,7 +14,7 @@ public class TaxSquare extends Square implements EffectSquareAPI {
 
         monopoly.display();
 
-        System.out.printf("%s You have paid $%d tax!\n\n", TAG, tax);
+        System.out.printf("%s You have paid $%d tax!%n%n", TAG, tax);
 
     } // determine add amount or lose money
 }

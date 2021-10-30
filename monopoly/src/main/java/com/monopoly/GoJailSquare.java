@@ -13,6 +13,6 @@ public class GoJailSquare extends Square implements EffectSquareAPI {
 
         monopoly.display();
 
-        System.out.printf("%s Oh no! You have been send to jail!\n\n", TAG);
+        System.out.printf("%s Oh no! You have been send to jail!%n%n", TAG);
     }
 }
