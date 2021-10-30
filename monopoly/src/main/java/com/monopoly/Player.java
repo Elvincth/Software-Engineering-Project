@@ -89,6 +89,8 @@ public class Player implements PlayerAPI {
         setJailRound(1);
     }
 
+
+
     public void setJailRound(int num) {
         inJailRound = num;
     }

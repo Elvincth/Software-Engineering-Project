@@ -25,8 +25,8 @@ public class Monopoly {
     private ArrayList<String> tokenChoices = new ArrayList<String>();
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
-    final boolean DEBUG = false;
-    final int SHORT_DELAY_TIME = DEBUG ? 10 : 900;
+    final boolean DEBUG = true;
+    final int SHORT_DELAY_TIME = DEBUG ? 500 : 900;
     // Dice
     private Dice dice = new Dice(DEBUG);
     private int roundCounter = 0;
@@ -72,7 +72,7 @@ public class Monopoly {
             if (DEBUG) {
                 players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
                 players.add(new Player("TEST2", tokenChoicesInfo.get(1)));
-                // players.add(new Player("TEST3", tokenChoicesInfo.get(2)));
+                players.add(new Player("TEST3", tokenChoicesInfo.get(2)));
                 // players.add(new Player("TEST4", tokenChoicesInfo.get(3)));
                 // players.add(new Player("TEST5", tokenChoicesInfo.get(4)));
                 // players.add(new Player("TEST6", tokenChoicesInfo.get(5)));
@@ -112,19 +112,21 @@ public class Monopoly {
 
             landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
 
-            display(); // Display the game board
-
             if (!currentPlayer.isInJail()) {
                 dice.display(); // Tell user what he rolled
 
                 utils.delay(SHORT_DELAY_TIME);
 
+                utils.clearScreen();
+
                 System.out.printf("You landed on %s\n", landedSquare.getName()); // Tell where did the user landed
 
                 utils.delay(SHORT_DELAY_TIME);
+
+                utils.clearScreen();
             }
 
-            utils.delay(SHORT_DELAY_TIME);
+            display(); // Display the game board
 
             if (nextPosition > 19 && !currentPlayer.isInJail()) {
                 // Tell the player he got 1500 at GO or passed it
@@ -214,7 +216,6 @@ public class Monopoly {
         // only ask if player number not larger then 6
         if (players.size() < 6) {
             addOneMore = addPlayerQuestion.ask();
-
             if (addOneMore) {
                 addPlayers();
             }
@@ -295,8 +296,10 @@ public class Monopoly {
         String display = "";
 
         for (int i = 0; i < players.size(); i++) {
+            Player player = players.get(i);
+
             // Print player that not in jail
-            if (players.get(i).getPosition() == pos && !players.get(i).isInJail()) {
+            if (player.getPosition() == pos && !player.isInJail() && !player.getLost()) {
                 display = players.get(i).getToken() + " " + display;
             }
         }
@@ -309,7 +312,9 @@ public class Monopoly {
         ArrayList<String> tokens = new ArrayList<String>();
 
         for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).isInJail()) {
+            Player player = players.get(i);
+
+            if (player.isInJail() && !player.getLost()) {
                 tokens.add(players.get(i).getToken());
             }
         }
@@ -390,7 +395,7 @@ public class Monopoly {
                 currentPlayer.getProperty().size());
 
         if (DEBUG) {
-            System.out.printf("[DEBUG] Dice total: %s, Player round: %s, Game round: %s\n\n", dice.getTotal(),
+            System.out.printf("[DEBUG] Dice total: %s, Player round: %s, Game round: %s%n%n", dice.getTotal(),
                     currentPlayer.getCurrentRound(), checkGameRound());
         }
     };

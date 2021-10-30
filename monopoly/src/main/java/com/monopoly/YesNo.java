@@ -15,7 +15,7 @@ public class YesNo extends Utils {
 
         String userInput = "";
 
-        System.out.printf("%s (y/n): ", message);
+        System.out.printf("%s (Y/N): ", message);
 
         while (scanner.hasNextLine()) {
             userInput = scanner.nextLine();
@@ -24,7 +24,7 @@ public class YesNo extends Utils {
                 break;
             }
 
-            System.out.println("Please enter (y/n) or (Y/N) only");
+            System.out.println("Please enter (y/n) or (Y/N) only.");
 
         }
 

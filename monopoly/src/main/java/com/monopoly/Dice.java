@@ -47,8 +47,11 @@ public class Dice implements DiceAPI {
 
     // Random the dice
     public void roll() {
-        rolledDice[0] = rollDice();
-        rolledDice[1] = rollDice();
+        // rolledDice[0] = rollDice();
+        // rolledDice[1] = rollDice();
+
+        rolledDice[0] = 10;
+        rolledDice[1] = 5;
     }
 
     // Display the dice

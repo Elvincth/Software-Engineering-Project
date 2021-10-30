@@ -24,9 +24,9 @@ public class ChanceSquare extends Square implements EffectSquareAPI {
         monopoly.display();
 
         if (addOrDeduct == 0) {
-            System.out.printf("%s Oh no! You have been deducted $%d\n", TAG, randomMoney);
+            System.out.printf("%s Oh no! You have been deducted $%d%n%n", TAG, randomMoney);
         } else {
-            System.out.printf("%s Congratulations! You have gained $%d\n", TAG, randomMoney);
+            System.out.printf("%s Congratulations! You have gained $%d%n%n", TAG, randomMoney);
         }
 
     } // determine add amount or lose money

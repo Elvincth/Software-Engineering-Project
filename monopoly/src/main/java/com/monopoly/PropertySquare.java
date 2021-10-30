@@ -78,10 +78,10 @@ public class PropertySquare extends Square implements EffectSquareAPI {
             player.deductBalance(price);
             player.addProperty(this);
             monopoly.display();
-            System.out.printf("%s You have bought %s\n\n", TAG, name);
+            System.out.printf("%s You have bought %s%n%n", TAG, name);
         } else {
             monopoly.display();
-            System.out.printf("%s You have no enough money to buy %s!\n\n", TAG, name);
+            System.out.printf("%s You have no enough money to buy %s!%n%n", TAG, name);
         }
     }
 
@@ -108,7 +108,7 @@ public class PropertySquare extends Square implements EffectSquareAPI {
         // Have owner and player is not owner
         // We will get rent and pass it to the owner
         if (haveOwner() && owner.getToken() != player.getToken()) {
-            System.out.printf("%s You have paid rent $%d to %s\n\n", TAG, rent, owner.getName());
+            System.out.printf("%s You have paid rent $%d to %s%n%n", TAG, rent, owner.getName());
             // PAY RENT
             player.deductBalance(rent);
             owner.addBalance(rent);
