@@ -26,7 +26,7 @@ public class Monopoly {
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
     final boolean DEBUG = true;
-    final int SHORT_DELAY_TIME = DEBUG ? 500 : 900;
+    final int SHORT_DELAY_TIME = DEBUG ? 10 : 900;
     // Dice
     private Dice dice = new Dice(DEBUG);
     private int roundCounter = 0;

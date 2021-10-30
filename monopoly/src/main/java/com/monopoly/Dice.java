@@ -42,21 +42,19 @@ public class Dice implements DiceAPI {
 
         System.out.print("\033[?25h"); // restore the cursor
 
+        // return dice[num1][num2];
         return dice[num1][num2];
     }
 
     // Random the dice
     public void roll() {
-        // rolledDice[0] = rollDice();
-        // rolledDice[1] = rollDice();
-
-        rolledDice[0] = 10;
-        rolledDice[1] = 5;
+        rolledDice[0] = rollDice();
+        rolledDice[1] = rollDice();
     }
 
     // Display the dice
     public void display() {
-        System.out.printf("◰ Dice one is %d, ◲ dice two is %d, the total is %d.\n", rolledDice[0], rolledDice[1],
+        System.out.printf("◰ Dice one is %d, ◲ dice two is %d, the total is %d.", rolledDice[0], rolledDice[1],
                 getTotal());
     }
 
@@ -66,6 +64,7 @@ public class Dice implements DiceAPI {
     };
 
     public int getTotal() {
-        return rolledDice[0] + rolledDice[1];
+        // return rolledDice[0] + rolledDice[1];
+        return 15;
     };
 }
