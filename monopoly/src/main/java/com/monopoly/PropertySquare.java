@@ -65,6 +65,10 @@ public class PropertySquare extends Square implements EffectSquareAPI {
         return color;
     }
 
+    public void removeOwner() {
+        owner = null;
+    }
+
     // set the owner of the property
     private void buy(Player player, Monopoly monopoly) {
         if (player.getBalance() >= this.price) {
@@ -85,6 +89,7 @@ public class PropertySquare extends Square implements EffectSquareAPI {
     public boolean haveOwner() {
         return owner != null;
     }
+
     public void effectTo(Player player, Monopoly monopoly) {
         // If no owner we ask if the player want to buy
         if (!haveOwner()) {
