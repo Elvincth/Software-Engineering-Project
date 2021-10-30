@@ -280,9 +280,10 @@ public class Monopoly {
     private void checkPlayerLose() {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getBalance() < 0) {
-                System.out.printf("%s is Bankruptcy\n", players.get(i).getName());
+                Player lostPlayer = players.get(i);
+                System.out.printf("%s is Bankruptcy\n", lostPlayer.getName());
                 utils.delay(2000);
-                players.get(i).setToLost();
+                lostPlayer.setToLost();
             }
         }
     }
