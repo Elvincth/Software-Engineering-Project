@@ -3,14 +3,14 @@ package com.monopoly;
 import java.util.ArrayList;
 
 public class Player implements PlayerAPI {
-    private int balance = 1500; // User current bank balance
-    private int position = 0; // Current position of the user
-    private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
-    private int currentRound = 0;
-    private boolean inJail = false;
-    private String name = "";
-    private String token = "";
-    private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>();
+    private int balance = 1500; // User current bank balance TODO: save
+    private int position = 0; // Current position of the user TODO: save
+    private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in TODO: save
+    private int currentRound = 0;//TODO: save
+    private boolean inJail = false;//TODO: save
+    private String name = "";//TODO: save
+    private String token = "";//TODO: save
+    private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>(); // TODO: save (player token or id sth like this)
     // private Utils utils = new Utils();
 
     Player(String name, String token) {
@@ -57,13 +57,6 @@ public class Player implements PlayerAPI {
         }
     }
 
-    public void goToJail() {
-        // Send the player to jail
-        position = 5;
-        setInJail(true);
-        setJailRound(1);
-    }
-
     public int getBalance() {
         return balance;
     }
@@ -86,12 +79,19 @@ public class Player implements PlayerAPI {
         ownedProperty.add(property);
     }
 
+    public void goToJail() {
+        // Send the player to jail
+        position = 5;
+        setInJail(true);
+        setJailRound(1);
+    }
+
     public void setJailRound(int num) {
         inJailRound = num;
     }
 
-    public void setInJail(boolean inJail) {
-        this.inJail = inJail;
+    public void setInJail(boolean myInJail) {
+        inJail = myInJail;
     }
 
     public boolean isInJail() {
