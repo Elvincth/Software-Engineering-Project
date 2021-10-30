@@ -39,16 +39,18 @@ public class JailSquare extends Square implements EffectSquareAPI {
 
     public void effectTo(Player player, Monopoly monopoly) {
         this.monopoly = monopoly;
+        this.player = player;
 
         // Handle the user in jail
         if (player.isInJail()) {
 
             YesNo payQuestion = new YesNo(monopoly.scanner, "Do you want to pay $50 to get out of jail?");
+            Boolean answer = payQuestion.ask();
 
             // Yes and have enough money
-            if (payQuestion.ask() && player.getBalance() >= 50) {
+            if (answer && player.getBalance() >= 50) {
                 outOfJail(true);
-            } else if (payQuestion.ask() && player.getBalance() < 50) {
+            } else if (answer && player.getBalance() < 50) {
                 System.out.printf("%s You don't have enough money, now roll the dice.%n%n", TAG);
                 utils.delay(monopoly.SHORT_DELAY_TIME);
                 rollDiceGetOut();

@@ -395,8 +395,8 @@ public class Monopoly {
                 currentPlayer.getProperty().size());
 
         if (DEBUG) {
-            System.out.printf("[DEBUG] Dice total: %s, Player round: %s, Game round: %s%n%n", dice.getTotal(),
-                    currentPlayer.getCurrentRound(), checkGameRound());
+            System.out.printf("[DEBUG] Dice total: %s, Player round: %s, Game round: %s, Jail Counter: %d%n%n",
+                    dice.getTotal(), currentPlayer.getCurrentRound(), checkGameRound(), currentPlayer.getJailRound());
         }
     };
 }
