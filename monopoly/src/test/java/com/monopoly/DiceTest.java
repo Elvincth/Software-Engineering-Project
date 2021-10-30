@@ -13,5 +13,7 @@ public class DiceTest {
 
         dice.roll();
 
+        assertTrue(dice.getRolled()[0] < 5 && dice.getRolled()[0] > 0, "Should be between 1 to/and 4");
+
     }
 }
