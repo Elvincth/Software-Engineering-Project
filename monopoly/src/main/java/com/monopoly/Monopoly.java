@@ -11,6 +11,7 @@ import com.inamik.text.tables.grid.Border;
 import com.inamik.text.tables.grid.Util;
 import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
+
 public class Monopoly {
     private int gameRound = 0;// TODO: save
     private Square[] squares = new Square[20];
@@ -29,9 +30,10 @@ public class Monopoly {
     // Dice
     private Dice dice = new Dice(DEBUG);
     private int roundCounter = 0;
-    private int losedPlayer = 0;
+    private int lostPlayer = 0;
+
     // Game data
-   // private GameData gameData = new GameData(this);
+    // private GameData gameData = new GameData(this);
     Monopoly() {
         squares[0] = new GoSquare("GO", 0);
         squares[1] = new PropertySquare("Central", 1, 800, 90, EColor.BLUE);
@@ -92,22 +94,23 @@ public class Monopoly {
         currentPlayer = players.get(currentPlayerIndex);
         Square landedSquare = squares[0];// Store user landed square
 
-        if (!currentPlayer.getlosed()) {
-        System.out.printf("It is your turn %s !\n", currentPlayer.getName());
+        if (!currentPlayer.getLost()) {
+            System.out.printf("It is your turn %s !\n", currentPlayer.getName());
 
-        // Player not in jail, we let user roll the dice
+            // Player not in jail, we let user roll the dice
 
-        utils.delay(SHORT_DELAY_TIME);
+            utils.delay(SHORT_DELAY_TIME);
 
-        dice.roll(); // Roll the dice
+            dice.roll(); // Roll the dice
 
-        if (!currentPlayer.isInJail()) {
-            nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed go
-                                                                         // square
-            currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
-        }
+            if (!currentPlayer.isInJail()) {
+                nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed
+                                                                             // go
+                                                                             // square
+                currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
+            }
 
-        landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
+            landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
 
             // display(); // Display the game board
 
@@ -115,18 +118,18 @@ public class Monopoly {
 
             utils.delay(SHORT_DELAY_TIME);
 
-        if (!currentPlayer.isInJail()) {
-            System.out.printf("You landed on %s\n", landedSquare.getName()); // Tell where did the user landed
+            if (!currentPlayer.isInJail()) {
+                System.out.printf("You landed on %s\n", landedSquare.getName()); // Tell where did the user landed
+
+                utils.delay(SHORT_DELAY_TIME);
+            }
 
             utils.delay(SHORT_DELAY_TIME);
-        }
 
-            utils.delay(SHORT_DELAY_TIME);
-
-        if (nextPosition > 19 && !currentPlayer.isInJail()) {
-            // Tell the player he got 1500 at GO or passed it
-            System.out.printf("[GO] %s Passed GO +1500! \n", currentPlayer.getName());
-        }
+            if (nextPosition > 19 && !currentPlayer.isInJail()) {
+                // Tell the player he got 1500 at GO or passed it
+                System.out.printf("[GO] %s Passed GO +1500! \n", currentPlayer.getName());
+            }
 
             // TODO: handle passed add money
             if (nextPosition > 19) {
@@ -143,7 +146,7 @@ public class Monopoly {
             turnMenu.ask();
         }
         checkPlayerLose();
-        
+
         // check game round
         checkGameRound();
 
@@ -235,7 +238,7 @@ public class Monopoly {
         }
     }
 
-    public int checkGameRound() {// count the game round
+    private int checkGameRound() {// count the game round
         if (roundCounter >= players.size() + 2) {
             gameRound++;
             roundCounter = 0;
@@ -246,7 +249,7 @@ public class Monopoly {
         return gameRound;
     }
 
-    public String checkGameWinner() {
+    private String checkGameWinner() {
         String playerName = "";
         int higherBalance = 0;
         for (int i = 0; i < players.size(); i++) {
@@ -258,28 +261,28 @@ public class Monopoly {
         return playerName;
     }
 
-    public boolean endGameCheck() {// check wether the game is end or not
+    private boolean endGameCheck() {// check wether the game is end or not
         for (int i = 0; i < players.size(); i++) {
-            if (players.get(i).getlosed()) {
-                losedPlayer++;
+            if (players.get(i).getLost()) {
+                lostPlayer++;
             }
         }
         if (gameRound == 100) {
             return true;
-        } else if (losedPlayer == players.size() - 1) {
+        } else if (lostPlayer == players.size() - 1) {
             return true;
         } else {
-            losedPlayer = 0;
+            lostPlayer = 0;
             return false;
         }
     }
 
-    public void checkPlayerLose() {
+    private void checkPlayerLose() {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getBalance() < 0) {
                 System.out.printf("%s is Bankruptcy\n", players.get(i).getName());
                 utils.delay(2000);
-                players.get(i).isLosed();
+                players.get(i).setToLost();
             }
         }
     }

@@ -5,13 +5,15 @@ import java.util.ArrayList;
 public class Player implements PlayerAPI {
     private int balance = 1500; // User current bank balance TODO: save
     private int position = 0; // Current position of the user TODO: save
-    private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in TODO: save
-    private int currentRound = 0;//TODO: save
-    private boolean inJail = false;//TODO: save
-    private String name = "";//TODO: save
-    private String token = "";//TODO: save
-    private boolean losed = false;
-    private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>(); // TODO: save (player token or id sth like this)
+    private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
+                                 // TODO: save
+    private int currentRound = 0;// TODO: save
+    private boolean inJail = false;// TODO: save
+    private String name = "";// TODO: save
+    private String token = "";// TODO: save
+    private boolean lost = false;
+    private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>(); // TODO: save (player token or id
+                                                                                       // sth like this)
     // private Utils utils = new Utils();
 
     Player(String name, String token) {
@@ -111,11 +113,12 @@ public class Player implements PlayerAPI {
         currentRound = round;
     }
 
-    public void isLosed(){
-        losed = true;
+    public void setToLost() {
+        lost = true;
         balance = 0;
     }
-    public boolean getlosed(){
-        return losed;
+
+    public boolean getLost() {
+        return lost;
     }
 }
