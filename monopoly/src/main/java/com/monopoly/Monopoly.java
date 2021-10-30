@@ -26,7 +26,7 @@ public class Monopoly extends GameData {
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
     final boolean DEBUG = true;
-    final int SHORT_DELAY_TIME = DEBUG ? 500 : 900;
+    final int SHORT_DELAY_TIME = DEBUG ? 10 : 900;
     // Dice
     private Dice dice = new Dice(DEBUG);
     private int roundCounter = 0;
@@ -93,7 +93,7 @@ public class Monopoly extends GameData {
 
         dice.roll(); // Roll the dice
         nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed go square
-        currentPlayer.setPosition(dice.getTotal(), this); // Set the position as the rolled dice number
+        currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
         landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
 
         // display(); // Display the game board
@@ -112,11 +112,10 @@ public class Monopoly extends GameData {
 
         // TODO: handle passed add money
         if (nextPosition > 19) {
-            // Passed GO add 1500
+            // Tell the player he got 1500 at GO or passed it
             System.out.printf("[GO] %s Passed GO +1500! \n", currentPlayer.getName());
-            // Passed go or at go, add current round counter
-
         }
+
         // Check is the square is a effect square
         if (landedSquare instanceof EffectSquareAPI) {
             ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
@@ -152,7 +151,7 @@ public class Monopoly extends GameData {
         
     }
 
-    public Dice getDice(){
+    public Dice getDice() {
         return dice;
     }
 

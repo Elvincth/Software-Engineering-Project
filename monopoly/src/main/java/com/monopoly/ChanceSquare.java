@@ -1,7 +1,8 @@
 package com.monopoly;
 
 public class ChanceSquare extends Square implements EffectSquareAPI {
-    public String name = ""; // if random = 0 = dedect, if random = 1 = add
+    public String name = ""; // if random = 0 = deduct, if random = 1 = add
+    private final String TAG = "[CHANCE]";
 
     ChanceSquare(String name, int position) {
         super(name, position);
@@ -19,5 +20,14 @@ public class ChanceSquare extends Square implements EffectSquareAPI {
             randomMoney = 10 * (int) (1 + Math.random() * 20);
             player.addBalance(randomMoney);
         }
+
+        monopoly.display();
+
+        if (addOrDeduct == 0) {
+            System.out.printf("%s Oh no! You have been deducted $%d", TAG, randomMoney);
+        } else {
+            System.out.printf("%s Congratulations! You have gained $%d", TAG, randomMoney);
+        }
+
     } // determine add amount or lose money
 }
