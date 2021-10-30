@@ -3,7 +3,7 @@ package com.monopoly;
 import java.util.ArrayList;
 
 public class Player implements PlayerAPI {
-    private int balance = 100; // User current bank balance //TODO: remove ??
+    private int balance = 1500; // User current bank balance
     private int position = 0; // Current position of the user
     private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
     private int currentRound = 0;
@@ -44,6 +44,7 @@ public class Player implements PlayerAPI {
         return position;
     }
 
+    // Warning: Used to ADD pos not really set
     public void setPosition(int pos) {
         int nextPosition = position + pos;
         if (nextPosition > 19) {
@@ -54,6 +55,13 @@ public class Player implements PlayerAPI {
         } else {
             position += pos;
         }
+    }
+
+    public void goToJail() {
+        // Send the player to jail
+        position = 5;
+        setInJail(true);
+        setJailRound(1);
     }
 
     public int getBalance() {
@@ -86,7 +94,7 @@ public class Player implements PlayerAPI {
         this.inJail = inJail;
     }
 
-    public boolean getInJail() {
+    public boolean isInJail() {
         return inJail;
     }
 
@@ -100,11 +108,5 @@ public class Player implements PlayerAPI {
 
     public void setCurrentRound(int round) {
         currentRound = round;
-    }
-
-    @Override
-    public boolean isInJail() {
-        // TODO Auto-generated method stub
-        return false;
     }
 }

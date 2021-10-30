@@ -1,7 +1,5 @@
 package com.monopoly;
 
-import java.util.Scanner;
-
 public class JailSquare extends Square implements EffectSquareAPI {
 
     JailSquare(String name, int position) {
