@@ -14,7 +14,7 @@ public interface PlayerAPI {
 
     public int getPosition(); // Return player position
 
-    public void setPosition(int pos, Monopoly monopoly); // move to a square position
+    public void setPosition(int pos); // move to a square position
 
     public int getBalance(); // Return player balance
 

@@ -7,6 +7,7 @@ public class GoSquare extends Square implements EffectSquareAPI {
     }
 
     public void effectTo(Player player, Monopoly monopoly) {
+      //  player.sendJail();
         // if (player.getCurrentRound() > 0) {
         // player.addBalance(1500);
 

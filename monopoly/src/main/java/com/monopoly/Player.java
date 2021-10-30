@@ -44,7 +44,7 @@ public class Player implements PlayerAPI {
         return position;
     }
 
-    public void setPosition(int pos, Monopoly monopoly) {
+    public void setPosition(int pos) {
         int nextPosition = position + pos;
         if (nextPosition > 19) {
             position = nextPosition - 20;
@@ -78,30 +78,20 @@ public class Player implements PlayerAPI {
         ownedProperty.add(property);
     }
 
-    public void IsInJail() {
-        inJail = true;
-    }
-    public void IsOutJail() {
-        inJail = false;
-        position = 5;
+    public void setJailRound(int num) {
+        inJailRound = num;
     }
 
-    public void clearJailRound(){
-        inJailRound = 0;
+    public void setInJail(boolean inJail) {
+        this.inJail = inJail;
     }
 
-    public boolean getIsInJail() {
+    public boolean getInJail() {
         return inJail;
     }
 
     public int getJailRound() {
         return inJailRound;
-    }
-    public void addJailRound() {
-        inJailRound += 1;
-    }
-    public void sendJail() {
-        position = 5;
     }
 
     public int getCurrentRound() {
