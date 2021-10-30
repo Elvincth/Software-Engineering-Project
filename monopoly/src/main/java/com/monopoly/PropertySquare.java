@@ -85,7 +85,6 @@ public class PropertySquare extends Square implements EffectSquareAPI {
     public boolean haveOwner() {
         return owner != null;
     }
-
     public void effectTo(Player player, Monopoly monopoly) {
         // If no owner we ask if the player want to buy
         if (!haveOwner()) {

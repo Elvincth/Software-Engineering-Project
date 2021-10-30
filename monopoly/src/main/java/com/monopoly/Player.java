@@ -10,6 +10,7 @@ public class Player implements PlayerAPI {
     private boolean inJail = false;
     private String name = "";
     private String token = "";
+    private boolean losed = false;
     private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>();
     // private Utils utils = new Utils();
 
@@ -50,7 +51,7 @@ public class Player implements PlayerAPI {
             position = nextPosition - 20;
             // Passed go or at go, add current round counter
             currentRound = currentRound + 1;
-            balance += 1500;
+            balance -= 1500;
         } else {
             position += pos;
         }
@@ -100,6 +101,14 @@ public class Player implements PlayerAPI {
 
     public void setCurrentRound(int round) {
         currentRound = round;
+    }
+
+    public void isLosed(){
+        losed = true;
+        balance = 0;
+    }
+    public boolean getlosed(){
+        return losed;
     }
 
     @Override

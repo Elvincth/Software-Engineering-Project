@@ -13,7 +13,7 @@ import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
 
 public class Monopoly extends GameData {
-    private int gameRound = 99;
+    private int gameRound = 0;
     private Square[] squares = new Square[20];
     private ArrayList<Player> players = new ArrayList<Player>();
     private int currentPlayerIndex = 0; // Current player index
@@ -25,12 +25,12 @@ public class Monopoly extends GameData {
     private ArrayList<String> tokenChoices = new ArrayList<String>();
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
-    final boolean DEBUG = true;
+    final boolean DEBUG = false;
     final int SHORT_DELAY_TIME = DEBUG ? 10 : 900;
     // Dice
     private Dice dice = new Dice(DEBUG);
     private int roundCounter = 0;
-
+    private int losedPlayer = 0;
     Monopoly() {
         squares[0] = new GoSquare("GO", 0);
         squares[1] = new PropertySquare("Central", 1, 800, 90, EColor.BLUE);
@@ -87,44 +87,48 @@ public class Monopoly extends GameData {
         currentPlayer = players.get(currentPlayerIndex);
         Square landedSquare = squares[0];// Store user landed square
 
-        System.out.printf("It is your turn %s !\n", currentPlayer.getName());
+        if (!currentPlayer.getlosed()) {
+            System.out.printf("It is your turn %s !\n", currentPlayer.getName());
 
-        utils.delay(SHORT_DELAY_TIME);
+            utils.delay(SHORT_DELAY_TIME);
 
-        dice.roll(); // Roll the dice
-        nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed go square
-        currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
-        landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
+            dice.roll(); // Roll the dice
+            nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed go
+                                                                         // square
+            currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
+            landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
 
-        // display(); // Display the game board
+            // display(); // Display the game board
 
-        dice.display(); // Tell user what he rolled
+            dice.display(); // Tell user what he rolled
 
-        utils.delay(SHORT_DELAY_TIME);
+            utils.delay(SHORT_DELAY_TIME);
 
-        utils.clearScreen();
+            utils.clearScreen();
 
-        System.out.printf("You landed on %s\n", landedSquare.getName()); // Tell where did the user landed
+            System.out.printf("You landed on %s\n", landedSquare.getName()); // Tell where did the user landed
 
-        utils.delay(SHORT_DELAY_TIME);
+            utils.delay(SHORT_DELAY_TIME);
 
-        display(); // Game board
+            display(); // Game board
 
-        // TODO: handle passed add money
-        if (nextPosition > 19) {
-            // Tell the player he got 1500 at GO or passed it
-            System.out.printf("[GO] %s Passed GO +1500! \n", currentPlayer.getName());
+            // TODO: handle passed add money
+            if (nextPosition > 19) {
+                // Tell the player he got 1500 at GO or passed it
+                System.out.printf("[GO] %s Passed GO +1500! \n", currentPlayer.getName());
+            }
+
+            // Check is the square is a effect square
+            if (landedSquare instanceof EffectSquareAPI) {
+                ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
+            }
+
+            // Ask for next turn
+            turnMenu.ask();
         }
-
-        // Check is the square is a effect square
-        if (landedSquare instanceof EffectSquareAPI) {
-            ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
-        }
-
-        // Ask for next turn
-        turnMenu.ask();
-
-        //check game round
+        checkPlayerLose();
+        
+        // check game round
         checkGameRound();
 
         // Pass to next player
@@ -139,16 +143,15 @@ public class Monopoly extends GameData {
         } else {
             currentPlayerIndex += 1;
         }
-        if (!endGameCheck()){
+        if (!endGameCheck()) {
             nextTurn();
-        }
-        else{
+        } else {
             utils.clearScreen();
             System.out.println("The game is End \n");
             System.out.printf("The winenr is %s \n", checkGameWinner());
-            //TODO add menu
+            // TODO add menu
         }
-        
+
     }
 
     public Dice getDice() {
@@ -217,47 +220,53 @@ public class Monopoly extends GameData {
     }
 
     public int checkGameRound() {// count the game round
-        if (roundCounter >= players.size() + 2){
+        if (roundCounter >= players.size() + 2) {
             gameRound++;
             roundCounter = 0;
-        }
-        else{
+        } else {
             roundCounter++;
-        };
+        }
+        ;
         return gameRound;
     }
 
-    public String checkGameWinner(){
-        String playerName ="";
+    public String checkGameWinner() {
+        String playerName = "";
         int higherBalance = 0;
         for (int i = 0; i < players.size(); i++) {
-            if(players.get(i).getBalance() > higherBalance){
+            if (players.get(i).getBalance() > higherBalance) {
                 higherBalance = players.get(i).getBalance();
                 playerName = players.get(i).getName();
             }
         }
         return playerName;
     }
-    public boolean endGameCheck(){//check wether the game is end or not
-        if (gameRound == 100){
-            return true;
+
+    public boolean endGameCheck() {// check wether the game is end or not
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getlosed()) {
+                losedPlayer++;
+            }
         }
-        else if(players.size() < 2){
+        if (gameRound == 100) {
             return true;
-        }
-        else{
+        } else if (losedPlayer == players.size() - 1) {
+            return true;
+        } else {
+            losedPlayer = 0;
             return false;
         }
     }
-//TODO check player lose
-    // public void checkPlayerLose(){
-    //     for (int i = 0; i < players.size(); i++) {
-    //         if(players.get(i).getBalance() < 0){
-    //             System.out.printf("%s is Bankruptcy",players.get(i).getName());
-    //             players.remove(i);
-    //         }
-    //     }
-    // }
+
+    public void checkPlayerLose() {
+        for (int i = 0; i < players.size(); i++) {
+            if (players.get(i).getBalance() < 0) {
+                System.out.printf("%s is Bankruptcy\n", players.get(i).getName());
+                utils.delay(2000);
+                players.get(i).isLosed();
+            }
+        }
+    }
 
     // Get user tokens by position
     private ArrayList<String> getTokensByPos(int pos) {
