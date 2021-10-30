@@ -101,9 +101,9 @@ public class Monopoly {
 
             utils.delay(SHORT_DELAY_TIME);
 
-            dice.roll(); // Roll the dice
-
             if (!currentPlayer.isInJail()) {
+                dice.roll(); // Roll the dice
+
                 nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed
                                                                              // go
                                                                              // square
@@ -127,12 +127,6 @@ public class Monopoly {
             utils.delay(SHORT_DELAY_TIME);
 
             if (nextPosition > 19 && !currentPlayer.isInJail()) {
-                // Tell the player he got 1500 at GO or passed it
-                System.out.printf("[GO] %s Passed GO +1500! \n", currentPlayer.getName());
-            }
-
-            // TODO: handle passed add money
-            if (nextPosition > 19) {
                 // Tell the player he got 1500 at GO or passed it
                 System.out.printf("[GO] %s Passed GO +1500! \n", currentPlayer.getName());
             }

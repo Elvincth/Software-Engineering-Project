@@ -54,7 +54,7 @@ public class Player implements PlayerAPI {
             position = nextPosition - 20;
             // Passed go or at go, add current round counter
             currentRound = currentRound + 1;
-            balance -= 1500;
+            balance += 1500;
         } else {
             position += pos;
         }
