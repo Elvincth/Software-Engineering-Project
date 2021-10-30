@@ -13,7 +13,7 @@ import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
 
 public class Monopoly extends GameData {
-    private int gameRound = 0;
+    private int gameRound = 99;
     private Square[] squares = new Square[20];
     private ArrayList<Player> players = new ArrayList<Player>();
     private int currentPlayerIndex = 0; // Current player index
@@ -144,8 +144,8 @@ public class Monopoly extends GameData {
         }
         else{
             utils.clearScreen();
-            System.out.println("The game is End");
-            System.out.printf("The winenr is %s", checkGameWinner());
+            System.out.println("The game is End \n");
+            System.out.printf("The winenr is %s \n", checkGameWinner());
             //TODO add menu
         }
         
@@ -238,14 +238,26 @@ public class Monopoly extends GameData {
         }
         return playerName;
     }
-    public boolean endGameCheck(){
+    public boolean endGameCheck(){//check wether the game is end or not
         if (gameRound == 100){
+            return true;
+        }
+        else if(players.size() < 2){
             return true;
         }
         else{
             return false;
         }
     }
+//TODO check player lose
+    // public void checkPlayerLose(){
+    //     for (int i = 0; i < players.size(); i++) {
+    //         if(players.get(i).getBalance() < 0){
+    //             System.out.printf("%s is Bankruptcy",players.get(i).getName());
+    //             players.remove(i);
+    //         }
+    //     }
+    // }
 
     // Get user tokens by position
     private ArrayList<String> getTokensByPos(int pos) {
