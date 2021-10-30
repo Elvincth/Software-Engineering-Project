@@ -28,10 +28,10 @@ public class DiceTest {
     @Test
     void mutiDiceTest(){
         dice = new Dice(false);
-
+        
         dice.roll();
 
-        assertTrue(dice.getTotal() < 9 && dice.getTotal() > 0,  "Two dice should be between 1 to 9");
+        assertTrue(dice.getTotal() < 9 && dice.getTotal() > 1,  "Two dice should be between 2 to 8");
     }
 
 }

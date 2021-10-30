@@ -10,6 +10,10 @@ public class Dice implements DiceAPI {
         this.DEBUG = DEBUG;
     }
 
+    Dice() {
+        this.DEBUG = false;
+    }
+
     private int rollDice() {
         int num1 = 0;
         int num2 = 0;
