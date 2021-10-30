@@ -3,7 +3,7 @@ package com.monopoly;
 import java.util.ArrayList;
 
 public class Player implements PlayerAPI {
-    private int balance = 1500; // User current bank balance TODO: save
+    private int balance = 500; // User current bank balance TODO: save
     private int position = 0; // Current position of the user TODO: save
     private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
                                  // TODO: save
