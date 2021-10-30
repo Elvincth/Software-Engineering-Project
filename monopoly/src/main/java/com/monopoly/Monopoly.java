@@ -13,7 +13,7 @@ import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
 
 public class Monopoly extends GameData {
-    private int currentRound = 0;
+    private int gameRound = 99;
     private Square[] squares = new Square[20];
     private ArrayList<Player> players = new ArrayList<Player>();
     private int currentPlayerIndex = 0; // Current player index
@@ -29,6 +29,7 @@ public class Monopoly extends GameData {
     final int SHORT_DELAY_TIME = DEBUG ? 10 : 900;
     // Dice
     private Dice dice = new Dice(DEBUG);
+    private int roundCounter = 0;
 
     Monopoly() {
         squares[0] = new GoSquare("GO", 0);
@@ -127,6 +128,9 @@ public class Monopoly extends GameData {
         // Ask for next turn
         turnMenu.ask();
 
+        //check game round
+        checkGameRound();
+
         // Pass to next player
         nextPlayer();
     }
@@ -139,8 +143,16 @@ public class Monopoly extends GameData {
         } else {
             currentPlayerIndex += 1;
         }
-
-        nextTurn();
+        if (!endGameCheck()){
+            nextTurn();
+        }
+        else{
+            utils.clearScreen();
+            System.out.println("The game is End \n");
+            System.out.printf("The winenr is %s \n", checkGameWinner());
+            //TODO add menu
+        }
+        
     }
 
     public Dice getDice() {
@@ -208,9 +220,48 @@ public class Monopoly extends GameData {
         }
     }
 
-    public int getCurrentRound() {
-        return currentRound;
+    public int checkGameRound() {// count the game round
+        if (roundCounter >= players.size() + 2){
+            gameRound++;
+            roundCounter = 0;
+        }
+        else{
+            roundCounter++;
+        };
+        return gameRound;
     }
+
+    public String checkGameWinner(){
+        String playerName ="";
+        int higherBalance = 0;
+        for (int i = 0; i < players.size(); i++) {
+            if(players.get(i).getBalance() > higherBalance){
+                higherBalance = players.get(i).getBalance();
+                playerName = players.get(i).getName();
+            }
+        }
+        return playerName;
+    }
+    public boolean endGameCheck(){//check wether the game is end or not
+        if (gameRound == 100){
+            return true;
+        }
+        else if(players.size() < 2){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+//TODO check player lose
+    // public void checkPlayerLose(){
+    //     for (int i = 0; i < players.size(); i++) {
+    //         if(players.get(i).getBalance() < 0){
+    //             System.out.printf("%s is Bankruptcy",players.get(i).getName());
+    //             players.remove(i);
+    //         }
+    //     }
+    // }
 
     // Get user tokens by position
     private String getTokensByPos(int pos) {
@@ -313,8 +364,7 @@ public class Monopoly extends GameData {
 
         if (DEBUG) {
             System.out.printf("[DEBUG] Dice total: %s, Player round: %s, Game round: %s\n\n", dice.getTotal(),
-                    currentPlayer.getCurrentRound(), currentRound);
+                    currentPlayer.getCurrentRound(), checkGameRound());
         }
-
     };
 }
