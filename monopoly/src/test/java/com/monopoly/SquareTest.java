@@ -10,12 +10,12 @@ public class SquareTest extends TestUtils{
     private Square[] squares = monopoly.getSquares();
 
     // the position of square will start at 0 since we are using array for storing each square
-    // therefore the position of square will between 0 to 19 (20 square) 
+    // therefore the position of square will between 0 to 19 (20 square)
 
     // for checking square type
     @Test
     void testType() {
-        assertTrue(monopoly.getSquares()[0] instanceof GoSquare);
+        assertTrue(monopoly.getSquares()[0] instanceof Square);
         assertTrue(monopoly.getSquares()[1] instanceof PropertySquare);
         assertTrue(monopoly.getSquares()[2] instanceof PropertySquare);
         assertTrue(monopoly.getSquares()[3] instanceof TaxSquare);
@@ -40,7 +40,7 @@ public class SquareTest extends TestUtils{
 
     }
 
-    // for checking price of each property square 
+    // for checking price of each property square
     @Test
     void testPrice() {
         assertEquals(((PropertySquare) squares[1]).getPrice(), 800);
@@ -59,7 +59,7 @@ public class SquareTest extends TestUtils{
         passed("Price of Square");
     }
 
-    // for checking rent of each property square 
+    // for checking rent of each property square
     @Test
     void testRent() {
         assertEquals(((PropertySquare) squares[1]).getRent(), 90);
@@ -78,7 +78,7 @@ public class SquareTest extends TestUtils{
         passed("Price of Square");
     }
 
-    // for checking position of each property square 
+    // for checking position of each property square
     @Test
     void testPostion() {
         assertEquals(monopoly.getSquares()[0].getPosition(), 0);

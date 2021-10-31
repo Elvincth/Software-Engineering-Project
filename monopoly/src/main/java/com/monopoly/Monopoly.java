@@ -38,7 +38,7 @@ public class Monopoly {
     // private GameData gameData = new GameData(this);
     Monopoly(boolean TEST) {
         this.TEST = TEST;
-        squares[0] = new GoSquare("GO", 0);
+        squares[0] = new Square("GO", 0);
         squares[1] = new PropertySquare("Central", 1, 800, 90, EColor.BLUE);
         squares[2] = new PropertySquare("Wan Chai", 2, 700, 65, EColor.BLUE);
         squares[3] = new TaxSquare("INCOME TAX", 3);
