@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ChanceTest extends TestUtils {
     private Monopoly monopoly = new Monopoly(true);
-    ChanceSquare chanceSquare = new ChanceSquare("TEST_PLAYER", 12);
+    ChanceSquare chanceSquare = new ChanceSquare("Chance", 8);
     private Player player = new Player("TEST_PLAYER", "A");
     int testedBalance = 5000; // the balance of the test player to $5000
 
