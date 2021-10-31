@@ -12,7 +12,23 @@ public class SquareTest {
         assertTrue(monopoly.getSquares()[0] instanceof GoSquare);
         assertTrue(monopoly.getSquares()[1] instanceof PropertySquare);
         assertTrue(monopoly.getSquares()[2] instanceof PropertySquare);
-
+        assertTrue(monopoly.getSquares()[3] instanceof TaxSquare);
+        assertTrue(monopoly.getSquares()[4] instanceof PropertySquare);
+        assertTrue(monopoly.getSquares()[5] instanceof JailSquare);
+        assertTrue(monopoly.getSquares()[6] instanceof PropertySquare);
+        assertTrue(monopoly.getSquares()[7] instanceof PropertySquare);
+        assertTrue(monopoly.getSquares()[8] instanceof ChanceSquare);
+        assertTrue(monopoly.getSquares()[9] instanceof PropertySquare);
+        assertTrue(monopoly.getSquares()[10] instanceof Square);
+        assertTrue(monopoly.getSquares()[11] instanceof PropertySquare);
+        assertTrue(monopoly.getSquares()[12] instanceof ChanceSquare);
+        assertTrue(monopoly.getSquares()[13] instanceof PropertySquare);
+        assertTrue(monopoly.getSquares()[14] instanceof PropertySquare);
+        assertTrue(monopoly.getSquares()[15] instanceof GoJailSquare);
+        assertTrue(monopoly.getSquares()[16] instanceof PropertySquare);
+        assertTrue(monopoly.getSquares()[17] instanceof PropertySquare);
+        assertTrue(monopoly.getSquares()[18] instanceof ChanceSquare);
+        assertTrue(monopoly.getSquares()[19] instanceof PropertySquare);
     }
 
     // Used to rent
