@@ -60,6 +60,10 @@ public class Player implements PlayerAPI {
         }
     }
 
+    public void setBalance(int num) {
+        balance = num;
+    }
+
     public int getBalance() {
         return balance;
     }

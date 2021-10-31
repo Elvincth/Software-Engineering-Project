@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class JailTest extends TestUtils {
     private Monopoly monopoly = new Monopoly(true);
     private GoJailSquare goJailSquare = new GoJailSquare("GO TO JAIL", 15);
+    private JailSquare jailSquare = new JailSquare("JAIL", 5);
     private Player player = new Player("TEST_PLAYER", "A");
 
     // Used to test if the player have been sent to jail if the player landed on Go
@@ -20,7 +21,7 @@ public class JailTest extends TestUtils {
         passed(description);
     }
 
-    // Used to test if the player have been sent to jail
+    // Used to test if the player have been out of the jail
     @Test
     void testOutJail() {
         String description = "Player is out of jail and in jail round is rest to 0";
@@ -29,6 +30,21 @@ public class JailTest extends TestUtils {
         passed(description);
     }
 
-    
+    @Test
+    // Used to test if the user can successfully pay $150 to get out of the jail
+    void testPayToOut() {
+        final int DEFAULT_BAL = 500;
+        int expectBalanceLeft = 500 - 150;
+
+        player.goToJail();
+        jailSquare.effectTo(player, monopoly);
+        player.setBalance(DEFAULT_BAL);
+        jailSquare.payToOut();
+
+        String description = "Player is out of jail and its balance is $" + player.getBalance();
+
+        assertTrue(player.getBalance() == expectBalanceLeft, description);
+        passed(description);
+    }
 
 }

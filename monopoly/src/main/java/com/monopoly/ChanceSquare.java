@@ -3,6 +3,7 @@ package com.monopoly;
 public class ChanceSquare extends Square implements EffectSquareAPI {
     public String name = ""; // if random = 0 = deduct, if random = 1 = add
     private final String TAG = "[CHANCE]";
+    private int randomMoney = 0;
 
     ChanceSquare(String name, int position) {
         super(name, position);
@@ -11,7 +12,7 @@ public class ChanceSquare extends Square implements EffectSquareAPI {
 
     public void effectTo(Player player, Monopoly monopoly) {
         int addOrDeduct = (int) (Math.random() * 2); // generate a random number between 0 to 1
-        int randomMoney = 0;
+        // int randomMoney = 0;
 
         if (addOrDeduct == 0) {
             randomMoney = 10 * (int) (1 + Math.random() * 30);
@@ -28,6 +29,10 @@ public class ChanceSquare extends Square implements EffectSquareAPI {
         } else {
             System.out.printf("%s Congratulations! You have gained $%d%n%n", TAG, randomMoney);
         }
-
     } // determine add amount or lose money
+
+    public int getRandomMoney(){
+        return randomMoney;     
+    }
+
 }
