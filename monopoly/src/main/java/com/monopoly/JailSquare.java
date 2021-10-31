@@ -6,6 +6,7 @@ public class JailSquare extends Square implements EffectSquareAPI {
     private Dice dice = new Dice(false);
     private Monopoly monopoly;
     private Player player;
+    private final int OUT_JAIL_PRICE = 150;
 
     JailSquare(String name, int position) {
         super(name, position);
@@ -13,8 +14,7 @@ public class JailSquare extends Square implements EffectSquareAPI {
 
     private void outOfJail(Boolean isPay) {
         // Set player out of jail
-        player.setInJail(false);
-        player.setJailRound(0);
+        player.outOfJail();
 
         monopoly.display();
 
@@ -37,30 +37,37 @@ public class JailSquare extends Square implements EffectSquareAPI {
 
     }
 
+    protected void payToOut() {
+        outOfJail(true);
+        player.deductBalance(OUT_JAIL_PRICE);
+    }
+
     public void effectTo(Player player, Monopoly monopoly) {
         this.monopoly = monopoly;
         this.player = player;
 
-        // Handle the user in jail
-        if (player.isInJail()) {
-            player.setJailRound(player.getJailRound() + 1); // Add jail round
+        if (!monopoly.isTest()) {
+            // Handle the user in jail
+            if (player.isInJail()) {
+                player.setJailRound(player.getJailRound() + 1); // Add jail round
 
-            YesNo payQuestion = new YesNo(monopoly.scanner, "Do you want to pay $50 to get out of jail?");
-            Boolean answer = payQuestion.ask();
+                YesNo payQuestion = new YesNo(monopoly.scanner, "Do you want to pay $50 to get out of jail?");
+                Boolean answer = payQuestion.ask();
 
-            // Yes and have enough money
-            if (answer && player.getBalance() >= 50) {
-                outOfJail(true);
-            } else if (answer && player.getBalance() < 50) {
-                System.out.printf("%s You don't have enough money, now roll the dice.%n%n", TAG);
-                utils.delay(monopoly.SHORT_DELAY_TIME);
-                rollDiceGetOut();
+                // Yes and have enough money
+                if (answer && player.getBalance() >= OUT_JAIL_PRICE) {
+                    payToOut();
+                } else if (answer && player.getBalance() < OUT_JAIL_PRICE) {
+                    System.out.printf("%s You don't have enough money, now roll the dice.%n%n", TAG);
+                    utils.delay(monopoly.SHORT_DELAY_TIME);
+                    rollDiceGetOut();
+                } else {
+                    rollDiceGetOut();
+                }
+
             } else {
-                rollDiceGetOut();
+                System.out.printf("%s You're just visiting.%n%n", TAG);
             }
-
-        } else {
-            System.out.printf("%s You're just visiting.%n%n", TAG);
         }
     }
 }

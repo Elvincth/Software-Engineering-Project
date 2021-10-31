@@ -20,7 +20,6 @@ public class Player implements PlayerAPI {
         this.name = name;
         this.token = token;
     }
-    
 
     // Player(String name, String token, int position) {
     // this.name = name;
@@ -90,7 +89,10 @@ public class Player implements PlayerAPI {
         setJailRound(1);
     }
 
-
+    public void outOfJail() {
+        setInJail(false);
+        setJailRound(0);
+    }
 
     public void setJailRound(int num) {
         inJailRound = num;
