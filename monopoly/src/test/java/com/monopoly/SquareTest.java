@@ -9,6 +9,9 @@ public class SquareTest extends TestUtils{
     private Monopoly monopoly = new Monopoly();
     private Square[] squares = monopoly.getSquares();
 
+    // the position of square will start at 0 since we are using array for storing each square
+    // therefore the position of square will between 0 to 19 (20 square) 
+
     // for checking square type
     @Test
     void testType() {
