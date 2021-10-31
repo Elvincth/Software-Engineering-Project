@@ -43,6 +43,7 @@ public class JailSquare extends Square implements EffectSquareAPI {
 
         // Handle the user in jail
         if (player.isInJail()) {
+            player.setJailRound(player.getJailRound() + 1); // Add jail round
 
             YesNo payQuestion = new YesNo(monopoly.scanner, "Do you want to pay $50 to get out of jail?");
             Boolean answer = payQuestion.ask();
