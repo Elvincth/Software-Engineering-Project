@@ -13,7 +13,6 @@ import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
 
 public class Monopoly {
-    //private boolean isStarted = false;
     private int gameRound = 0;// TODO: save
     private Square[] squares = new Square[20];
     private ArrayList<Player> players = new ArrayList<Player>();
@@ -27,6 +26,7 @@ public class Monopoly {
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
     private final boolean DEBUG = true;
+    private boolean TEST = false; // is in testing mode, will skip display and next round
     protected final int SHORT_DELAY_TIME = DEBUG ? 10 : 900;
     // Dice
     private Dice dice = new Dice(DEBUG);
@@ -36,7 +36,8 @@ public class Monopoly {
 
     // Game data
     // private GameData gameData = new GameData(this);
-    Monopoly() {
+    Monopoly(boolean TEST) {
+        this.TEST = TEST;
         squares[0] = new GoSquare("GO", 0);
         squares[1] = new PropertySquare("Central", 1, 800, 90, EColor.BLUE);
         squares[2] = new PropertySquare("Wan Chai", 2, 700, 65, EColor.BLUE);
@@ -61,6 +62,10 @@ public class Monopoly {
         tokenChoicesInfo = new ArrayList<String>(Arrays.asList("🐶", "🐱", "🚗", "🎩", "🍉", "🐴"));
     }
 
+    Monopoly() {
+        this(false);
+    }
+
     // Start the game
     public void start() {
         utils.clearScreen();
@@ -70,7 +75,7 @@ public class Monopoly {
         Menu startMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo);
         String userChoice = startMenu.askChoice();
 
-        if (userChoice.equals(choicesInfo[0])) {
+        if (userChoice.equals(choicesInfo[0]) && !TEST) {
             if (DEBUG) {
                 players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
                 players.add(new Player("TEST2", tokenChoicesInfo.get(1)));
@@ -84,6 +89,12 @@ public class Monopoly {
 
             nextTurn();
         }
+
+        // // Add a fake player for test
+        // if (TEST) {
+        // players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
+        // }
+
     }
 
     // Handle what the user will do in the turn
@@ -355,79 +366,82 @@ public class Monopoly {
 
     // For display the game board
     public void display() {
-        int height = 5;
-        int width = 20;
+        if (!TEST) {
+            int height = 5;
+            int width = 20;
 
-        Square[][] boardSquare = { { squares[10], squares[11], squares[12], squares[13], squares[14], squares[15] },
-                { squares[9], null, null, null, null, squares[16] },
-                { squares[8], null, null, null, null, squares[17] },
-                { squares[7], null, null, null, null, squares[18] },
-                { squares[6], null, null, null, null, squares[19] },
-                { squares[5], squares[4], squares[3], squares[2], squares[1], squares[0] } };
+            Square[][] boardSquare = { { squares[10], squares[11], squares[12], squares[13], squares[14], squares[15] },
+                    { squares[9], null, null, null, null, squares[16] },
+                    { squares[8], null, null, null, null, squares[17] },
+                    { squares[7], null, null, null, null, squares[18] },
+                    { squares[6], null, null, null, null, squares[19] },
+                    { squares[5], squares[4], squares[3], squares[2], squares[1], squares[0] } };
 
-        SimpleTable table = SimpleTable.of();
+            SimpleTable table = SimpleTable.of();
 
-        table.nextRow();
+            table.nextRow();
 
-        for (int i = 0; i < boardSquare.length; ++i) {
+            for (int i = 0; i < boardSquare.length; ++i) {
 
-            for (int j = 0; j < boardSquare[i].length; ++j) {
-                Square square = boardSquare[i][j]; // Current square
-                boolean isSquare = square != null;
+                for (int j = 0; j < boardSquare[i].length; ++j) {
+                    Square square = boardSquare[i][j]; // Current square
+                    boolean isSquare = square != null;
 
-                table.nextCell();
+                    table.nextCell();
 
-                // Split the name into parts by \n
-                // So we can use addLine
-                if (isSquare) {
-                    String[] splitString;
+                    // Split the name into parts by \n
+                    // So we can use addLine
+                    if (isSquare) {
+                        String[] splitString;
 
-                    splitString = square.getDisplayName().split("\n");
+                        splitString = square.getDisplayName().split("\n");
 
-                    for (String s : splitString) {
-                        table.addLine(s);
+                        for (String s : splitString) {
+                            table.addLine(s);
+                        }
                     }
-                }
 
-                // Add jailed token to jail square if any
-                if (square instanceof JailSquare) {
-                    ArrayList<String> jailedTokens = getJailedToken();
-                    if (jailedTokens.size() > 0) {
-                        table.addLine(String.format("|%s|", String.join(" ", jailedTokens)));
+                    // Add jailed token to jail square if any
+                    if (square instanceof JailSquare) {
+                        ArrayList<String> jailedTokens = getJailedToken();
+                        if (jailedTokens.size() > 0) {
+                            table.addLine(String.format("|%s|", String.join(" ", jailedTokens)));
+                        }
                     }
+
+                    // Add the player tokens that currently on that square
+                    if (isSquare) {
+                        // If have user token
+                        table.addLine(getTokensByPos(square.getPosition()));
+                    }
+
+                    table.applyToCell(Functions.VERTICAL_CENTER.withHeight(height))
+                            .applyToCell(Functions.HORIZONTAL_CENTER.withWidth(width));
                 }
 
-                // Add the player tokens that currently on that square
-                if (isSquare) {
-                    // If have user token
-                    table.addLine(getTokensByPos(square.getPosition()));
+                if (i != 5) { // Skip the last row, no need to insert
+                    table.nextRow();
                 }
 
-                table.applyToCell(Functions.VERTICAL_CENTER.withHeight(height))
-                        .applyToCell(Functions.HORIZONTAL_CENTER.withWidth(width));
             }
 
-            if (i != 5) { // Skip the last row, no need to insert
-                table.nextRow();
+            GridTable gridTable = table.toGrid();
+
+            gridTable = Border.DOUBLE_LINE.apply(gridTable);
+
+            utils.clearScreen();
+
+            System.out.println(Util.asString(gridTable)); // Print out the table
+
+            System.out.printf("Current Player: %s, Token: %s, Balance: $%d, Number of property: %d\n",
+                    currentPlayer.getName(), currentPlayer.getToken(), currentPlayer.getBalance(),
+                    currentPlayer.getProperty().size());
+
+            if (DEBUG) {
+                System.out.printf("[DEBUG] Dice total: %s, Player round: %s, Game round: %s, Jail Counter: %d%n%n",
+                        dice.getTotal(), currentPlayer.getCurrentRound(), checkGameRound(),
+                        currentPlayer.getJailRound());
             }
-
-        }
-
-        GridTable gridTable = table.toGrid();
-
-        gridTable = Border.DOUBLE_LINE.apply(gridTable);
-
-        utils.clearScreen();
-
-        System.out.println(Util.asString(gridTable)); // Print out the table
-
-        System.out.printf("Current Player: %s, Token: %s, Balance: $%d, Number of property: %d\n",
-                currentPlayer.getName(), currentPlayer.getToken(), currentPlayer.getBalance(),
-                currentPlayer.getProperty().size());
-
-        if (DEBUG) {
-            System.out.printf("[DEBUG] Dice total: %s, Player round: %s, Game round: %s, Jail Counter: %d%n%n",
-                    dice.getTotal(), currentPlayer.getCurrentRound(), checkGameRound(), currentPlayer.getJailRound());
         }
     };
 
@@ -436,8 +450,8 @@ public class Monopoly {
         return squares;
     }
 
-    // //Get is the game started
-    // public boolean getIsStarted(){
-    //     return isStarted()
-    // }
+    // Get is testing
+    public boolean isTest() {
+        return TEST;
+    }
 }
