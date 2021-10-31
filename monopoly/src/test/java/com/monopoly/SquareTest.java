@@ -101,4 +101,22 @@ public class SquareTest extends TestUtils{
 
         passed("Position of Square");
     }
+
+    @Test
+    void testColor(){
+        assertEquals(((PropertySquare) squares[1]).getColor(), EColor.BLUE);
+        assertEquals(((PropertySquare) squares[2]).getColor(), EColor.BLUE);
+        assertEquals(((PropertySquare) squares[4]).getColor(), EColor.BLUE);
+        assertEquals(((PropertySquare) squares[6]).getColor(), EColor.RED);
+        assertEquals(((PropertySquare) squares[7]).getColor(), EColor.RED);
+        assertEquals(((PropertySquare) squares[9]).getColor(), EColor.RED);
+        assertEquals(((PropertySquare) squares[11]).getColor(), EColor.DARK_BLUE);
+        assertEquals(((PropertySquare) squares[13]).getColor(), EColor.DARK_BLUE);
+        assertEquals(((PropertySquare) squares[14]).getColor(), EColor.DARK_BLUE);
+        assertEquals(((PropertySquare) squares[16]).getColor(), EColor.YELLOW);
+        assertEquals(((PropertySquare) squares[17]).getColor(), EColor.YELLOW);
+        assertEquals(((PropertySquare) squares[19]).getColor(), EColor.YELLOW);
+
+        passed("Color of Square");
+    }
 }
