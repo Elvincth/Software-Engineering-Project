@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+
 public class SquareTest {
     private Monopoly monopoly = new Monopoly();
+    private Square[] squares = monopoly.getSquares();
 
     @Test
     void testType() {
@@ -29,13 +31,16 @@ public class SquareTest {
         assertTrue(monopoly.getSquares()[17] instanceof PropertySquare);
         assertTrue(monopoly.getSquares()[18] instanceof ChanceSquare);
         assertTrue(monopoly.getSquares()[19] instanceof PropertySquare);
+        assertTrue(squares[0] instanceof GoSquare);
+        assertTrue(squares[1] instanceof PropertySquare);
+        assertTrue(squares[2] instanceof PropertySquare);
     }
 
     // Used to rent
     @Test
     void testRent() {
 
-    //   monopoly.getSquares()[1].getRent();
+        ((PropertySquare)squares[1]).getRent();
 
         // assertTrue(();
     }
