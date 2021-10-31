@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class JailTest {
+public class JailTest extends TestUtils {
     // private Monopoly monopoly = new Monopoly();
     // private GoJailSquare goJailSquare = new GoJailSquare("GO TO JAIL", 15);
     private Player player = new Player("TEST_PLAYER", "A");
