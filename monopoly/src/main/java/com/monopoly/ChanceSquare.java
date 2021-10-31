@@ -29,5 +29,8 @@ public class ChanceSquare extends Square implements EffectSquareAPI {
             System.out.printf("%s Congratulations! You have gained $%d%n%n", TAG, randomMoney);
         }
 
+        // for test unit can be delete or comment
+        System.out.println("The balance of the player is: " + "$" + player.getBalance());
+
     } // determine add amount or lose money
 }
