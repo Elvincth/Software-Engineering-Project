@@ -29,19 +29,6 @@ public class ChanceSquare extends Square implements EffectSquareAPI {
         } else {
             System.out.printf("%s Congratulations! You have gained $%d%n%n", TAG, randomMoney);
         }
-
-        // // for testing
-        // if(monopoly.isTest()){
-        //     if(player.getBalance() >= 4700){
-        //         System.out.println("Balance After Deducted: " + "$" + player.getBalance());
-        //         System.out.println("Which is larger or equal to $4700");
-        //     }else if (player.getBalance() <= 5200){
-        //         System.out.println("Balance After Added: " + "$" + player.getBalance());
-        //         System.out.println("Which is smaller or equal to $5200");
-        //     }
-
-        //     System.out.println(randomMoney);
-        // }
     } // determine add amount or lose money
 
     public int getRandomMoney(){
