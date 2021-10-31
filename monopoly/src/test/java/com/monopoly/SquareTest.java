@@ -74,4 +74,30 @@ public class SquareTest {
 
         System.out.println("All square rent correct.");
     }
+
+    @Test
+    void testPostion() {
+        assertEquals(monopoly.getSquares()[0].getPosition(), 0);
+        assertEquals(monopoly.getSquares()[1].getPosition(), 1);
+        assertEquals(monopoly.getSquares()[2].getPosition(), 2);
+        assertEquals(monopoly.getSquares()[3].getPosition(), 3);
+        assertEquals(monopoly.getSquares()[4].getPosition(), 4);
+        assertEquals(monopoly.getSquares()[5].getPosition(), 5);
+        assertEquals(monopoly.getSquares()[6].getPosition(), 6);
+        assertEquals(monopoly.getSquares()[7].getPosition(), 7);
+        assertEquals(monopoly.getSquares()[8].getPosition(), 8);
+        assertEquals(monopoly.getSquares()[9].getPosition(), 9);
+        assertEquals(monopoly.getSquares()[10].getPosition(), 10);
+        assertEquals(monopoly.getSquares()[11].getPosition(), 11);
+        assertEquals(monopoly.getSquares()[12].getPosition(), 12);
+        assertEquals(monopoly.getSquares()[13].getPosition(), 13);
+        assertEquals(monopoly.getSquares()[14].getPosition(), 14);
+        assertEquals(monopoly.getSquares()[15].getPosition(), 15);
+        assertEquals(monopoly.getSquares()[16].getPosition(), 16);
+        assertEquals(monopoly.getSquares()[17].getPosition(), 17);
+        assertEquals(monopoly.getSquares()[18].getPosition(), 18);
+        assertEquals(monopoly.getSquares()[19].getPosition(), 19);
+
+        System.out.println("All square posistion correct.");
+    }
 }
