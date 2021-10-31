@@ -8,7 +8,7 @@ public class DiceTest {
     private Dice dice;
 
     @Test
-    void Dice1Test() {
+    void firstDiceTest() {
         dice = new Dice(false);
 
         dice.roll();
@@ -17,7 +17,7 @@ public class DiceTest {
     }
 
     @Test
-    void Dice2Test() {
+    void secondDiceTest() {
         dice = new Dice(false);
 
         dice.roll();
@@ -26,12 +26,12 @@ public class DiceTest {
     }
 
     @Test
-    void mutiDiceTest(){
+    void doubleDiceTest() {
         dice = new Dice(false);
-        
+
         dice.roll();
 
-        assertTrue(dice.getTotal() < 9 && dice.getTotal() > 1,  "Two dice should be between 2 to 8");
+        assertTrue(dice.getTotal() < 9 && dice.getTotal() > 1, "Two dice should be between 2 to 8");
     }
 
 }

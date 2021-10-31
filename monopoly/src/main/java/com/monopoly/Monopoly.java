@@ -13,7 +13,8 @@ import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
 
 public class Monopoly {
-    private int gameRound = 99;// TODO: save
+    //private boolean isStarted = false;
+    private int gameRound = 0;// TODO: save
     private Square[] squares = new Square[20];
     private ArrayList<Player> players = new ArrayList<Player>();
     private int currentPlayerIndex = 0; // Current player index TODO: save
@@ -25,8 +26,8 @@ public class Monopoly {
     private ArrayList<String> tokenChoices = new ArrayList<String>();
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
-    final boolean DEBUG = false;
-    final int SHORT_DELAY_TIME = DEBUG ? 10 : 900;
+    private final boolean DEBUG = true;
+    protected final int SHORT_DELAY_TIME = DEBUG ? 10 : 900;
     // Dice
     private Dice dice = new Dice(DEBUG);
     private int roundCounter = 0;
@@ -434,4 +435,9 @@ public class Monopoly {
     public Square[] getSquares() {
         return squares;
     }
+
+    // //Get is the game started
+    // public boolean getIsStarted(){
+    //     return isStarted()
+    // }
 }
