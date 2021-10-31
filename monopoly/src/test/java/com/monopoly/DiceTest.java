@@ -30,8 +30,8 @@ public class DiceTest extends TestUtils {
     void totalDiceTest() {
         String description = "Two dice sum up is between 2 to 8 and correct";
         dice.roll();
-        assertTrue(dice.getTotal() < 9 && dice.getTotal() > 1);
-        assertTrue(dice.getTotal() == (dice.getRolled()[0] + dice.getRolled()[1]));
+        assertTrue(dice.getTotal() < 9 && dice.getTotal() > 1);// Check if the sum range is fix
+        assertTrue(dice.getTotal() == (dice.getRolled()[0] + dice.getRolled()[1])); // Check if the sum is same
         passed(description);
     }
 
