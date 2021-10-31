@@ -70,7 +70,7 @@ public class PropertySquare extends Square implements EffectSquareAPI {
     }
 
     // set the owner of the property
-    private void buy(Player player, Monopoly monopoly) {
+    public void buy(Player player, Monopoly monopoly) {
         if (player.getBalance() >= this.price) {
             // check weather the player have enough balance for buying the property
             owner = player;
