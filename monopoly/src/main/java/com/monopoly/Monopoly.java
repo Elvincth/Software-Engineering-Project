@@ -13,7 +13,7 @@ import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
 
 public class Monopoly {
-    private int gameRound = 0;// TODO: save
+    private int gameRound = 99;// TODO: save
     private Square[] squares = new Square[20];
     private ArrayList<Player> players = new ArrayList<Player>();
     private int currentPlayerIndex = 0; // Current player index TODO: save
@@ -25,12 +25,13 @@ public class Monopoly {
     private ArrayList<String> tokenChoices = new ArrayList<String>();
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
-    final boolean DEBUG = true;
+    final boolean DEBUG = false;
     final int SHORT_DELAY_TIME = DEBUG ? 10 : 900;
     // Dice
     private Dice dice = new Dice(DEBUG);
     private int roundCounter = 0;
     private int lostPlayer = 0;
+    ArrayList<Player> winnerPlayerList = new ArrayList<Player>();
 
     // Game data
     // private GameData gameData = new GameData(this);
@@ -163,8 +164,7 @@ public class Monopoly {
             nextTurn();
         } else {
             utils.clearScreen();
-            System.out.println("The game is End \n");
-            System.out.printf("The winner is %s \n", checkGameWinner());
+            checkGameWinner();
             // TODO add menu
         }
 
@@ -235,7 +235,7 @@ public class Monopoly {
     }
 
     private int checkGameRound() {// count the game round
-        if (roundCounter >= players.size() + 2) {
+        if (roundCounter >= players.size() - 1) {
             gameRound++;
             roundCounter = 0;
         } else {
@@ -244,16 +244,46 @@ public class Monopoly {
         return gameRound;
     }
 
-    private String checkGameWinner() {
-        String playerName = "";
+    private String loseConvert(boolean lose){
+        if(lose){
+            return "Yes";
+        }
+        else{
+            return "No";
+        }
+    }
+
+    private void printSettlementTable() {
+        System.out.printf("%-10s %-10s %-10s\n", "PlayerName" , "Balance" , "lose");
+        System.out.printf("--------------------------------\n");
+        for (int i = 0; i < players.size(); i++) {
+            System.out.printf("%-10s %-10s %-10s\n", players.get(i).getName(), players.get(i).getBalance(),loseConvert(players.get(i).getLost()));
+        }
+        System.out.printf("--------------------------------\n");
+    }
+
+    private void checkGameWinner() {
         int higherBalance = 0;
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getBalance() > higherBalance) {
                 higherBalance = players.get(i).getBalance();
-                playerName = players.get(i).getName();
             }
         }
-        return playerName;
+        for (int j = 0; j < players.size(); j++) {
+            if (players.get(j).getBalance() == higherBalance) {
+                winnerPlayerList.add(players.get(j));
+            }
+        }
+        printSettlementTable();
+        System.out.println("The game is end");
+        System.out.print("The winner is ");
+        for (int k = 0; k < winnerPlayerList.size(); k++) {
+            if (k == winnerPlayerList.size() - 1) {
+                System.out.printf("%S ", winnerPlayerList.get(k).getName());
+            } else {
+                System.out.printf("%s,", winnerPlayerList.get(k).getName());
+            }
+        }
     }
 
     private boolean endGameCheck() {// check wether the game is end or not

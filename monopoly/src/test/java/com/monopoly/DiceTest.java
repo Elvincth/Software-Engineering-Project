@@ -8,12 +8,30 @@ public class DiceTest {
     private Dice dice;
 
     @Test
-    void diceTest() {
+    void Dice1Test() {
         dice = new Dice(false);
 
         dice.roll();
 
         assertTrue(dice.getRolled()[0] < 5 && dice.getRolled()[0] > 0, "Should be between 1 to 4");
-
     }
+
+    @Test
+    void Dice2Test() {
+        dice = new Dice(false);
+
+        dice.roll();
+
+        assertTrue(dice.getRolled()[1] < 5 && dice.getRolled()[1] > 0, "Should be between 1 to 4");
+    }
+
+    @Test
+    void mutiDiceTest(){
+        dice = new Dice(false);
+        
+        dice.roll();
+
+        assertTrue(dice.getTotal() < 9 && dice.getTotal() > 1,  "Two dice should be between 2 to 8");
+    }
+
 }
