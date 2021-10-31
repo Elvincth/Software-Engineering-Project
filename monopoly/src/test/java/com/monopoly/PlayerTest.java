@@ -17,14 +17,14 @@ public class PlayerTest extends TestUtils {
     }
 
     @Test
-    void addBalanceTest() {
+    void testAddBalance() {
         String description = "addBalance method run correctly";
         assertTrue(player.addBalance(100) == 600, description); // 500 + 100 = 600
         passed(description);
     }
 
     @Test
-    void deductBalanceTest() {
+    void testDeductBalance() {
         String description = "deductBalance method run correctly";
         assertTrue(player.deductBalance(100) == 400, description); // 500 - 100 = 400
         passed(description);
@@ -39,7 +39,7 @@ public class PlayerTest extends TestUtils {
     }
 
     @Test
-    void setToLostTest() {
+    void testSetToLost() {
         String description = "setToLost method run correctly";
         player.setToLost();
         assertTrue(player.getLost(), description);
