@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SquareTest {
+public class SquareTest extends TestUtils{
     private Monopoly monopoly = new Monopoly();
     private Square[] squares = monopoly.getSquares();
 
@@ -33,7 +33,7 @@ public class SquareTest {
         assertTrue(monopoly.getSquares()[18] instanceof ChanceSquare);
         assertTrue(monopoly.getSquares()[19] instanceof PropertySquare);
 
-        System.out.println("All square type correct.");
+        passed("Rent of Square");
 
     }
 
@@ -53,7 +53,7 @@ public class SquareTest {
         assertEquals(((PropertySquare) squares[17]).getPrice(), 400);
         assertEquals(((PropertySquare) squares[19]).getPrice(), 600);
 
-        System.out.println("All square price correct.");
+        passed("Price of Square");
     }
 
     // for checking rent of each property square 
@@ -72,9 +72,10 @@ public class SquareTest {
         assertEquals(((PropertySquare) squares[17]).getRent(), 25);
         assertEquals(((PropertySquare) squares[19]).getRent(), 25);
 
-        System.out.println("All square rent correct.");
+        passed("Price of Square");
     }
 
+    // for checking position of each property square 
     @Test
     void testPostion() {
         assertEquals(monopoly.getSquares()[0].getPosition(), 0);
@@ -98,6 +99,6 @@ public class SquareTest {
         assertEquals(monopoly.getSquares()[18].getPosition(), 18);
         assertEquals(monopoly.getSquares()[19].getPosition(), 19);
 
-        System.out.println("All square posistion correct.");
+        passed("Position of Square");
     }
 }
