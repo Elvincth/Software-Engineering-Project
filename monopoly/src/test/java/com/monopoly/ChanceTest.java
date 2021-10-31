@@ -12,5 +12,5 @@ public class ChanceTest extends TestUtils{
     void testRamdomDeduct(){
         assertTrue(booleanSupplier);
     }
-    
+
 }
