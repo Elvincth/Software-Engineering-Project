@@ -33,6 +33,8 @@ public class JailSquare extends Square implements EffectSquareAPI {
         if (rolledDice[0] == rolledDice[1]) {
             System.out.printf("%s Same dice! You're out of jail.%n%n", TAG);
             outOfJail(false);
+        } else {
+            System.out.printf("%s Uh oh! Dice not the same, can;t get out of jail.%n%n", TAG);
         }
 
     }

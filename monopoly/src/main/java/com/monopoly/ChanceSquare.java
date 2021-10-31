@@ -28,6 +28,5 @@ public class ChanceSquare extends Square implements EffectSquareAPI {
         } else {
             System.out.printf("%s Congratulations! You have gained $%d%n%n", TAG, randomMoney);
         }
-
     } // determine add amount or lose money
 }

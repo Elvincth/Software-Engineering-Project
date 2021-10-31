@@ -256,20 +256,12 @@ public class Monopoly {
         return gameRound;
     }
 
-    private String loseConvert(boolean lose) {
-        if (lose) {
-            return "Yes";
-        } else {
-            return "No";
-        }
-    }
-
     private void printSettlementTable() {
         System.out.printf("%-10s %-10s %-10s\n", "PlayerName", "Balance", "lose");
         System.out.printf("--------------------------------\n");
         for (int i = 0; i < players.size(); i++) {
             System.out.printf("%-10s %-10s %-10s\n", players.get(i).getName(), players.get(i).getBalance(),
-                    loseConvert(players.get(i).getLost()));
+                    players.get(i).getLost() ? "Yes" : "No");
         }
         System.out.printf("--------------------------------\n");
     }

@@ -4,8 +4,17 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
+
 public class PlayerTest extends TestUtils {
     private Player player = new Player("Test1", "2");
+
+    @BeforeEach
+    // Before running each test cases we should set the default player balance to
+    // 500
+    void setDefaultBalance() {
+        player.setBalance(500);
+    }
 
     @Test
     void addBalanceTest() {
@@ -26,16 +35,6 @@ public class PlayerTest extends TestUtils {
         String description = "setPosition method run correctly";
         player.setPosition(10);
         assertTrue(player.getPosition() == 10, description); // 500 - 100 = 400
-        passed(description);
-    }
-
-    @Test
-    void goToJailTest() {
-        String description = "GoToJail method run correctly";
-        player.goToJail();
-        assertTrue(player.getPosition() == 5, description); // 500 - 100 = 400
-        assertTrue(player.getJailRound() == 1, description);
-        assertTrue(player.isInJail() == true, description);
         passed(description);
     }
 

@@ -5,11 +5,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SquareTest extends TestUtils{
+public class SquareTest extends TestUtils {
     private Monopoly monopoly = new Monopoly();
     private Square[] squares = monopoly.getSquares();
 
-    // the position of square will start at 0 since we are using array for storing each square
+    // the position of square will start at 0 since we are using array for storing
+    // each square
     // therefore the position of square will between 0 to 19 (20 square)
 
     // for checking square type
@@ -80,7 +81,7 @@ public class SquareTest extends TestUtils{
 
     // for checking position of each property square
     @Test
-    void testPostion() {
+    void testPosition() {
         assertEquals(monopoly.getSquares()[0].getPosition(), 0);
         assertEquals(monopoly.getSquares()[1].getPosition(), 1);
         assertEquals(monopoly.getSquares()[2].getPosition(), 2);
@@ -106,7 +107,7 @@ public class SquareTest extends TestUtils{
     }
 
     @Test
-    void testColor(){
+    void testColor() {
         assertEquals(((PropertySquare) squares[1]).getColor(), EColor.BLUE);
         assertEquals(((PropertySquare) squares[2]).getColor(), EColor.BLUE);
         assertEquals(((PropertySquare) squares[4]).getColor(), EColor.BLUE);
@@ -120,6 +121,6 @@ public class SquareTest extends TestUtils{
         assertEquals(((PropertySquare) squares[17]).getColor(), EColor.YELLOW);
         assertEquals(((PropertySquare) squares[19]).getColor(), EColor.YELLOW);
 
-        passed("Color of Square");
+        passed("Color of property");
     }
 }

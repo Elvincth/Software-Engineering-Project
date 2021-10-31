@@ -31,7 +31,7 @@ public class JailTest extends TestUtils {
     }
 
     @Test
-    // Used to test if the payer used to test jail square
+    // Used to test if the user can successfully pay $150 to get out of the jail
     void testPayToOut() {
         final int DEFAULT_BAL = 500;
         int expectBalanceLeft = 500 - 150;
