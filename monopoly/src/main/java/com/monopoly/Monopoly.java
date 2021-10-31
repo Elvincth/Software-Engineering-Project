@@ -244,20 +244,20 @@ public class Monopoly {
         return gameRound;
     }
 
-    private String loseConvert(boolean lose){
-        if(lose){
+    private String loseConvert(boolean lose) {
+        if (lose) {
             return "Yes";
-        }
-        else{
+        } else {
             return "No";
         }
     }
 
     private void printSettlementTable() {
-        System.out.printf("%-10s %-10s %-10s\n", "PlayerName" , "Balance" , "lose");
+        System.out.printf("%-10s %-10s %-10s\n", "PlayerName", "Balance", "lose");
         System.out.printf("--------------------------------\n");
         for (int i = 0; i < players.size(); i++) {
-            System.out.printf("%-10s %-10s %-10s\n", players.get(i).getName(), players.get(i).getBalance(),loseConvert(players.get(i).getLost()));
+            System.out.printf("%-10s %-10s %-10s\n", players.get(i).getName(), players.get(i).getBalance(),
+                    loseConvert(players.get(i).getLost()));
         }
         System.out.printf("--------------------------------\n");
     }
@@ -429,4 +429,9 @@ public class Monopoly {
                     dice.getTotal(), currentPlayer.getCurrentRound(), checkGameRound(), currentPlayer.getJailRound());
         }
     };
+
+    // Get all squares
+    public Square[] getSquares() {
+        return squares;
+    }
 }
