@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class SquareTest {
+public class SquareTest extends TestUtils{
     private Monopoly monopoly = new Monopoly();
     private Square[] squares = monopoly.getSquares();
 
@@ -33,7 +33,7 @@ public class SquareTest {
         assertTrue(monopoly.getSquares()[18] instanceof ChanceSquare);
         assertTrue(monopoly.getSquares()[19] instanceof PropertySquare);
 
-        System.out.println("All square type correct.");
+        passed("Rent of Square");
 
     }
 
@@ -53,7 +53,7 @@ public class SquareTest {
         assertEquals(((PropertySquare) squares[17]).getPrice(), 400);
         assertEquals(((PropertySquare) squares[19]).getPrice(), 600);
 
-        System.out.println("All square price correct.");
+        passed("Price of Square");
     }
 
     // for checking rent of each property square 
@@ -72,6 +72,33 @@ public class SquareTest {
         assertEquals(((PropertySquare) squares[17]).getRent(), 25);
         assertEquals(((PropertySquare) squares[19]).getRent(), 25);
 
-        System.out.println("All square rent correct.");
+        passed("Price of Square");
+    }
+
+    // for checking position of each property square 
+    @Test
+    void testPostion() {
+        assertEquals(monopoly.getSquares()[0].getPosition(), 0);
+        assertEquals(monopoly.getSquares()[1].getPosition(), 1);
+        assertEquals(monopoly.getSquares()[2].getPosition(), 2);
+        assertEquals(monopoly.getSquares()[3].getPosition(), 3);
+        assertEquals(monopoly.getSquares()[4].getPosition(), 4);
+        assertEquals(monopoly.getSquares()[5].getPosition(), 5);
+        assertEquals(monopoly.getSquares()[6].getPosition(), 6);
+        assertEquals(monopoly.getSquares()[7].getPosition(), 7);
+        assertEquals(monopoly.getSquares()[8].getPosition(), 8);
+        assertEquals(monopoly.getSquares()[9].getPosition(), 9);
+        assertEquals(monopoly.getSquares()[10].getPosition(), 10);
+        assertEquals(monopoly.getSquares()[11].getPosition(), 11);
+        assertEquals(monopoly.getSquares()[12].getPosition(), 12);
+        assertEquals(monopoly.getSquares()[13].getPosition(), 13);
+        assertEquals(monopoly.getSquares()[14].getPosition(), 14);
+        assertEquals(monopoly.getSquares()[15].getPosition(), 15);
+        assertEquals(monopoly.getSquares()[16].getPosition(), 16);
+        assertEquals(monopoly.getSquares()[17].getPosition(), 17);
+        assertEquals(monopoly.getSquares()[18].getPosition(), 18);
+        assertEquals(monopoly.getSquares()[19].getPosition(), 19);
+
+        passed("Position of Square");
     }
 }
