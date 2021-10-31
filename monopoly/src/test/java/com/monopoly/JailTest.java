@@ -15,6 +15,6 @@ public class JailTest extends TestUtils {
         // goJailSquare.effectTo(player, monopoly);
         // Test if the player in jail square position and is in jail
         assertTrue(!player.isInJail(), "frfrf");
-        System.out.println("description - passed");
+        passed("description - passed");
     }
 }
