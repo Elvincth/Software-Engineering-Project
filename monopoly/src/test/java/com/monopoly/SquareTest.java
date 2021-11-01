@@ -41,10 +41,10 @@ public class SquareTest extends TestUtils {
         passed("The type of the squares correct");
     }
 
-    // for checking price of each property square
+    // For checking price of each property square
     @Test
     void testPrice() {
-        // check whether the property squares include the specific price
+        // Check whether the property squares include the specific price
         assertEquals(((PropertySquare) squares[1]).getPrice(), 800);
         assertEquals(((PropertySquare) squares[2]).getPrice(), 700);
         assertEquals(((PropertySquare) squares[4]).getPrice(), 600);
@@ -61,7 +61,7 @@ public class SquareTest extends TestUtils {
         passed("The price of the property squares correct");
     }
 
-    // for checking rent of each property square
+    // For checking rent of each property square
     @Test
     void testRent() {
         // check whether the property squares include the specific rent
@@ -81,10 +81,10 @@ public class SquareTest extends TestUtils {
         passed("The rent of the property squares correct");
     }
 
-    // for checking position of each property square
+    // For checking position of each property square
     @Test
     void testPosition() {
-        // check whether the squares include the specific position
+        // Check whether the squares include the specific position
         assertEquals(monopoly.getSquares()[0].getPosition(), 0);
         assertEquals(monopoly.getSquares()[1].getPosition(), 1);
         assertEquals(monopoly.getSquares()[2].getPosition(), 2);

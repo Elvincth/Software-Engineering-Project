@@ -14,7 +14,7 @@ public class JailTest extends TestUtils {
     @Test
     void testGoJailSquare() {
         String description = "Player is in jail and position is 5 (jail square)";
-        goJailSquare.effectTo(player, monopoly); // 
+        goJailSquare.effectTo(player, monopoly); //
         assertTrue(player.isInJail() && player.getPosition() == 5, description);
         passed(description);
     }
@@ -24,8 +24,8 @@ public class JailTest extends TestUtils {
     void testOutJail() {
         String description = "Player is out of jail and in jail round is rest to 0";
         player.outOfJail(); // Set the player out of jail
-        assertTrue(!player.isInJail() && player.getJailRound() == 0, description); // Test if isInJail is true and jail
-                                                                                   // round is rest to 0
+        // Test if isInJail is true and jail round is rest to 0
+        assertTrue(!player.isInJail() && player.getJailRound() == 0, description);
         passed(description);
     }
 
@@ -37,7 +37,7 @@ public class JailTest extends TestUtils {
 
         player.goToJail(); // Set the player to jail
         jailSquare.effectTo(player, monopoly); // Pass essential objects to jail square
-        player.setBalance(DEFAULT_BAL);// Set player balance to$ 500
+        player.setBalance(DEFAULT_BAL);// Set player balance to $500
         jailSquare.payToOut();// Test pay to out method in jailSquare
 
         String description = "Player is out of jail and its balance is $" + player.getBalance();
