@@ -16,16 +16,20 @@ public class PlayerTest extends TestUtils {
         player.setBalance(500);
     }
 
+    // check whether it has a correct balance after addition
     @Test
     void testAddBalance() {
         String description = "addBalance method run correctly";
+        // Assume the added amount is 100
         assertTrue(player.addBalance(100) == 600, description); // 500 + 100 = 600
         passed(description);
     }
 
+    // check whether it has a correct balance after deduction
     @Test
     void testDeductBalance() {
         String description = "deductBalance method run correctly";
+        // Assume the deducted amount is 100
         assertTrue(player.deductBalance(100) == 400, description); // 500 - 100 = 400
         passed(description);
     }
