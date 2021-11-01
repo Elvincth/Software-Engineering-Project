@@ -5,9 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class GoTest extends TestUtils {
-    private Monopoly monopoly = new Monopoly(true);
     private Player player = new Player("1", "1");
-    private int nextPosition = 0;
     private Dice dice = new Dice();
 
     @Test

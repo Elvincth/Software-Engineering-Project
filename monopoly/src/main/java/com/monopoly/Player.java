@@ -125,6 +125,7 @@ public class Player implements PlayerAPI {
     public void setToLost() {
         lost = true;
         balance = 0;
+        ownedProperty = new ArrayList<PropertySquare>();
     }
 
     public boolean getLost() {
