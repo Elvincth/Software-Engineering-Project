@@ -47,5 +47,4 @@ public class ChanceTest extends TestUtils {
 
         passed(description);
     }
-
 }

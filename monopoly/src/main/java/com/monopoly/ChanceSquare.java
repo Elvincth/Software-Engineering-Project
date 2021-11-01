@@ -31,8 +31,8 @@ public class ChanceSquare extends Square implements EffectSquareAPI {
         }
     } // determine add amount or lose money
 
-    public int getRandomMoney(){
-        return randomMoney;     
+    public int getRandomMoney() {
+        return randomMoney;
     }
 
 }

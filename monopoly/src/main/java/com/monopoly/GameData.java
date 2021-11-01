@@ -1,5 +1,6 @@
 
 package com.monopoly;
+
 import org.json.JSONObject;
 
 public class GameData {

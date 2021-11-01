@@ -7,11 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.BeforeEach;
 
 public class PlayerTest extends TestUtils {
-    private Player player = new Player("Test1", "2");
+    private Player player = new Player("TEST_PLAYER", "A");
 
-    @BeforeEach
     // Before running each test cases we should set the default player balance to
     // 500
+    @BeforeEach
     void setDefaultBalance() {
         player.setBalance(500);
     }

@@ -1,5 +1,5 @@
 package com.monopoly;
 
-public class GoTest {
+public class GoTest extends TestUtils {
 
 }

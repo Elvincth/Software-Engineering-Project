@@ -10,13 +10,11 @@ public class JailTest extends TestUtils {
     private JailSquare jailSquare = new JailSquare("JAIL", 5);
     private Player player = new Player("TEST_PLAYER", "A");
 
-    // Used to test if the player have been sent to jail if the player landed on Go
-    // Jail square
+    // Used to test go to jail square
     @Test
     void testGoJailSquare() {
         String description = "Player is in jail and position is 5 (jail square)";
-        // Test if the player in jail square position and is in jail
-        goJailSquare.effectTo(player, monopoly);
+        goJailSquare.effectTo(player, monopoly); // 
         assertTrue(player.isInJail() && player.getPosition() == 5, description);
         passed(description);
     }
@@ -25,25 +23,27 @@ public class JailTest extends TestUtils {
     @Test
     void testOutJail() {
         String description = "Player is out of jail and in jail round is rest to 0";
-        player.outOfJail();
-        assertTrue(!player.isInJail() && player.getJailRound() == 0, description);
+        player.outOfJail(); // Set the player out of jail
+        assertTrue(!player.isInJail() && player.getJailRound() == 0, description); // Test if isInJail is true and jail
+                                                                                   // round is rest to 0
         passed(description);
     }
 
     @Test
     // Used to test if the user can successfully pay $150 to get out of the jail
     void testPayToOut() {
-        final int DEFAULT_BAL = 500;
-        int expectBalanceLeft = 500 - 150;
+        final int DEFAULT_BAL = 500; // Give a default balance to the user
+        int expectBalanceLeft = 350; // Expected balance after user paid $150 to get out o
 
-        player.goToJail();
-        jailSquare.effectTo(player, monopoly);
-        player.setBalance(DEFAULT_BAL);
-        jailSquare.payToOut();
+        player.goToJail(); // Set the player to jail
+        jailSquare.effectTo(player, monopoly); // Pass essential objects to jail square
+        player.setBalance(DEFAULT_BAL);// Set player balance to$ 500
+        jailSquare.payToOut();// Test pay to out method in jailSquare
 
         String description = "Player is out of jail and its balance is $" + player.getBalance();
 
-        assertTrue(player.getBalance() == expectBalanceLeft, description);
+        assertTrue(player.getBalance() == expectBalanceLeft, description); // If player balance equal to expected
+                                                                           // balance left the test case is passed
         passed(description);
     }
 
