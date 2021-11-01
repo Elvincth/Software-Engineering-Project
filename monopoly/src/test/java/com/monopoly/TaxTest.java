@@ -9,7 +9,6 @@ public class TaxTest extends TestUtils {
     private TaxSquare taxSquare = new TaxSquare("INCOME TAX", 3);
     private Player player = new Player("TEST_PLAYER", "A");
 
-
     @Test
     void taxTest() {
         String description = "Tax paid correctly player ";
@@ -18,10 +17,12 @@ public class TaxTest extends TestUtils {
         // Should left with $450 balance
         int expectBalanceLeft = 450;
 
-        player.setBalance(DEFAULT_BAL);// Set player balance to $500
-
-        taxSquare.effectTo(player, monopoly);// Simulate user landed on the tax square
-
+        // Set player balance to $500
+        player.setBalance(DEFAULT_BAL);
+        // Simulate user landed on the tax square
+        taxSquare.effectTo(player, monopoly);
+        // If player balance is qual to expect balance left
+        // that mean the tax is paid by the user correctly
         assertTrue(player.getBalance() == expectBalanceLeft);
         passed(description);
     }
