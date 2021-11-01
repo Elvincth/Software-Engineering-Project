@@ -11,7 +11,7 @@ public class TaxTest extends TestUtils {
 
     @Test
     void taxTest() {
-        String description = "Tax paid correctly player ";
+        String description = "Tax paid correctly player";
         final int DEFAULT_BAL = 500; // Give a default balance to the user
         // Player with $500 balance paid 10% of tax 500 - (500*0.1) = 450
         // Should left with $450 balance
