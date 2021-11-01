@@ -16,6 +16,7 @@ public class SquareTest extends TestUtils {
     // for checking square type
     @Test
     void testType() {
+        // check whether the squares include the specific type
         assertTrue(monopoly.getSquares()[0] instanceof Square);
         assertTrue(monopoly.getSquares()[1] instanceof PropertySquare);
         assertTrue(monopoly.getSquares()[2] instanceof PropertySquare);
@@ -37,13 +38,13 @@ public class SquareTest extends TestUtils {
         assertTrue(monopoly.getSquares()[18] instanceof ChanceSquare);
         assertTrue(monopoly.getSquares()[19] instanceof PropertySquare);
 
-        passed("Rent of Square");
-
+        passed("The type of the squares correct");
     }
 
     // for checking price of each property square
     @Test
     void testPrice() {
+        // check whether the property squares include the specific price
         assertEquals(((PropertySquare) squares[1]).getPrice(), 800);
         assertEquals(((PropertySquare) squares[2]).getPrice(), 700);
         assertEquals(((PropertySquare) squares[4]).getPrice(), 600);
@@ -57,12 +58,13 @@ public class SquareTest extends TestUtils {
         assertEquals(((PropertySquare) squares[17]).getPrice(), 400);
         assertEquals(((PropertySquare) squares[19]).getPrice(), 600);
 
-        passed("Price of Square");
+        passed("The price of the property squares correct");
     }
 
     // for checking rent of each property square
     @Test
     void testRent() {
+        // check whether the property squares include the specific rent
         assertEquals(((PropertySquare) squares[1]).getRent(), 90);
         assertEquals(((PropertySquare) squares[2]).getRent(), 65);
         assertEquals(((PropertySquare) squares[4]).getRent(), 60);
@@ -76,12 +78,13 @@ public class SquareTest extends TestUtils {
         assertEquals(((PropertySquare) squares[17]).getRent(), 25);
         assertEquals(((PropertySquare) squares[19]).getRent(), 25);
 
-        passed("Price of Square");
+        passed("The rent of the property squares correct");
     }
 
     // for checking position of each property square
     @Test
     void testPosition() {
+        // check whether the squares include the specific position
         assertEquals(monopoly.getSquares()[0].getPosition(), 0);
         assertEquals(monopoly.getSquares()[1].getPosition(), 1);
         assertEquals(monopoly.getSquares()[2].getPosition(), 2);
@@ -103,11 +106,12 @@ public class SquareTest extends TestUtils {
         assertEquals(monopoly.getSquares()[18].getPosition(), 18);
         assertEquals(monopoly.getSquares()[19].getPosition(), 19);
 
-        passed("Position of Square");
+        passed("The posistion of the squares correct");
     }
 
     @Test
     void testColor() {
+        // check whether the property squares inlcude the correct color group
         assertEquals(((PropertySquare) squares[1]).getColor(), EColor.BLUE);
         assertEquals(((PropertySquare) squares[2]).getColor(), EColor.BLUE);
         assertEquals(((PropertySquare) squares[4]).getColor(), EColor.BLUE);
@@ -121,6 +125,6 @@ public class SquareTest extends TestUtils {
         assertEquals(((PropertySquare) squares[17]).getColor(), EColor.YELLOW);
         assertEquals(((PropertySquare) squares[19]).getColor(), EColor.YELLOW);
 
-        passed("Color of property");
+        passed("The color of the property squares correct");
     }
 }
