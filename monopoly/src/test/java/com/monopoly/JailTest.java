@@ -42,8 +42,8 @@ public class JailTest extends TestUtils {
 
         String description = "Player is out of jail and its balance is $" + player.getBalance();
 
-        assertTrue(player.getBalance() == expectBalanceLeft, description); // If player balance equal to expected
-                                                                           // balance left the test case is passed
+        // If player balance equal to expected balance left the test case is passed
+        assertTrue(player.getBalance() == expectBalanceLeft, description);
         passed(description);
     }
 
