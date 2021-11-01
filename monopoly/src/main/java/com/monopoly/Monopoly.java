@@ -450,6 +450,10 @@ public class Monopoly {
         return squares;
     }
 
+    public void setCurrentPlayer(Player player) {
+        currentPlayer = player;
+    }
+
     // Get is testing
     public boolean isTest() {
         return TEST;
