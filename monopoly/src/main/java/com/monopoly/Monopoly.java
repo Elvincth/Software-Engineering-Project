@@ -43,7 +43,7 @@ public class Monopoly {
         squares[2] = new PropertySquare("Wan Chai", 2, 700, 65, EColor.BLUE);
         squares[3] = new TaxSquare("INCOME TAX", 3);
         squares[4] = new PropertySquare("Stanley", 4, 600, 60, EColor.BLUE);
-        squares[5] = new JailSquare("JAIL", 5); // JAIL/JUST VISITING
+        squares[5] = new JailSquare("JAIL / VISIT", 5); // JAIL/JUST VISITING
         squares[6] = new PropertySquare("Shek O", 6, 400, 10, EColor.RED);
         squares[7] = new PropertySquare("Mong Kok", 7, 500, 40, EColor.RED);
         squares[8] = new ChanceSquare("Chance", 8);

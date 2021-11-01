@@ -29,14 +29,14 @@ public class ChanceTest extends TestUtils {
         passed(description);
     }
 
-    // for checking the ramdom number of deduction or addition can be divisible by
+    // for checking the random number of deduction or addition can be divisible by
     // 10
     @Test
     void testRandomNumber() {
         String description = "Random number divisible by 10";
         player.setBalance(testedBalance);
         chanceSquare.effectTo(player, monopoly);
-        // calculating the balance in default $5000
+        // Calculate the balance in default $5000
         assertTrue(chanceSquare.getRandomMoney() % 10 == 0, description);
 
         System.out.println("The random number of money is: $" + chanceSquare.getRandomMoney());

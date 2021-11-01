@@ -36,9 +36,7 @@ public class SquareTest extends TestUtils {
         assertTrue(monopoly.getSquares()[17] instanceof PropertySquare);
         assertTrue(monopoly.getSquares()[18] instanceof ChanceSquare);
         assertTrue(monopoly.getSquares()[19] instanceof PropertySquare);
-
         passed("Rent of Square");
-
     }
 
     // for checking price of each property square
@@ -56,7 +54,6 @@ public class SquareTest extends TestUtils {
         assertEquals(((PropertySquare) squares[16]).getPrice(), 400);
         assertEquals(((PropertySquare) squares[17]).getPrice(), 400);
         assertEquals(((PropertySquare) squares[19]).getPrice(), 600);
-
         passed("Price of Square");
     }
 
@@ -75,7 +72,6 @@ public class SquareTest extends TestUtils {
         assertEquals(((PropertySquare) squares[16]).getRent(), 10);
         assertEquals(((PropertySquare) squares[17]).getRent(), 25);
         assertEquals(((PropertySquare) squares[19]).getRent(), 25);
-
         passed("Price of Square");
     }
 
@@ -102,7 +98,6 @@ public class SquareTest extends TestUtils {
         assertEquals(monopoly.getSquares()[17].getPosition(), 17);
         assertEquals(monopoly.getSquares()[18].getPosition(), 18);
         assertEquals(monopoly.getSquares()[19].getPosition(), 19);
-
         passed("Position of Square");
     }
 
@@ -120,7 +115,6 @@ public class SquareTest extends TestUtils {
         assertEquals(((PropertySquare) squares[16]).getColor(), EColor.YELLOW);
         assertEquals(((PropertySquare) squares[17]).getColor(), EColor.YELLOW);
         assertEquals(((PropertySquare) squares[19]).getColor(), EColor.YELLOW);
-
         passed("Color of property");
     }
 }
