@@ -33,7 +33,9 @@ public class JailTest extends TestUtils {
     // Used to test if the user can successfully pay $150 to get out of the jail
     void testPayToOut() {
         final int DEFAULT_BAL = 500; // Give a default balance to the user
-        int expectBalanceLeft = 350; // Expected balance after user paid $150 to get out o
+        int expectBalanceLeft = 350; // Expected balance after user paid $150 to get out
+
+        monopoly.setCurrentPlayer(player); // Simulate current player
 
         player.goToJail(); // Set the player to jail
         jailSquare.effectTo(player, monopoly); // Pass essential objects to jail square

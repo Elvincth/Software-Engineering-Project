@@ -15,7 +15,7 @@ import com.inamik.text.tables.GridTable;
 public class Monopoly {
     private int gameRound = 0;// TODO: save
     private Square[] squares = new Square[20];
-    private ArrayList<Player> players = new ArrayList<Player>();
+    public ArrayList<Player> players = new ArrayList<Player>();
     private int currentPlayerIndex = 0; // Current player index TODO: save
     private Player currentPlayer;
     // Utils
@@ -90,10 +90,10 @@ public class Monopoly {
             nextTurn();
         }
 
-        // // Add a fake player for test
-        // if (TEST) {
-        // players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
-        // }
+        // Add a fake player for test
+        if (TEST) {
+            players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
+        }
 
     }
 
@@ -448,6 +448,10 @@ public class Monopoly {
     // Get all squares
     public Square[] getSquares() {
         return squares;
+    }
+
+    public void setCurrentPlayer(Player player) {
+        currentPlayer = player;
     }
 
     // Get is testing
