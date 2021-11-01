@@ -123,20 +123,10 @@ public class Monopoly {
                 currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
             }
 
-            landedSquare = squares[currentPlayer.getPosition()];// Set user landed square
+            landedSquare = getLandedSquare();// Set user landed square
 
             if (!currentPlayer.isInJail()) {
-                dice.display(); // Tell user what he rolled
-
-                utils.delay(SHORT_DELAY_TIME);
-
-                utils.clearScreen();
-
-                System.out.printf("You landed on %s\n", landedSquare.getName()); // Tell where did the user landed
-
-                utils.delay(SHORT_DELAY_TIME);
-
-                utils.clearScreen();
+                displayLanded();
             }
 
             display(); // Display the game board
@@ -162,6 +152,24 @@ public class Monopoly {
 
         // Pass to next player
         nextPlayer();
+    }
+
+    public Square getLandedSquare() {
+        return squares[currentPlayer.getPosition()];
+    }
+
+    public void displayLanded() {
+        dice.display(); // Tell user what he rolled
+
+        utils.delay(SHORT_DELAY_TIME);
+
+        utils.clearScreen();
+
+        System.out.printf("You landed on %s\n", getLandedSquare().getName()); // Tell where did the user landed
+
+        utils.delay(SHORT_DELAY_TIME);
+
+        utils.clearScreen();
     }
 
     // Set the player index as next player (Pass turn to next player)

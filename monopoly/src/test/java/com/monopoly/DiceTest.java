@@ -29,13 +29,16 @@ public class DiceTest extends TestUtils {
         passed(description);
     }
 
-    // Test the total sum of the dice is correct
+    // Test the dice.getTotal() method is correct
+    // The method will return the sum of two dice
     @Test
     void totalDiceTest() {
-        String description = "The sum of of two dice is between 2 to 8";
+        String description = "The sum of two dice is correct and its between 2 to 8";
         dice.roll(); // Roll the dice
-        assertTrue(dice.getTotal() < 9 && dice.getTotal() > 1);// Check if the sum range
-        assertTrue(dice.getTotal() == (dice.getRolled()[0] + dice.getRolled()[1])); // Check if the sum is same
+        // Check the sum of two dice range
+        assertTrue(dice.getTotal() < 9 && dice.getTotal() > 1, "Sum of two dice is between 2 to 8");
+        // Check if the sum of two dice is correct
+        assertTrue(dice.getTotal() == (dice.getRolled()[0] + dice.getRolled()[1]), "The sum of two dice is correct");
         passed(description);
     }
 
