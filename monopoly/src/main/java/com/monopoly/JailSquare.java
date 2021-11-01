@@ -16,9 +16,13 @@ public class JailSquare extends Square implements EffectSquareAPI {
         // Set player out of jail
         player.outOfJail();
 
+        player.setPosition(dice.getTotal());
+
         monopoly.display();
 
         System.out.printf("%s %s You're out of jail.%n%n", TAG, isPay ? "Paid $150!" : "Same dice!");
+
+        monopoly.displayLanded();
 
     }
 
@@ -34,7 +38,13 @@ public class JailSquare extends Square implements EffectSquareAPI {
             System.out.printf("%s Same dice! You're out of jail.%n%n", TAG);
             outOfJail(false);
         } else {
-            System.out.printf("%s Uh oh! Dice not the same, can;t get out of jail.%n%n", TAG);
+            if(player.getJailRound() < 3){
+                System.out.printf("%s Uh oh! Dice not the same, cannot get out of jail.%n%n", TAG);
+                player.setJailRound(player.getJailRound() + 1);
+            }
+            else{
+                payToOut();
+            }
         }
 
     }
@@ -59,6 +69,7 @@ public class JailSquare extends Square implements EffectSquareAPI {
                 // Yes and have enough money
                 if (answer && player.getBalance() >= OUT_JAIL_PRICE) {
                     payToOut();
+                    dice.roll();
                 } else if (answer && player.getBalance() < OUT_JAIL_PRICE) {
                     System.out.printf("%s You don't have enough money, now roll the dice.%n%n", TAG);
                     utils.delay(monopoly.SHORT_DELAY_TIME);

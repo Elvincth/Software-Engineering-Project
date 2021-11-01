@@ -25,9 +25,9 @@ public class Monopoly {
     private ArrayList<String> tokenChoices = new ArrayList<String>();
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
-    private final boolean DEBUG = true;
+    private final boolean DEBUG = false;
     private boolean TEST = false; // is in testing mode, will skip display and next round
-    protected final int SHORT_DELAY_TIME = DEBUG ? 10 : 900;
+    protected final int SHORT_DELAY_TIME = DEBUG ? 10 : 2000;
     // Dice
     private Dice dice = new Dice(DEBUG);
     private int roundCounter = 0;
