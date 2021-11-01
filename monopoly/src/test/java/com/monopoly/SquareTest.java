@@ -9,14 +9,14 @@ public class SquareTest extends TestUtils {
     private Monopoly monopoly = new Monopoly();
     private Square[] squares = monopoly.getSquares();
 
-    // the position of square will start at 0 since we are using array for storing
+    // The position of square will start at 0 since we are using array for storing
     // each square
     // therefore the position of square will between 0 to 19 (20 square)
 
-    // for checking square type
+    // For checking square type
     @Test
     void testType() {
-        // check whether the squares include the specific type
+        // Check whether the squares include the specific type
         assertTrue(monopoly.getSquares()[0] instanceof Square);
         assertTrue(monopoly.getSquares()[1] instanceof PropertySquare);
         assertTrue(monopoly.getSquares()[2] instanceof PropertySquare);
@@ -64,7 +64,7 @@ public class SquareTest extends TestUtils {
     // For checking rent of each property square
     @Test
     void testRent() {
-        // check whether the property squares include the specific rent
+        // Check whether the property squares include the specific rent
         assertEquals(((PropertySquare) squares[1]).getRent(), 90);
         assertEquals(((PropertySquare) squares[2]).getRent(), 65);
         assertEquals(((PropertySquare) squares[4]).getRent(), 60);
@@ -106,12 +106,12 @@ public class SquareTest extends TestUtils {
         assertEquals(monopoly.getSquares()[18].getPosition(), 18);
         assertEquals(monopoly.getSquares()[19].getPosition(), 19);
 
-        passed("The posistion of the squares correct");
+        passed("The position of the squares correct");
     }
 
     @Test
     void testColor() {
-        // check whether the property squares inlcude the correct color group
+        // Check whether the property squares include the correct color group
         assertEquals(((PropertySquare) squares[1]).getColor(), EColor.BLUE);
         assertEquals(((PropertySquare) squares[2]).getColor(), EColor.BLUE);
         assertEquals(((PropertySquare) squares[4]).getColor(), EColor.BLUE);
