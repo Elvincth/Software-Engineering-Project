@@ -90,6 +90,10 @@ public class Monopoly {
             nextTurn();
         }
 
+        if (userChoice.equals(choicesInfo[1])) {
+            // Load the game
+        }
+
         // // Add a fake player for test
         // if (TEST) {
         // players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
