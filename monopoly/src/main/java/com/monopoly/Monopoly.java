@@ -180,7 +180,7 @@ public class Monopoly {
         } else {
             currentPlayerIndex += 1;
         }
-        if (!endGameCheck()) {
+        if (!endGameCheck(gameRound)) {
             nextTurn();
         } else {
             utils.clearScreen();
@@ -274,7 +274,7 @@ public class Monopoly {
         System.out.printf("--------------------------------\n");
     }
 
-    private void checkGameWinner() {
+    public void checkGameWinner() {
         int higherBalance = 0;
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getBalance() > higherBalance) {
@@ -298,7 +298,7 @@ public class Monopoly {
         }
     }
 
-    private boolean endGameCheck() {// check wether the game is end or not
+    public boolean endGameCheck(int gameRound) {// check wether the game is end or not
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getLost()) {
                 lostPlayer++;
