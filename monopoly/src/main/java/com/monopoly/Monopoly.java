@@ -25,7 +25,7 @@ public class Monopoly {
     private ArrayList<String> tokenChoices = new ArrayList<String>();
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
-    private final boolean DEBUG = false;
+    private final boolean DEBUG = true;
     private boolean TEST = false; // is in testing mode, will skip display and next round
     protected final int SHORT_DELAY_TIME = DEBUG ? 10 : 2000;
     // Dice
@@ -33,9 +33,9 @@ public class Monopoly {
     private int roundCounter = 0;
     private int lostPlayer = 0;
     ArrayList<Player> winnerPlayerList = new ArrayList<Player>();
-
     // Game data
-    // private GameData gameData = new GameData(this);
+    private GameData gameData = new GameData(this);
+
     Monopoly(boolean TEST) {
         this.TEST = TEST;
         squares[0] = new Square("GO", 0);
@@ -100,8 +100,9 @@ public class Monopoly {
     // Handle what the user will do in the turn
     private void nextTurn() {
         int nextPosition = 0;
-        String[] commands = { "1" };
-        String[] choicesInfo = { "End my turn" };
+        String selectedChoice = "1";
+        String[] commands = { "1", "2" };
+        String[] choicesInfo = { "End my turn", "Exit and save" };
         Menu turnMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo);
         // For players
         currentPlayer = players.get(currentPlayerIndex);
@@ -141,8 +142,8 @@ public class Monopoly {
                 ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
             }
 
-            // Ask for next turn
-            turnMenu.ask();
+            // Ask for next turn or save the game
+            selectedChoice = turnMenu.ask();
 
             checkPlayerLost();
         }
@@ -150,8 +151,16 @@ public class Monopoly {
         // check game round
         checkGameRound();
 
-        // Pass to next player
-        nextPlayer();
+        // User selected end my turn option
+        if (selectedChoice.equals(commands[0])) {
+            // Pass to next player
+            nextPlayer();
+        }
+
+        // User selected save the game
+        if (selectedChoice.equals(commands[1])) {
+            gameData.save();
+        }
     }
 
     public Square getLandedSquare() {
@@ -450,7 +459,11 @@ public class Monopoly {
         return squares;
     }
 
-    //Set the current player
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    // Set the current player
     public void setCurrentPlayer(Player player) {
         currentPlayer = player;
     }

@@ -10,9 +10,8 @@ public class GameData {
         this.monopoly = monopoly;
     }
 
-    public boolean save(JSONObject data, String path) {
-
-        return false;
+    public void save() {
+        System.out.println("Save");
     }
 
     public boolean load(String path) {
