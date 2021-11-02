@@ -1,32 +1,27 @@
 {
-    "currentPlayerIndex": 0,
+    "currentPlayerIndex": 1,
     "playerDetails": [
         {
-            "currentRound": "0",
-            "balance": "310",
-            "name": "TEST1",
-            "inJailRound": "0",
-            "getLostStatus": "false",
-            "position": "8",
+            "currentRound": 0,
+            "balance": 110,
+            "name": "asdasd",
+            "property": [
+                "Shek O"
+            ],
+            "inJailRound": 0,
+            "getLostStatus": false,
+            "position": 6,
             "token": "🐶"
         },
         {
-            "currentRound": "0",
-            "balance": "500",
-            "name": "TEST2",
-            "inJailRound": "0",
-            "getLostStatus": "false",
-            "position": "0",
+            "currentRound": 0,
+            "balance": 490,
+            "name": "scsdf",
+            "property": [],
+            "inJailRound": 0,
+            "getLostStatus": false,
+            "position": 6,
             "token": "🐱"
-        },
-        {
-            "currentRound": "0",
-            "balance": "500",
-            "name": "TEST3",
-            "inJailRound": "0",
-            "getLostStatus": "false",
-            "position": "0",
-            "token": "🚗"
         }
     ],
     "gameRound": 1

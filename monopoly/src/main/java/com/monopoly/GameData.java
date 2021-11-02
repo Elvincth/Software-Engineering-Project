@@ -1,10 +1,17 @@
 
 package com.monopoly;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
+
 import java.util.ArrayList;
 
 public class GameData {
@@ -14,7 +21,7 @@ public class GameData {
         this.monopoly = monopoly;
     }
 
-    public void save() {
+    public boolean save() {
         ArrayList<Player> players = monopoly.getPlayers();
         JSONObject putMain = new JSONObject();
         JSONArray createPlayerObjectArray = new JSONArray();
@@ -27,26 +34,20 @@ public class GameData {
             Player player = players.get(i);
             addPlayerObject.put("name", player.getName()); // String type
             addPlayerObject.put("token", player.getToken()); // String type
-            addPlayerObject.put("balance", Integer.toString(player.getBalance())); // Integer to String
+            addPlayerObject.put("balance", player.getBalance()); // Integer to String
 
-            // // // testing
-            // JSONArray propertyArray = new JSONArray();
-            // if (player.getProperty().size() > 0) {
-            //     for(int j = 0; j < player.getProperty().size(); j++){
-            //         propertyArray.add(player.getProperty().get(i).getName());
-            //     }
-            // }
-
-            // addPlayerObject.put("property", propertyArray);
-
-            // for (int j = 0; j < player.getProperty().size(); j++) {
-            //     propertyArray.add(player.getProperty().get(i).getName());
-            // }
-
-            addPlayerObject.put("position", Integer.toString(player.getPosition())); // Integer to String
-            addPlayerObject.put("currentRound", Integer.toString(player.getCurrentRound())); // Integer to String
-            addPlayerObject.put("inJailRound", Integer.toString(player.getJailRound())); // Integer to String
-            addPlayerObject.put("getLostStatus", String.valueOf(player.getLost())); // Integer to String
+            // testing
+            JSONArray propertyArray = new JSONArray();
+            if (player.getProperty().size() > 0) {
+                for(int j = 0; j < player.getProperty().size(); j++){
+                    propertyArray.add(player.getProperty().get(j).getName());
+                }
+            }
+            addPlayerObject.put("property", propertyArray);
+            addPlayerObject.put("position", player.getPosition()); 
+            addPlayerObject.put("currentRound", player.getCurrentRound()); 
+            addPlayerObject.put("inJailRound", player.getJailRound()); 
+            addPlayerObject.put("getLostStatus", player.getLost()); 
 
             createPlayerObjectArray.add(addPlayerObject);
         }
@@ -65,15 +66,28 @@ public class GameData {
         }
 
         System.out.println("Game Saved");
-       
-        // Player player = players.get(0);
 
-        // System.out.println(player.getProperty().get(0).getName());
-        
-            
+        return true;
     }
 
-    public void load() {
+    public boolean load() throws IOException, ParseException{
+        // create json parser
+        JSONParser parser = new JSONParser();
 
+        // reader for reading json file
+        Reader reader = new FileReader("GameData.json");
+
+        // set json object for getting content of json file
+        JSONObject gameObject = (JSONObject) parser.parse(reader);
+
+        // get round variable in json file
+        long gameRound = (long) gameObject.get("gameRound");
+        System.out.println("Game Round / Rounds: " + gameRound);
+
+        // get number of player variable in json file
+        long currentPlayerIndex = (long) gameObject.get("currentPlayerIndex");
+        System.out.println("Current Player Index: " + currentPlayerIndex);
+
+        return true;
     }
 }

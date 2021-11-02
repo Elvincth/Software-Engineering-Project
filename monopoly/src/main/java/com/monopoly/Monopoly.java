@@ -1,5 +1,6 @@
 package com.monopoly;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 //https://github.com/dialex/JColor
@@ -9,6 +10,9 @@ import java.util.Scanner;
 import com.inamik.text.tables.SimpleTable;
 import com.inamik.text.tables.grid.Border;
 import com.inamik.text.tables.grid.Util;
+
+import org.json.simple.parser.ParseException;
+
 import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
 
@@ -25,7 +29,7 @@ public class Monopoly {
     private ArrayList<String> tokenChoices = new ArrayList<String>();
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
-    private final boolean DEBUG = true;
+    private final boolean DEBUG = false;
     private boolean TEST = false; // is in testing mode, will skip display and next round
     protected final int SHORT_DELAY_TIME = DEBUG ? 10 : 1000;
     // Dice
@@ -67,7 +71,7 @@ public class Monopoly {
     }
 
     // Start the game
-    public void start() {
+    public void start() throws IOException, ParseException {
         utils.clearScreen();
         System.out.println("Welcome To Monopoly!");
         String[] commands = { "1", "2" };
@@ -104,7 +108,7 @@ public class Monopoly {
         }
 
         // // Add a fake player for test
-        // if (TEST) {
+        // if (TEST) {1
         // players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
         // }
 
