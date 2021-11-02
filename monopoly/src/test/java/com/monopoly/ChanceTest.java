@@ -23,8 +23,8 @@ public class ChanceTest extends TestUtils {
         if (player.getBalance() < 5000) {
             System.out.println("Balance After Deducted: $" + player.getBalance());
             System.out.println("Which is larger or equal to $4700");
-        } 
-        // check whether the addition amount will not over $200 
+        }
+        // check whether the addition amount will not over $200
         else if (player.getBalance() > 5000) {
             System.out.println("Balance After Added: $" + player.getBalance());
             System.out.println("Which is smaller or equal to $5200");
@@ -32,13 +32,14 @@ public class ChanceTest extends TestUtils {
         passed(description);
     }
 
-    // for checking the ramdom number of deduction or addition can be divisible by 10
+    // for checking the random number of deduction or addition can be divisible by
+    // 10
     @Test
     void testRandomNumber() {
         String description = "Random number divisible by 10 correct";
         player.setBalance(testedBalance);
         chanceSquare.effectTo(player, monopoly);
-        
+
         // checking the random number can divisible by 10
         assertTrue(chanceSquare.getRandomMoney() % 10 == 0, description);
 

@@ -6,8 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class PropertySquareTest extends TestUtils {
     private PropertySquare propertySquare = new PropertySquare("Test1", 1, 300, 90, EColor.BLUE);
     private PropertySquare propertySquare2 = new PropertySquare("Test2", 2, 900, 90, EColor.BLUE);
-    private Player player = new Player("Test1", "A");
-    private Player player2 = new Player("Test2", "B");
+    private Player player = new Player("TEST_PLAYER", "A");
+    private Player player2 = new Player("TEST_PLAYER_2", "B");
     private Monopoly monopoly = new Monopoly(true);
 
     @Test

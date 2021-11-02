@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 public class GoTest extends TestUtils {
-    private Player player = new Player("1", "1");
+    private Player player = new Player("TEST_PLAYER", "A");
     private Dice dice = new Dice();
 
     @Test
