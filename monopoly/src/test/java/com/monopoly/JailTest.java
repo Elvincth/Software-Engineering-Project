@@ -49,4 +49,26 @@ public class JailTest extends TestUtils {
         passed(description);
     }
 
+    @Test
+    void testThirdRound() {
+        String description = "The player must pay HKD150 to leave jail" + player.getBalance();
+        final int DEFAULT_BAL = 500; // Give a default balance to the user
+        int expectBalanceLeft = 350; // Expected balance after the user paid $150 to get out
+
+        jailSquare.effectTo(player, monopoly);//init the variables in jail square
+        monopoly.setCurrentPlayer(player); // Simulate current player
+        int[] rolledDice = { 3, 4 };// set the dice to not the same face
+
+        player.setBalance(DEFAULT_BAL);// Set player balance to $500
+        player.setJailRound(3);// set player jail round to 3 which should be the last round
+        assertTrue(player.getJailRound() == 3, description);
+
+        jailSquare.checkRound(rolledDice); // check jail round, if player jail round is 3 and the rolled dice is not the
+                                           // same face the player must pay HKD150
+
+        // If player balance equal to expected balance left the test case is passed
+        assertTrue(player.getBalance() == expectBalanceLeft, description);// the player balance should be 500 - 350
+        assertTrue(player.isInJail() == false, description);// check whether the player is out of jail or not
+        passed(description);
+    }
 }
