@@ -18,6 +18,7 @@ public class GoTest extends TestUtils {
                                              // 2(minium number of two dice) > 20(position of Go square))
         assertTrue(player.getBalance() == 2000, description); // 500(default balance of the player) + 1500(Money gain
                                                               // after player passed the Go)
+        passed(description);
     }
 
     @Test
@@ -27,6 +28,7 @@ public class GoTest extends TestUtils {
                                 // Square
         assertTrue(player.getBalance() == 2000, description); // 500(default balance of the player) + 1500(Money gain
                                                               // after player passed the Go)
+        passed(description);
     }
 
 }
