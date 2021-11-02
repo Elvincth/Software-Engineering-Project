@@ -1,33 +1,33 @@
 {
-    "Game Round": 2,
-    "Player Details": [
+    "currentPlayerIndex": 0,
+    "playerDetails": [
         {
-            "In Jail Round": "0",
-            "Position": "3",
-            "Get Lost Status": "false",
-            "Current Round": "0",
-            "Token": "🐶",
-            "Balance": "450",
-            "Name": "TEST1"
+            "currentRound": "0",
+            "balance": "310",
+            "name": "TEST1",
+            "inJailRound": "0",
+            "getLostStatus": "false",
+            "position": "8",
+            "token": "🐶"
         },
         {
-            "In Jail Round": "0",
-            "Position": "3",
-            "Get Lost Status": "false",
-            "Current Round": "0",
-            "Token": "🐱",
-            "Balance": "450",
-            "Name": "TEST2"
+            "currentRound": "0",
+            "balance": "500",
+            "name": "TEST2",
+            "inJailRound": "0",
+            "getLostStatus": "false",
+            "position": "0",
+            "token": "🐱"
         },
         {
-            "In Jail Round": "0",
-            "Position": "0",
-            "Get Lost Status": "false",
-            "Current Round": "0",
-            "Token": "🚗",
-            "Balance": "500",
-            "Name": "TEST3"
+            "currentRound": "0",
+            "balance": "500",
+            "name": "TEST3",
+            "inJailRound": "0",
+            "getLostStatus": "false",
+            "position": "0",
+            "token": "🚗"
         }
     ],
-    "Current Player Index": 1
+    "gameRound": 1
 }

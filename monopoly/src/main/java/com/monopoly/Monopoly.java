@@ -27,7 +27,7 @@ public class Monopoly {
     // Settings
     private final boolean DEBUG = true;
     private boolean TEST = false; // is in testing mode, will skip display and next round
-    protected final int SHORT_DELAY_TIME = DEBUG ? 10 : 2000;
+    protected final int SHORT_DELAY_TIME = DEBUG ? 10 : 1000;
     // Dice
     private Dice dice = new Dice(DEBUG);
     private int roundCounter = 0;
@@ -80,6 +80,15 @@ public class Monopoly {
                 players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
                 players.add(new Player("TEST2", tokenChoicesInfo.get(1)));
                 players.add(new Player("TEST3", tokenChoicesInfo.get(2)));
+
+                // PropertySquare square1 = (PropertySquare)squares[1];
+                // PropertySquare square2 = (PropertySquare)squares[2];
+                // PropertySquare square3 = (PropertySquare)squares[4];
+
+                // square1.buy(players.get(0), this);
+                // square2.buy(players.get(0), this);
+                // square3.buy(players.get(0), this);
+
                 // players.add(new Player("TEST4", tokenChoicesInfo.get(3)));
                 // players.add(new Player("TEST5", tokenChoicesInfo.get(4)));
                 // players.add(new Player("TEST6", tokenChoicesInfo.get(5)));
@@ -91,7 +100,7 @@ public class Monopoly {
         }
 
         if (userChoice.equals(choicesInfo[1])) {
-            // Load the game
+            gameData.load();
         }
 
         // // Add a fake player for test

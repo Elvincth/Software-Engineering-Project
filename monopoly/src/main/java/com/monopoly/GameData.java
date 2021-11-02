@@ -25,20 +25,35 @@ public class GameData {
 
             JSONObject addPlayerObject = new JSONObject();
             Player player = players.get(i);
-            addPlayerObject.put("Name", player.getName()); // String type
-            addPlayerObject.put("Token", player.getToken()); // String type
-            addPlayerObject.put("Balance", Integer.toString(player.getBalance())); // Integer to String
-            addPlayerObject.put("Position", Integer.toString(player.getPosition())); // Integer to String
-            addPlayerObject.put("Current Round", Integer.toString(player.getCurrentRound())); // Integer to String
-            addPlayerObject.put("In Jail Round", Integer.toString(player.getJailRound())); // Integer to String
-            addPlayerObject.put("Get Lost Status", String.valueOf(player.getLost())); // Integer to String
-;
+            addPlayerObject.put("name", player.getName()); // String type
+            addPlayerObject.put("token", player.getToken()); // String type
+            addPlayerObject.put("balance", Integer.toString(player.getBalance())); // Integer to String
+
+            // // // testing
+            // JSONArray propertyArray = new JSONArray();
+            // if (player.getProperty().size() > 0) {
+            //     for(int j = 0; j < player.getProperty().size(); j++){
+            //         propertyArray.add(player.getProperty().get(i).getName());
+            //     }
+            // }
+
+            // addPlayerObject.put("property", propertyArray);
+
+            // for (int j = 0; j < player.getProperty().size(); j++) {
+            //     propertyArray.add(player.getProperty().get(i).getName());
+            // }
+
+            addPlayerObject.put("position", Integer.toString(player.getPosition())); // Integer to String
+            addPlayerObject.put("currentRound", Integer.toString(player.getCurrentRound())); // Integer to String
+            addPlayerObject.put("inJailRound", Integer.toString(player.getJailRound())); // Integer to String
+            addPlayerObject.put("getLostStatus", String.valueOf(player.getLost())); // Integer to String
+
             createPlayerObjectArray.add(addPlayerObject);
         }
 
-        putMain.put("Player Details", createPlayerObjectArray);
-        putMain.put("Game Round", monopoly.getGameRound());
-        putMain.put("Current Player Index", monopoly.getCurrentPlayerIndex());
+        putMain.put("playerDetails", createPlayerObjectArray);
+        putMain.put("gameRound", monopoly.getGameRound());
+        putMain.put("currentPlayerIndex", monopoly.getCurrentPlayerIndex());
 
         // Write JSON file
         try (FileWriter file = new FileWriter("Gamedata.json")) {
@@ -50,9 +65,15 @@ public class GameData {
         }
 
         System.out.println("Game Saved");
+       
+        // Player player = players.get(0);
+
+        // System.out.println(player.getProperty().get(0).getName());
+        
+            
     }
 
     public void load() {
-        
+
     }
 }
