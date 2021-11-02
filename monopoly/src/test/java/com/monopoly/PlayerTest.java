@@ -45,7 +45,8 @@ public class PlayerTest extends TestUtils {
         passed(description);
     }
 
-    // Check whether did the player variables being rest after the player have set to lost
+    // Check whether did the player variables being rest after the player have set
+    // to lost
     // the game
     // After lost the user balance should be set to 0
     // and the player should release all the owned property (if any)
