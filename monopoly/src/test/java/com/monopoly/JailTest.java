@@ -51,7 +51,7 @@ public class JailTest extends TestUtils {
 
     @Test
     void testThirdRound() {
-        String description = "The player must pay HKD150 to leave jail" + player.getBalance();
+        String description = "The player must pay HKD150 to leave jail";
         final int DEFAULT_BAL = 500; // Give a default balance to the user
         int expectBalanceLeft = 350; // Expected balance after the user paid $150 to get out
 
