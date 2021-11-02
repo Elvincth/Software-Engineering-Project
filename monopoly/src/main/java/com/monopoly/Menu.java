@@ -16,7 +16,7 @@ public class Menu extends Utils {
         this.commands = commands;
         this.choices = choices;
         this.listLayout = listLayout;
-
+        
         if (commands.length != choices.length) {
             throw new IllegalArgumentException("Each command must have a choice");
         }

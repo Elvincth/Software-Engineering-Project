@@ -467,9 +467,19 @@ public class Monopoly {
     public void setCurrentPlayer(Player player) {
         currentPlayer = player;
     }
-
-    // Get is testing
+    
+    // Get is testing1
     public boolean isTest() {
         return TEST;
+    }
+
+    // New - for save
+    public int getGameRound() {
+        return gameRound;
+    }
+
+    // New - for save
+    public int getCurrentPlayerIndex() {
+        return currentPlayerIndex;
     }
 }

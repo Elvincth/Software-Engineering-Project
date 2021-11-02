@@ -1,0 +1,33 @@
+{
+    "Game Round": 2,
+    "Player Details": [
+        {
+            "In Jail Round": "0",
+            "Position": "3",
+            "Get Lost Status": "false",
+            "Current Round": "0",
+            "Token": "🐶",
+            "Balance": "450",
+            "Name": "TEST1"
+        },
+        {
+            "In Jail Round": "0",
+            "Position": "3",
+            "Get Lost Status": "false",
+            "Current Round": "0",
+            "Token": "🐱",
+            "Balance": "450",
+            "Name": "TEST2"
+        },
+        {
+            "In Jail Round": "0",
+            "Position": "0",
+            "Get Lost Status": "false",
+            "Current Round": "0",
+            "Token": "🚗",
+            "Balance": "500",
+            "Name": "TEST3"
+        }
+    ],
+    "Current Player Index": 1
+}
