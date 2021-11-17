@@ -17,7 +17,7 @@ import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
 
 public class Monopoly {
-    private int gameRound = 99;// TODO: save
+    private int gameRound = 0;// TODO: save
     private Square[] squares = new Square[20];
     private ArrayList<Player> players = new ArrayList<Player>();
     private int currentPlayerIndex = 0; // Current player index TODO: save
