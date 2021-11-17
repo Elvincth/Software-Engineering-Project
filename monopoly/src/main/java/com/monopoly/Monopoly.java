@@ -29,7 +29,7 @@ public class Monopoly {
     private ArrayList<String> tokenChoices = new ArrayList<String>();
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
-    private final boolean DEBUG = false;
+    private final boolean DEBUG = true;
     private boolean TEST = false; // is in testing mode, will skip display and next round
     protected final int SHORT_DELAY_TIME = DEBUG ? 10 : 1000;
     // Current round
@@ -228,9 +228,16 @@ public class Monopoly {
     private void askSave() {
         YesNo saveQuestion = new YesNo(scanner, "Do you want to save the game, before you back to main menu?");
         boolean saveGame = false;
+        gameData.printArt(utils.ANSI_YELLOW);
+        System.out.println();
         saveGame = saveQuestion.ask();
         if (saveGame) {
             gameData.save();
+            try {
+                start(); // Back to main menu
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         } else {
             try {
                 start();

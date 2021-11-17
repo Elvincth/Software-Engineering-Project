@@ -80,12 +80,25 @@ public class GameData extends Utils {
             e.printStackTrace();
         }
 
-        System.out.println("Game Saved");
-        // TODO: Back to main menu
+        System.out.println("The game have been saved! \n");
+        printArt(ANSI_GREEN);
 
-
+        delay(monopoly.SHORT_DELAY_TIME);
 
         return true;
+    }
+
+    public void printArt(String Color) {
+        System.out.println(Color + " _________________");
+        System.out.println("| | ___________ |o|");
+        System.out.println("| | ___________ | |");
+        System.out.println("| | ___________ | |");
+        System.out.println("| | ___________ | |");
+        System.out.println("| |_____________| |");
+        System.out.println("|     _______     |");
+        System.out.println("|    |       |   ||");
+        System.out.println("|    |       |   V|");
+        System.out.println("|____|_______|____|" + ANSI_RESET);
     }
 
     private int objToInt(Object object) {
@@ -108,12 +121,17 @@ public class GameData extends Utils {
             restoreProperty(playerArr);
 
             System.out.println(TAG + " Loaded the game!"); // Message
+
+            printArt(ANSI_GREEN);
+
             delay(monopoly.SHORT_DELAY_TIME);
 
             monopoly.nextTurn();
         } else {
             System.out.println(TAG + " No game save found!");
-            // TODO: Back to main menu
+            printArt(ANSI_RED);
+            delay(monopoly.SHORT_DELAY_TIME);
+            monopoly.start();
         }
 
         return true;
