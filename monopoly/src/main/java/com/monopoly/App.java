@@ -4,9 +4,6 @@ import java.io.IOException;
 
 import org.json.simple.parser.ParseException;
 
-/**
- * Hello world!
- */
 public final class App {
     private App() {
     }
