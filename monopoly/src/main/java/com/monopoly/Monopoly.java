@@ -544,8 +544,8 @@ public class Monopoly {
         return currentPlayerIndex;
     }
 
-    public int setCurrentPlayerIndex() {
-        return currentPlayerIndex;
+    public void setCurrentPlayerIndex(int index) {
+        currentPlayerIndex = index;
     }
 
     public Player getCurrentPlayer() {

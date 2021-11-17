@@ -27,6 +27,7 @@ public class GameData extends Utils {
 
     public boolean save() {
         ArrayList<Player> players = monopoly.getPlayers();
+        JSONObject dataObj = new JSONObject();
         JSONObject gameObj = new JSONObject();
         JSONArray playerObjArr = new JSONArray();
 
@@ -57,21 +58,24 @@ public class GameData extends Utils {
             playerObj.put("token", player.getToken());
             playerObj.put("lost", player.getLost());
             playerObj.put("ownedProperty", ownedPropertyArr);
-
             playerObjArr.add(playerObj);
         }
 
+        // Put essential game data
         gameObj.put("gameRound", monopoly.getGameRound());
-        gameObj.put("players", playerObjArr);
         gameObj.put("currentPlayerIndex", monopoly.getCurrentPlayerIndex());
         gameObj.put("currentPlayer", monopoly.getCurrentPlayer().getToken()); // Store the token of current player
         gameObj.put("roundCounter", monopoly.getRoundCounter());
         gameObj.put("numLostPlayer", monopoly.getNumLostPlayer());
 
+        // Put all data in it
+        dataObj.put("game", gameObj); // Add game data
+        dataObj.put("players", playerObjArr); // Add player list
+
         // Write JSON file
         try (FileWriter file = new FileWriter(FILE_NAME)) {
             // We can write any JSONArray or JSONObject instance to the file
-            file.write(gameObj.toString());
+            file.write(dataObj.toString());
             file.flush();
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,34 +96,89 @@ public class GameData extends Utils {
         if (new File(FILE_NAME).exists()) {
             JSONParser parser = new JSONParser(); // create json parser
             Reader reader = new FileReader("GameData.json"); // reader for reading json file
-            JSONObject gameObj = (JSONObject) parser.parse(reader); // Parse the file content
-            System.out.println(TAG + " Restoring game save!"); // Message
+            JSONObject dataObj = (JSONObject) parser.parse(reader); // Parse the file content
+            JSONArray playerArr = (JSONArray) dataObj.get("players");
+            JSONObject gameObj = (JSONObject) dataObj.get("game");
 
-            // int gameRound = objToInt(gameObj.get("gameRound")); // get round variable in
-            // json file
-            // int currentPlayerIndex = objToInt(gameObj.get("currentPlayerIndex")); // get
-            // number of player variable in
-            // // json file
+            System.out.println(TAG + " Loading the game!"); // Message
 
-            // System.out.println("Game Round / Rounds: " + gameRound);
-
-            // System.out.println("Current Player Index: " + currentPlayerIndex);
-
-            JSONArray playerArray = (JSONArray) gameObj.get("players");
-            restoreGame(); // Restore essential data for the game
-            restorePlayer(playerArray);// Restore the player list
+            restorePlayer(playerArr);// Restore the player list
+            // Restore player before restoring the game data
+            restoreGame(gameObj); // Restore essential data for the game
+            // last phase restore property
 
         } else {
-            System.out.println(TAG + " No game save!");
+            System.out.println(TAG + " No game saved!");
             // TODO: Back to main menu
         }
 
         return true;
     }
 
-    //Restore essential game data
-    private void restoreGame(){
-        
+    // Helper function
+    // Return the player object by a token given
+    private Player tokenToPlayer(String token) {
+        ArrayList<Player> players = monopoly.getPlayers();
+        Player player = null;
+
+        for (int i = 0; i < players.size(); i++) {
+            player = players.get(i);
+            if (token.equals(player.getToken())) {
+                break;
+            }
+        }
+
+        return player;
+    }
+
+    // Helper function
+    // Return the PropertySquare by its name
+    private PropertySquare nameToProperty(String name) {
+        Square[] squares = monopoly.getSquares();
+
+        PropertySquare property = null;
+
+        for (int i = 0; i < squares.length; i++) {
+            // only target property square
+            if (squares[i] instanceof PropertySquare && squares[i].getName().equals(name)) {
+                property = (PropertySquare) squares[i];
+                break;
+            }
+        }
+
+        return property;
+
+    }
+
+    // Restore the property owners
+    private void restoreProperty(JSONArray playerArray) {
+        playerArray.forEach(item -> {
+            // JSONArray ownedProperty = (JSONArray) playerObj.get("ownedProperty"); //
+        });
+    }
+
+    // Restore essential game data
+    private void restoreGame(JSONObject gameObj) {
+        Player currentPlayer = tokenToPlayer((String) gameObj.get("currentPlayer"));
+        int currentPlayerIndex = objToInt(gameObj.get("currentPlayerIndex"));
+        int roundCounter = objToInt(gameObj.get("roundCounter"));
+        int gameRound = objToInt(gameObj.get("gameRound"));
+        int numLostPlayer = objToInt(gameObj.get("numLostPlayer"));
+
+        // System.out.println(currentPlayer.getName());
+        // System.out.println(currentPlayerIndex);
+        // System.out.println(roundCounter);
+        // System.out.println(gameRound);
+        // System.out.println(numLostPlayer);
+
+        System.out.println(nameToProperty("Mong Kok"));
+
+        // Restore the game data
+        monopoly.setCurrentPlayer(currentPlayer);
+        monopoly.setCurrentPlayerIndex(currentPlayerIndex);
+        monopoly.setRoundCounter(roundCounter);
+        monopoly.setGameRound(gameRound);
+        monopoly.setNumLostPlayer(numLostPlayer);
     }
 
     // Restore the player list
@@ -137,7 +196,6 @@ public class GameData extends Utils {
             String name = (String) playerObj.get("name");
             String token = (String) playerObj.get("token");
             boolean lost = (Boolean) playerObj.get("lost");
-            // JSONArray ownedProperty = (JSONArray) playerObj.get("ownedProperty"); //
             // Array of string
 
             Player player = new Player(name, token);
@@ -156,7 +214,7 @@ public class GameData extends Utils {
 
         });
 
-        // Set the players list
+        // Restore the player list
         monopoly.setPlayers(players);
     }
 
