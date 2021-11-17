@@ -12,6 +12,7 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 @SuppressWarnings("unchecked")
 public class GameData {
@@ -88,6 +89,23 @@ public class GameData {
         long currentPlayerIndex = (long) gameObject.get("currentPlayerIndex");
         System.out.println("Current Player Index: " + currentPlayerIndex);
 
+
+        JSONArray playerArray = (JSONArray) gameObject.get("playerDetails");
+        playerArray.forEach(pObj -> getProperty((JSONObject) pObj));
+
         return true;
+    }
+
+    private void getProperty(JSONObject pObj) {
+
+        JSONObject playerObject = (JSONObject) pObj;
+        
+        JSONArray numberofProperty = (JSONArray) playerObject.get("property");
+
+        Iterator<String> iterator = numberofProperty.iterator();
+        System.out.println("Number of Property: ");
+        while (iterator.hasNext()) {
+            System.out.println(iterator.next());
+        }
     }
 }
