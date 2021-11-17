@@ -7,26 +7,18 @@ public class Player implements PlayerAPI {
     private int position = 0; // Current position of the user
     private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
     private boolean justOutJail = false;// mean the player in just out jail in this round
-    private int currentRound = 0;// TODO: save
-    private boolean inJail = false;// TODO: save
-    private String name = "";// TODO: save
-    private String token = "";// TODO: save
+    private int currentRound = 0;
+    private boolean inJail = false;
+    private String name = "";
+    private String token = "";
     private boolean lost = false;
-    private boolean jailThreeRoundOut = false; 
-    private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>(); // TODO: save (player token or id
-                                                                                       // sth like this)
-    // private Utils utils = new Utils();
+    private boolean jailThreeRoundOut = false;
+    private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>();
 
     Player(String name, String token) {
         this.name = name;
         this.token = token;
     }
-
-    // Player(String name, String token, int position) {
-    // this.name = name;
-    // this.token = token;
-    // this.position = position;
-    // }
 
     public String getName() {
         return name;
@@ -44,14 +36,15 @@ public class Player implements PlayerAPI {
         justOutJail = true;
     }
 
-    public void isjailThreeRoundOut(){
+    public void isJailThreeRoundOut() {
         jailThreeRoundOut = true;
     }
-    public void clearjailThreeRoundOut(){
+
+    public void clearJailThreeRoundOut() {
         jailThreeRoundOut = false;
     }
 
-    public boolean getIsjailThreeRoundOut(){
+    public boolean getIsJailThreeRoundOut() {
         return jailThreeRoundOut;
     }
 

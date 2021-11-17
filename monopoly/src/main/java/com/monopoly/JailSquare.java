@@ -20,11 +20,11 @@ public class JailSquare extends Square implements EffectSquareAPI {
         player.outOfJail();
 
         player.isJustOutJail();
-        if (player.getIsjailThreeRoundOut() == true) {
+        if (player.getIsJailThreeRoundOut() == true) {
             System.out.printf("%s Round 3 now, you must pay $150 to leave the Jail \n", TAG);
         }
         System.out.printf("%s %s You're out of jail.%n%n", TAG, isPay ? "Paid $150!" : "Same dice!");
-        utils.delay(2000); // TODO: monopoly.SHORT_DELAY_TIME
+        utils.delay(monopoly.SHORT_DELAY_TIME);
     }
 
     private void rollDiceGetOut() {
@@ -56,7 +56,7 @@ public class JailSquare extends Square implements EffectSquareAPI {
     }
 
     public void roundThreeOut() {
-        player.isjailThreeRoundOut();
+        player.isJailThreeRoundOut();
         outOfJail(true);
         player.deductBalance(OUT_JAIL_PRICE);
     }
@@ -78,7 +78,7 @@ public class JailSquare extends Square implements EffectSquareAPI {
                     payToOut();
                 } else if (answer && player.getBalance() < OUT_JAIL_PRICE) {
                     System.out.printf("%s You don't have enough money, now roll the dice.%n%n", TAG);
-                    utils.delay(2000); // TODO: monopoly.SHORT_DELAY_TIME
+                    utils.delay(monopoly.SHORT_DELAY_TIME);
                     rollDiceGetOut();
                 } else {
                     rollDiceGetOut();
