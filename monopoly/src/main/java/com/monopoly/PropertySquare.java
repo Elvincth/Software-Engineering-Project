@@ -58,6 +58,11 @@ public class PropertySquare extends Square implements EffectSquareAPI {
         return rent;
     } // return the rent of the property
 
+    // New - add for restore
+    public void setOwner(Player player) {
+        owner = player;
+    }
+
     public Player getOwner() {
         return owner;
     }// return the owner of the property

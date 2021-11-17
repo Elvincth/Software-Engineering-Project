@@ -39,7 +39,8 @@ public class Player implements PlayerAPI {
     public void setToken(String token) {
         this.token = token;
     }
-    public void isJustOutJail(){
+
+    public void isJustOutJail() {
         justOutJail = true;
     }
 
@@ -54,11 +55,11 @@ public class Player implements PlayerAPI {
         return jailThreeRoundOut;
     }
 
-    public boolean getJustOutJail(){
+    public boolean getJustOutJail() {
         return justOutJail;
     }
 
-    public void clearJustOutJail(){
+    public void clearJustOutJail() {
         justOutJail = false;
     }
 
@@ -101,7 +102,7 @@ public class Player implements PlayerAPI {
         return balance;
     }
 
-    public ArrayList<PropertySquare> getProperty() {
+    public ArrayList<PropertySquare> getOwnedProperty() {
         return ownedProperty;
     }
 

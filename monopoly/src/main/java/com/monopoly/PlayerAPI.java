@@ -22,7 +22,7 @@ public interface PlayerAPI {
 
     public int deductBalance(int num); // Will deduct the balance of the player **
 
-    public ArrayList<PropertySquare> getProperty(); // get property belong to the user
+    public ArrayList<PropertySquare> getOwnedProperty(); // get property belong to the user
 
     public void addProperty(PropertySquare property); // add the property to user after they bought
 
