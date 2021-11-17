@@ -6,13 +6,16 @@ public class Player implements PlayerAPI {
     private int balance = 500; // User current bank balance
     private int position = 0; // Current position of the user
     private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
-    private int currentRound = 0;
-    private boolean inJail = false;
-    private String name = "";
-    private String token = "";
+    private boolean justOutJail = false;// mean the player in just out jail in this round
+                                 // TODO: save
+    private int currentRound = 0;// TODO: save
+    private boolean inJail = false;// TODO: save
+    private String name = "";// TODO: save
+    private String token = "";// TODO: save
     private boolean lost = false;
-    private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>();
-    // sth like this)
+    private boolean ThreeRoundOut = false; //jailRound
+    private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>(); // TODO: save (player token or id
+                                                                                       // sth like this)
     // private Utils utils = new Utils();
 
     Player(String name, String token) {
@@ -36,6 +39,28 @@ public class Player implements PlayerAPI {
 
     public void setToken(String token) {
         this.token = token;
+    }
+    public void isJustOutJail(){
+        justOutJail = true;
+    }
+
+    public void isThreeRoundOut(){
+        ThreeRoundOut = true;
+    }
+    public void clearThreeRoundOut(){
+        ThreeRoundOut = false;
+    }
+
+    public boolean getIsThreeRoundOut(){
+        return ThreeRoundOut;
+    }
+
+    public boolean getJustOutJail(){
+        return justOutJail;
+    }
+
+    public void clearJustOutJail(){
+        justOutJail = false;
     }
 
     public String getToken() {
