@@ -15,7 +15,7 @@ public class YesNo extends Utils {
 
         String userInput = "";
 
-        System.out.printf("%s (Y/N): ", message);
+        System.out.printf(ANSI_YELLOW + "%s (Y/N): " + ANSI_RESET, message);
 
         while (scanner.hasNextLine()) {
             userInput = scanner.nextLine();

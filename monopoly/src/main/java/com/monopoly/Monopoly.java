@@ -17,7 +17,7 @@ import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
 
 public class Monopoly {
-    private int gameRound = 0;// TODO: save
+    private int gameRound = 99;// TODO: save
     private Square[] squares = new Square[20];
     private ArrayList<Player> players = new ArrayList<Player>();
     private int currentPlayerIndex = 0; // Current player index TODO: save
@@ -29,7 +29,7 @@ public class Monopoly {
     private ArrayList<String> tokenChoices = new ArrayList<String>();
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
-    private final boolean DEBUG = false;
+    private final boolean DEBUG = true;
     private boolean TEST = false; // is in testing mode, will skip display and next round
     protected final int SHORT_DELAY_TIME = DEBUG ? 10 : 1000;
     // Dice
@@ -42,6 +42,24 @@ public class Monopoly {
 
     Monopoly(boolean TEST) {
         this.TEST = TEST;
+        init();
+    }
+
+    Monopoly() {
+        this(false);
+    }
+
+    // Reset game, set all var to init
+    private void init() {
+        // Reset all
+        players = new ArrayList<Player>();
+        currentPlayerIndex = 0;
+        currentPlayer = null;
+        tokenChoices = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        tokenChoicesInfo = new ArrayList<String>(Arrays.asList("🐶", "🐱", "🚗", "🎩", "🍉", "🐴"));
+        roundCounter = 0;
+        lostPlayer = 0;
+        winnerPlayerList = new ArrayList<Player>();
         squares[0] = new Square("GO", 0);
         squares[1] = new PropertySquare("Central", 1, 800, 90, EColor.BLUE);
         squares[2] = new PropertySquare("Wan Chai", 2, 700, 65, EColor.BLUE);
@@ -62,20 +80,21 @@ public class Monopoly {
         squares[17] = new PropertySquare("Yuen Long", 17, 400, 25, EColor.YELLOW);
         squares[18] = new ChanceSquare("Chance", 18);
         squares[19] = new PropertySquare("Tai O", 19, 600, 25, EColor.YELLOW);
-        tokenChoices = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        tokenChoicesInfo = new ArrayList<String>(Arrays.asList("🐶", "🐱", "🚗", "🎩", "🍉", "🐴"));
-    }
-
-    Monopoly() {
-        this(false);
     }
 
     // Start the game
     public void start() throws IOException, ParseException {
         utils.clearScreen();
-        System.out.println("Welcome To Monopoly!");
-        String[] commands = { "1", "2" };
-        String[] choicesInfo = { "Start Game", "Load a game" };
+        System.out.println(
+                utils.ANSI_YELLOW_BACKGROUND + utils.ANSI_BLACK + "\n Welcome To Monopoly!" + utils.ANSI_RESET);
+        System.out.println(utils.ANSI_YELLOW + "  ____");
+        System.out.println(" /\\' .\\    _____");
+        System.out.println("/: \\___\\  / .  /\\");
+        System.out.println("\\' / . / /____/..\\");
+        System.out.println(" \\/___/  \\'  '\\  /");
+        System.out.println("          \\'__'\\/ \n" + utils.ANSI_RESET);
+        String[] commands = { "1", "2", "3" };
+        String[] choicesInfo = { "Start Game", "Load game", "Exit" };
         Menu startMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo);
         String userChoice = startMenu.askChoice();
 
@@ -84,18 +103,6 @@ public class Monopoly {
                 players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
                 players.add(new Player("TEST2", tokenChoicesInfo.get(1)));
                 players.add(new Player("TEST3", tokenChoicesInfo.get(2)));
-
-                // PropertySquare square1 = (PropertySquare)squares[1];
-                // PropertySquare square2 = (PropertySquare)squares[2];
-                // PropertySquare square3 = (PropertySquare)squares[4];
-
-                // square1.buy(players.get(0), this);
-                // square2.buy(players.get(0), this);
-                // square3.buy(players.get(0), this);
-
-                // players.add(new Player("TEST4", tokenChoicesInfo.get(3)));
-                // players.add(new Player("TEST5", tokenChoicesInfo.get(4)));
-                // players.add(new Player("TEST6", tokenChoicesInfo.get(5)));
             } else {
                 addPlayers();
             }
@@ -209,9 +216,9 @@ public class Monopoly {
         if (!endGameCheck(gameRound)) {
             nextTurn();
         } else {
+            // The game is end
             utils.clearScreen();
-            checkGameWinner();
-            // TODO add menu
+            endGame();
         }
 
     }
@@ -291,16 +298,27 @@ public class Monopoly {
     }
 
     private void printSettlementTable() {
-        System.out.printf("%-10s %-10s %-10s\n", "PlayerName", "Balance", "lose");
+        System.out.printf("%-11s %-10s %-10s\n", "Player Name", "Balance", "Lose");
         System.out.printf("--------------------------------\n");
         for (int i = 0; i < players.size(); i++) {
-            System.out.printf("%-10s %-10s %-10s\n", players.get(i).getName(), players.get(i).getBalance(),
+            System.out.printf("%-11s %-10s %-10s\n", players.get(i).getName(), "$" + players.get(i).getBalance(),
                     players.get(i).getLost() ? "Yes" : "No");
         }
         System.out.printf("--------------------------------\n");
     }
 
-    public void checkGameWinner() {
+    public void endGame() {
+        String[] commands = { "1", "2" };
+        String[] choicesInfo = { "Back to main menu", "Exit" };
+        Menu endMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo); // End game menu
+
+        System.out.println("   _____          __  __ ______    ______      ________ _____  ");
+        System.out.println("  / ____|   /\\   |  \\/  |  ____|  / __ \\ \\    / /  ____|  __ \\ ");
+        System.out.println(" | |  __   /  \\  | \\  / | |__    | |  | \\ \\  / /| |__  | |__) |");
+        System.out.println(" | | |_ | / /\\ \\ | |\\/| |  __|   | |  | |\\ \\/ / |  __| |  _  / ");
+        System.out.println(" | |__| |/ ____ \\| |  | | |____  | |__| | \\  /  | |____| | \\ \\ ");
+        System.out.println("  \\_____/_/    \\_\\_|  |_|______|  \\____/   \\/   |______|_|  \\_\\ \n\n");
+
         int higherBalance = 0;
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getBalance() > higherBalance) {
@@ -313,7 +331,7 @@ public class Monopoly {
             }
         }
         printSettlementTable();
-        System.out.println("The game is end");
+        System.out.println("Game over!");
         System.out.print("The winner is ");
         for (int k = 0; k < winnerPlayerList.size(); k++) {
             if (k == winnerPlayerList.size() - 1) {
@@ -322,6 +340,22 @@ public class Monopoly {
                 System.out.printf("%s,", winnerPlayerList.get(k).getName());
             }
         }
+
+        System.out.println("\n");
+
+        String userChoice = endMenu.ask();
+
+        // Back to main menu choice
+        if (userChoice.equals(commands[0])) {
+            init(); // Reset the game, init it again
+            try {
+                start(); // Start the game
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
     }
 
     public boolean endGameCheck(int gameRound) {// check wether the game is end or not
@@ -330,7 +364,7 @@ public class Monopoly {
                 lostPlayer++;
             }
         }
-        if (gameRound == 100) {
+        if (gameRound >= 100) {
             return true;
         } else if (lostPlayer == players.size() - 1) {
             return true;
@@ -340,6 +374,7 @@ public class Monopoly {
         }
     }
 
+    // Used to check if any player have lost the game
     private void checkPlayerLost() {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getBalance() < 0) {
@@ -459,7 +494,9 @@ public class Monopoly {
 
             System.out.println(Util.asString(gridTable)); // Print out the table
 
-            System.out.printf("Current Player: %s, Token: %s, Balance: $%d, Number of property: %d\n",
+            System.out.printf(
+                    utils.ANSI_GREEN + "Current Player: %s, Token: %s, Balance: $%d, Number of property: %d\n"
+                            + utils.ANSI_RESET,
                     currentPlayer.getName(), currentPlayer.getToken(), currentPlayer.getBalance(),
                     currentPlayer.getProperty().size());
 
@@ -484,7 +521,7 @@ public class Monopoly {
     public void setCurrentPlayer(Player player) {
         currentPlayer = player;
     }
-    
+
     // Get is testing1
     public boolean isTest() {
         return TEST;
