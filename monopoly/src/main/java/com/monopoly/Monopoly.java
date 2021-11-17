@@ -374,8 +374,37 @@ public class Monopoly {
         System.out.println(" | |_) \\ \\_/ /| |__    | |_) \\ \\_/ /| |__   ");
         System.out.println(" |  _ < \\   / |  __|   |  _ < \\   / |  __|  ");
         System.out.println(" | |_) | | |  | |____  | |_) | | |  | |____");
-        System.out.println(" |____/  |_|  |______| |____/  |_|  |______|\n" + utils.ANSI_RESET);
-        System.out.println("See you next time! \n\n");
+        System.out.println(" |____/  |_|  |______| |____/  |_|  |______|\n");
+        System.out.println("                  ██████                ");
+        System.out.println("                 ████████ █             ");
+        System.out.println("             ██████████████             ");
+        System.out.println("             █████████████              ");
+        System.out.println("              ███████████               ");
+        System.out.println("               ██████████               ");
+        System.out.println("                ████████                ");
+        System.out.println("                ▐██████                 ");
+        System.out.println("                ▐██████                 ");
+        System.out.println("                 ▌     ▌                ");
+        System.out.println("                ███ █████               ");
+        System.out.println("            ████████████████            ");
+        System.out.println("          ████████████████████          ");
+        System.out.println("        ████████████     ███████        ");
+        System.out.println("      ███████████         ███████       ");
+        System.out.println("     ████████████   ██ ███████████      ");
+        System.out.println("    ██████████████          ████████    ");
+        System.out.println("   ████████████████     █   █████████   ");
+        System.out.println("  █████████████████████ ██   █████████  ");
+        System.out.println("  █████████████████████  ██  ██████████ ");
+        System.out.println(" ███████████████████████ ██   ██████████");
+        System.out.println("████████████████████████      ██████████");
+        System.out.println("███████████████████          ███████████");
+        System.out.println(" ██████████████████       ██████████████");
+        System.out.println(" ███████████████████████  █████████████ ");
+        System.out.println("  █████████████████████████████████████ ");
+        System.out.println("   ██████████████████████████████████   ");
+        System.out.println("       ██████████████████████████████   ");
+        System.out.println("       ██████████████████████████       ");
+        System.out.println("             ███████████████            \n" + utils.ANSI_RESET);
     }
 
     public void endGame() {
