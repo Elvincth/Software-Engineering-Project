@@ -158,7 +158,7 @@ public class Monopoly {
 
             if (nextPosition > 19 && !currentPlayer.isInJail()) {
                 // Tell the player he got 1500 at GO or passed it
-                System.out.printf(utils.ANSI_GREEN + "[GO]" + utils.ANSI_RESET + " %s Passed GO +1500! \n",
+                System.out.printf(utils.ANSI_GREEN + "[GO]" + utils.ANSI_RESET + " %s Passed GO +$1500! \n\n",
                         currentPlayer.getName());
             }
 

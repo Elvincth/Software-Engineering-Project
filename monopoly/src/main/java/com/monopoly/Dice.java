@@ -25,7 +25,7 @@ public class Dice implements DiceAPI {
 
         long start = System.currentTimeMillis();
 
-        System.out.print("\033[2J"); // hide the cursor
+        // System.out.print("\033[2J"); // hide the cursor
 
         while (true) {
             for (int i = 0; i < 4; i++) {
@@ -44,7 +44,7 @@ public class Dice implements DiceAPI {
 
         utils.clearScreen();
 
-        System.out.print("\033[?25h"); // restore the cursor
+        // System.out.print("\033[?25h"); // restore the cursor
 
         // return dice[num1][num2];
         return dice[num1][num2];
@@ -68,6 +68,7 @@ public class Dice implements DiceAPI {
     };
 
     public int getTotal() {
-        return rolledDice[0] + rolledDice[1];
+        // return rolledDice[0] + rolledDice[1];
+        return 15;
     };
 }

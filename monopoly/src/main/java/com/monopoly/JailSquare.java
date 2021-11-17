@@ -12,6 +12,9 @@ public class JailSquare extends Square implements EffectSquareAPI {
         super(name, position);
     }
 
+    // isPay is the payment method
+    // isPay = the user is pay to get out
+    // if false means the user use same dice get out
     public void outOfJail(Boolean isPay) {
         // Set player out of jail
         player.outOfJail();
@@ -28,20 +31,21 @@ public class JailSquare extends Square implements EffectSquareAPI {
 
     private void rollDiceGetOut() {
         dice.roll();
-
         dice.display();
         System.out.println();
-
+        checkRound(dice.getRolled());
     }
 
     public void checkRound(int[] rolledDice) {
         // If same the user is free to go
         if (rolledDice[0] == rolledDice[1]) {
             System.out.printf("%s Same dice! You're out of jail.%n%n", TAG);
+            utils.delay(monopoly.SHORT_DELAY_TIME);
             outOfJail(false);
         } else {
             if (player.getJailRound() < 3) {
                 System.out.printf("%s Uh oh! Dice not the same, cannot get out of jail.%n%n", TAG);
+                utils.delay(monopoly.SHORT_DELAY_TIME);
                 player.setJailRound(player.getJailRound() + 1);
             } else {
                 payToOut();
