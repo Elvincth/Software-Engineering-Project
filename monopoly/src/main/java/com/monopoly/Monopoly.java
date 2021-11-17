@@ -425,12 +425,12 @@ public class Monopoly {
     private void checkPlayerLost() {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getBalance() < 0) {
-                Player mynumLostPlayer = players.get(i);
-                ArrayList<PropertySquare> lostProperty = mynumLostPlayer.getOwnedProperty();
+                Player numLostPlayer = players.get(i);
+                ArrayList<PropertySquare> lostProperty = numLostPlayer.getOwnedProperty();
 
-                System.out.printf("%s is Bankruptcy\n", mynumLostPlayer.getName());
+                System.out.printf("%s is Bankruptcy\n", numLostPlayer.getName());
                 utils.delay(SHORT_DELAY_TIME);
-                mynumLostPlayer.setToLost();
+                numLostPlayer.setToLost();
 
                 // Remove owner of lost properties
                 for (int j = 0; j < lostProperty.size(); j++) {
@@ -616,5 +616,3 @@ public class Monopoly {
     }
 
 }
-
-
