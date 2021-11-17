@@ -98,11 +98,11 @@ public class GameData {
 
     private void getJsonProperty(JSONObject pObj) {
 
-        JSONObject playerObject = (JSONObject) pObj;
+        JSONObject propertyObject = (JSONObject) pObj;
 
-        JSONArray numberofProperty = (JSONArray) playerObject.get("property");
+        JSONArray property = (JSONArray) propertyObject.get("property");
 
-        Iterator<String> iterator = numberofProperty.iterator();
+        Iterator<String> iterator = property.iterator();
         System.out.println("Number of Property: ");
         while (iterator.hasNext()) {
             System.out.println(iterator.next());
