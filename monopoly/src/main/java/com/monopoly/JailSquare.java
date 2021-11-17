@@ -24,6 +24,7 @@ public class JailSquare extends Square implements EffectSquareAPI {
             System.out.printf("%s Round 3 now, you must pay $150 to leave the Jail \n", TAG);
         }
         System.out.printf("%s %s You're out of jail.%n%n", TAG, isPay ? "Paid $150!" : "Same dice!");
+        utils.delay(2000); // TODO: monopoly.SHORT_DELAY_TIME
     }
 
     private void rollDiceGetOut() {
