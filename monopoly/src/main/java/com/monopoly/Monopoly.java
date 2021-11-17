@@ -172,20 +172,18 @@ public class Monopoly {
                 ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
             }
 
-            if(currentPlayer.getJustOutJail() == true){
+            if (currentPlayer.getJustOutJail() == true) {
 
                 utils.delay(SHORT_DELAY_TIME);
 
-                if(!currentPlayer.getIsThreeRoundOut()){
+                if (!currentPlayer.getIsThreeRoundOut()) {
                     dice.roll(); // Roll the dice
                 }
-
 
                 nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed
 
                 currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
 
-                
                 displayLanded();
 
                 landedSquare = getLandedSquare();// Set user landed square
@@ -207,7 +205,7 @@ public class Monopoly {
 
         // check game round
         checkGameRound();
-        
+
         // User selected end my turn option
         if (selectedChoice.equals(commands[0])) {
             // Pass to next player

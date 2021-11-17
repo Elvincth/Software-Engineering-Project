@@ -39,10 +39,10 @@ public class JailSquare extends Square implements EffectSquareAPI {
             utils.delay(monopoly.SHORT_DELAY_TIME);
             outOfJail(false);
         } else {
-            if (player.getJailRound() < 3) {
+            if (player.getInJailRound() < 3) {
                 monopoly.display();
                 System.out.printf("%s Uh oh! Dice not the same, cannot get out of jail.%n%n", TAG);
-                player.setJailRound(player.getJailRound() + 1);
+                player.setInJailRound(player.getInJailRound() + 1);
             } else {
                 roundThreeOut();
             }
