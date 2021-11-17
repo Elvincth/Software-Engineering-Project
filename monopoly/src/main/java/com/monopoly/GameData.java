@@ -90,17 +90,16 @@ public class GameData {
         long currentPlayerIndex = (long) gameObject.get("currentPlayerIndex");
         System.out.println("Current Player Index: " + currentPlayerIndex);
 
-
         JSONArray playerArray = (JSONArray) gameObject.get("playerDetails");
-        playerArray.forEach(pObj -> getProperty((JSONObject) pObj));
+        playerArray.forEach(pObj -> getJsonProperty((JSONObject) pObj));
 
         return true;
     }
 
-    private void getProperty(JSONObject pObj) {
+    private void getJsonProperty(JSONObject pObj) {
 
         JSONObject playerObject = (JSONObject) pObj;
-        
+
         JSONArray numberofProperty = (JSONArray) playerObject.get("property");
 
         Iterator<String> iterator = numberofProperty.iterator();
