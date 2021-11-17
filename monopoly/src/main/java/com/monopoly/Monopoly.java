@@ -46,7 +46,6 @@ public class Monopoly {
 
     Monopoly(boolean TEST) {
         this.TEST = TEST;
-        init();
     }
 
     Monopoly() {
@@ -54,7 +53,7 @@ public class Monopoly {
     }
 
     // Reset game, set all var to init
-    private void init() {
+    private void reset() {
         // Reset all
         gameRound = 0;
         players = new ArrayList<Player>();
@@ -89,6 +88,7 @@ public class Monopoly {
 
     // Start the game
     public void start() throws IOException, ParseException {
+        reset(); // Reset the game
         utils.clearScreen();
         System.out.println(
                 utils.ANSI_YELLOW_BACKGROUND + utils.ANSI_BLACK + "\n Welcome To Monopoly!" + utils.ANSI_RESET);
@@ -136,7 +136,7 @@ public class Monopoly {
         int nextPosition = 0;
         String selectedChoice = "1";
         String[] commands = { "1", "2" };
-        String[] choicesInfo = { "End my turn", "Exit and save" };
+        String[] choicesInfo = { "End my turn", "Back to menu" };
         Menu turnMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo);
         // For players
         currentPlayer = players.get(currentPlayerIndex);
@@ -217,10 +217,28 @@ public class Monopoly {
             nextPlayer();
         }
 
-        // User selected save the game
+        // User selected Back to menu
         if (selectedChoice.equals(commands[1])) {
-            gameData.save();
+            // Ask if the user save the game before exit
+            askSave();
         }
+    }
+
+    // Used to ask will the user save the game
+    private void askSave() {
+        YesNo saveQuestion = new YesNo(scanner, "Do you want to save the game, before you back to main menu?");
+        boolean saveGame = false;
+        saveGame = saveQuestion.ask();
+        if (saveGame) {
+            gameData.save();
+        } else {
+            try {
+                start();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 
     public Square getLandedSquare() {
@@ -394,7 +412,6 @@ public class Monopoly {
 
         // Back to main menu choice
         if (userChoice.equals(commands[0])) {
-            init(); // Reset the game, init it again
             try {
                 start(); // Start the game
             } catch (Exception e) {
