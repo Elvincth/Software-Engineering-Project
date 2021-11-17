@@ -13,7 +13,6 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 @SuppressWarnings("unchecked")
 public class GameData extends Utils {
@@ -100,14 +99,16 @@ public class GameData extends Utils {
             JSONArray playerArr = (JSONArray) dataObj.get("players");
             JSONObject gameObj = (JSONObject) dataObj.get("game");
 
-            System.out.println(TAG + " Loading the game!"); // Message
-
             restorePlayer(playerArr);// Restore the player list
             // Restore player before restoring the game data
             restoreGame(gameObj); // Restore essential data for the game
             // last phase restore property
             restoreProperty(playerArr);
 
+            System.out.println(TAG + " Loaded the game!"); // Message
+            delay(monopoly.SHORT_DELAY_TIME);
+
+            monopoly.nextTurn();
         } else {
             System.out.println(TAG + " No game saved!");
             // TODO: Back to main menu
@@ -162,13 +163,22 @@ public class GameData extends Utils {
 
             for (int i = 0; i < ownedProperty.size(); i++) {
                 String propertyName = (String) ownedProperty.get(i);
-                System.out.println(nameToProperty(propertyName).getDisplayName());
                 // Add the owned property to the user
+                // Restore the owned property list
                 player.addProperty(nameToProperty(propertyName));
 
-                System.out.println(player.getOwnedProperty());
+                // Restore the owner
+                nameToProperty(propertyName).setOwner(player);
+
+                // // For debug
+                // for (int j = 0; j < player.getOwnedProperty().size(); j++) {
+                // System.out.println(player.getOwnedProperty().get(j).getName() + ",");
+                // }
+
             }
+
         });
+
     }
 
     // Restore essential game data

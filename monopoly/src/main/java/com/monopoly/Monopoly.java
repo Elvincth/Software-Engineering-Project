@@ -115,6 +115,7 @@ public class Monopoly {
             nextTurn();
         }
 
+        // Load a game data
         if (userChoice.equals(choicesInfo[1])) {
             gameData.load();
         }
@@ -127,7 +128,7 @@ public class Monopoly {
     }
 
     // Handle what the user will do in the turn
-    private void nextTurn() {
+    public void nextTurn() {
         int nextPosition = 0;
         String selectedChoice = "1";
         String[] commands = { "1", "2" };
