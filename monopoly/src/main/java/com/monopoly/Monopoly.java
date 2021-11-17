@@ -158,7 +158,8 @@ public class Monopoly {
 
             if (nextPosition > 19 && !currentPlayer.isInJail()) {
                 // Tell the player he got 1500 at GO or passed it
-                System.out.printf("[GO] %s Passed GO +1500! \n", currentPlayer.getName());
+                System.out.printf(utils.ANSI_GREEN + "[GO]" + utils.ANSI_RESET + " %s Passed GO +1500! \n",
+                        currentPlayer.getName());
             }
 
             // Check is the square is a effect square
@@ -287,14 +288,13 @@ public class Monopoly {
         }
     }
 
-    private int checkGameRound() {// count the game round
+    private void checkGameRound() {// count the game round
         if (roundCounter >= players.size() - 1) {
             gameRound++;
             roundCounter = 0;
         } else {
             roundCounter++;
         }
-        return gameRound;
     }
 
     private void printSettlementTable() {
@@ -382,7 +382,7 @@ public class Monopoly {
                 ArrayList<PropertySquare> lostProperty = myLostPlayer.getProperty();
 
                 System.out.printf("%s is Bankruptcy\n", myLostPlayer.getName());
-                utils.delay(2000);
+                utils.delay(SHORT_DELAY_TIME);
                 myLostPlayer.setToLost();
 
                 // Remove owner of lost properties
@@ -495,15 +495,15 @@ public class Monopoly {
             System.out.println(Util.asString(gridTable)); // Print out the table
 
             System.out.printf(
-                    utils.ANSI_GREEN + "Current Player: %s, Token: %s, Balance: $%d, Number of property: %d\n"
+                    utils.ANSI_GREEN
+                            + "Current Player: %s, Token: %s, Balance: $%d, Number of property: %d, Game round: %s \n"
                             + utils.ANSI_RESET,
                     currentPlayer.getName(), currentPlayer.getToken(), currentPlayer.getBalance(),
-                    currentPlayer.getProperty().size());
+                    currentPlayer.getProperty().size(), gameRound);
 
             if (DEBUG) {
-                System.out.printf("[DEBUG] Dice total: %s, Player round: %s, Game round: %s, Jail Counter: %d%n%n",
-                        dice.getTotal(), currentPlayer.getCurrentRound(), checkGameRound(),
-                        currentPlayer.getJailRound());
+                System.out.printf("[DEBUG] Dice total: %s, Player round: %s, Jail Counter: %d%n%n", dice.getTotal(),
+                        currentPlayer.getCurrentRound(), currentPlayer.getJailRound());
             }
         }
     };

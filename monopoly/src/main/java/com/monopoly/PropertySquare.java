@@ -1,12 +1,13 @@
 package com.monopoly;
 
 public class PropertySquare extends Square implements EffectSquareAPI {
+    private Utils utils = new Utils();
     private String name = "";
     private int price = 0;
     private int rent = 0;
     private Player owner = null;
     private EColor color = EColor.BLUE;
-    private final String TAG = "[PROPERTY]";
+    private final String TAG = utils.ANSI_CYAN + "[PROPERTY]" + utils.ANSI_RESET;
     // private Utils utils = new Utils();
 
     PropertySquare(String name, int position, int price, int rent, EColor color) {

@@ -56,7 +56,7 @@ public class Menu extends Utils {
     private void displayMenu() {
         String separator = listLayout ? "\n" : " ";
         for (int i = 0; i < commands.length; i++) {
-            System.out.printf("[%s] %s %s", commands[i], choices[i], separator);
+            System.out.printf(ANSI_YELLOW + "[%s]" + ANSI_RESET + " %s %s", commands[i], choices[i], separator);
         }
     }
 

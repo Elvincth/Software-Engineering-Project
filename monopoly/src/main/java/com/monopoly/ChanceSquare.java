@@ -2,7 +2,8 @@ package com.monopoly;
 
 public class ChanceSquare extends Square implements EffectSquareAPI {
     public String name = ""; // if random = 0 = deduct, if random = 1 = add
-    private final String TAG = "[CHANCE]";
+    private Utils utils = new Utils();
+    private final String TAG = utils.ANSI_CYAN + "[CHANCE]" + utils.ANSI_RESET;
     private int randomMoney = 0;
 
     ChanceSquare(String name, int position) {

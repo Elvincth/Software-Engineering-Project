@@ -1,7 +1,8 @@
 package com.monopoly;
 
 public class GoJailSquare extends Square implements EffectSquareAPI {
-    private final String TAG = "[JAIL]";
+    private Utils utils = new Utils();
+    private final String TAG = utils.ANSI_CYAN + "[JAIL]" + utils.ANSI_RESET;
 
     GoJailSquare(String name, int position) {
         super(name, position);

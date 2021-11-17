@@ -2,7 +2,7 @@ package com.monopoly;
 
 public class TaxSquare extends Square implements EffectSquareAPI {
     private Utils utils = new Utils();
-    private final String TAG = "[TAX]";
+    private final String TAG = utils.ANSI_CYAN + "[TAX]" + utils.ANSI_RESET;
 
     TaxSquare(String name, int position) {
         super(name, position);
