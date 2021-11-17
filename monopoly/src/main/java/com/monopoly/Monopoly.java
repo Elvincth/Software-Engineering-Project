@@ -17,10 +17,10 @@ import com.inamik.text.tables.Cell.Functions;
 import com.inamik.text.tables.GridTable;
 
 public class Monopoly {
-    private int gameRound = 0;// TODO: save
+    private int gameRound = 0;
     private Square[] squares = new Square[20];
     private ArrayList<Player> players = new ArrayList<Player>();
-    private int currentPlayerIndex = 0; // Current player index TODO: save
+    private int currentPlayerIndex = 0; // Current player index
     private Player currentPlayer;
     // Utils
     protected Scanner scanner = new Scanner(System.in);
@@ -32,11 +32,15 @@ public class Monopoly {
     private final boolean DEBUG = true;
     private boolean TEST = false; // is in testing mode, will skip display and next round
     protected final int SHORT_DELAY_TIME = DEBUG ? 10 : 1000;
+    // Current round
+    private int roundCounter = 0;
+    // Lost player
+    private int numLostPlayer = 0; // Number of lost players
+    ArrayList<Player> winnerPlayerList = new ArrayList<Player>();// Runtime no need to save
+
     // Dice
     private Dice dice = new Dice(DEBUG);
-    private int roundCounter = 0;
-    private int lostPlayer = 0;
-    ArrayList<Player> winnerPlayerList = new ArrayList<Player>();
+
     // Game data
     private GameData gameData = new GameData(this);
 
@@ -52,13 +56,14 @@ public class Monopoly {
     // Reset game, set all var to init
     private void init() {
         // Reset all
+        gameRound = 0;
         players = new ArrayList<Player>();
         currentPlayerIndex = 0;
         currentPlayer = null;
         tokenChoices = new ArrayList<String>(Arrays.asList("1", "2", "3", "4", "5", "6"));
         tokenChoicesInfo = new ArrayList<String>(Arrays.asList("🐶", "🐱", "🚗", "🎩", "🍉", "🐴"));
         roundCounter = 0;
-        lostPlayer = 0;
+        numLostPlayer = 0;
         winnerPlayerList = new ArrayList<Player>();
         squares[0] = new Square("GO", 0);
         squares[1] = new PropertySquare("Central", 1, 800, 90, EColor.BLUE);
@@ -139,7 +144,7 @@ public class Monopoly {
 
             utils.delay(SHORT_DELAY_TIME);
 
-            if (!currentPlayer.isInJail()) {
+            if (!currentPlayer.getInJail()) {
                 dice.roll(); // Roll the dice
 
                 nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed
@@ -150,13 +155,13 @@ public class Monopoly {
 
             landedSquare = getLandedSquare();// Set user landed square
 
-            if (!currentPlayer.isInJail()) {
+            if (!currentPlayer.getInJail()) {
                 displayLanded();
             }
 
             display(); // Display the game board
 
-            if (nextPosition > 19 && !currentPlayer.isInJail()) {
+            if (nextPosition > 19 && !currentPlayer.getInJail()) {
                 // Tell the player he got 1500 at GO or passed it
                 System.out.printf(utils.ANSI_GREEN + "[GO]" + utils.ANSI_RESET + " %s Passed GO +$1500! \n\n",
                         currentPlayer.getName());
@@ -361,15 +366,15 @@ public class Monopoly {
     public boolean endGameCheck(int gameRound) {// check wether the game is end or not
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getLost()) {
-                lostPlayer++;
+                numLostPlayer++;
             }
         }
         if (gameRound >= 100) {
             return true;
-        } else if (lostPlayer == players.size() - 1) {
+        } else if (numLostPlayer == players.size() - 1) {
             return true;
         } else {
-            lostPlayer = 0;
+            numLostPlayer = 0;
             return false;
         }
     }
@@ -378,12 +383,12 @@ public class Monopoly {
     private void checkPlayerLost() {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getBalance() < 0) {
-                Player myLostPlayer = players.get(i);
-                ArrayList<PropertySquare> lostProperty = myLostPlayer.getProperty();
+                Player mynumLostPlayer = players.get(i);
+                ArrayList<PropertySquare> lostProperty = mynumLostPlayer.getProperty();
 
-                System.out.printf("%s is Bankruptcy\n", myLostPlayer.getName());
+                System.out.printf("%s is Bankruptcy\n", mynumLostPlayer.getName());
                 utils.delay(SHORT_DELAY_TIME);
-                myLostPlayer.setToLost();
+                mynumLostPlayer.setToLost();
 
                 // Remove owner of lost properties
                 for (int j = 0; j < lostProperty.size(); j++) {
@@ -402,7 +407,7 @@ public class Monopoly {
             Player player = players.get(i);
 
             // Print player that not in jail
-            if (player.getPosition() == pos && !player.isInJail() && !player.getLost()) {
+            if (player.getPosition() == pos && !player.getInJail() && !player.getLost()) {
                 display = players.get(i).getToken() + " " + display;
             }
         }
@@ -417,7 +422,7 @@ public class Monopoly {
         for (int i = 0; i < players.size(); i++) {
             Player player = players.get(i);
 
-            if (player.isInJail() && !player.getLost()) {
+            if (player.getInJail() && !player.getLost()) {
                 tokens.add(players.get(i).getToken());
             }
         }
@@ -503,7 +508,7 @@ public class Monopoly {
 
             if (DEBUG) {
                 System.out.printf("[DEBUG] Dice total: %s, Player round: %s, Jail Counter: %d%n%n", dice.getTotal(),
-                        currentPlayer.getCurrentRound(), currentPlayer.getJailRound());
+                        currentPlayer.getCurrentRound(), currentPlayer.getInJailRound());
             }
         }
     };
@@ -511,15 +516,6 @@ public class Monopoly {
     // Get all squares
     public Square[] getSquares() {
         return squares;
-    }
-
-    public ArrayList<Player> getPlayers() {
-        return players;
-    }
-
-    // Set the current player
-    public void setCurrentPlayer(Player player) {
-        currentPlayer = player;
     }
 
     // Get is testing1
@@ -532,8 +528,49 @@ public class Monopoly {
         return gameRound;
     }
 
-    // New - for save
+    public void setGameRound(int round) {
+        gameRound = round;
+    }
+
+    public ArrayList<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(ArrayList<Player> arr) {
+        players = arr;
+    }
+
     public int getCurrentPlayerIndex() {
         return currentPlayerIndex;
     }
+
+    public int setCurrentPlayerIndex() {
+        return currentPlayerIndex;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    // Set the current player
+    public void setCurrentPlayer(Player player) {
+        currentPlayer = player;
+    }
+
+    public void setRoundCounter(int num) {
+        roundCounter = num;
+    }
+
+    public int getRoundCounter() {
+        return roundCounter;
+    }
+
+    public void setNumLostPlayer(int num) {
+        numLostPlayer = num;
+    }
+
+    public int getNumLostPlayer() {
+        return numLostPlayer;
+    }
+
 }

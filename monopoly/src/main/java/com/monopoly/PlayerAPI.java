@@ -26,8 +26,8 @@ public interface PlayerAPI {
 
     public void addProperty(PropertySquare property); // add the property to user after they bought
 
-    public boolean isInJail(); // Check is user in jail or not
+    public boolean getInJail(); // Check is user in jail or not
 
-    public int getJailRound(); // Get current user in jail round (IF any)
+    public int getInJailRound(); // Get current user in jail round (IF any)
 
 }

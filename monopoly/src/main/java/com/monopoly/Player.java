@@ -3,17 +3,16 @@ package com.monopoly;
 import java.util.ArrayList;
 
 public class Player implements PlayerAPI {
-    private int balance = 500; // User current bank balance TODO: save
-    private int position = 0; // Current position of the user TODO: save
+    private int balance = 500; // User current bank balance
+    private int position = 0; // Current position of the user
     private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
-                                 // TODO: save
-    private int currentRound = 0;// TODO: save
-    private boolean inJail = false;// TODO: save
-    private String name = "";// TODO: save
-    private String token = "";// TODO: save
+    private int currentRound = 0;
+    private boolean inJail = false;
+    private String name = "";
+    private String token = "";
     private boolean lost = false;
-    private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>(); // TODO: save (player token or id
-                                                                                       // sth like this)
+    private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>();
+    // sth like this)
     // private Utils utils = new Utils();
 
     Player(String name, String token) {
@@ -106,11 +105,11 @@ public class Player implements PlayerAPI {
         inJail = myInJail;
     }
 
-    public boolean isInJail() {
+    public boolean getInJail() {
         return inJail;
     }
 
-    public int getJailRound() {
+    public int getInJailRound() {
         return inJailRound;
     }
 
@@ -131,4 +130,7 @@ public class Player implements PlayerAPI {
     public boolean getLost() {
         return lost;
     }
+
+    // For game data
+
 }

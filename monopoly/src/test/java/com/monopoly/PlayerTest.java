@@ -66,6 +66,4 @@ public class PlayerTest extends TestUtils {
         passed(description);
     }
 
-    // TODO: check player lost
-
 }

@@ -1,6 +1,7 @@
 
 package com.monopoly;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -15,8 +16,10 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 @SuppressWarnings("unchecked")
-public class GameData {
-    Monopoly monopoly = null;
+public class GameData extends Utils {
+    private Monopoly monopoly = null;
+    private final String TAG = ANSI_CYAN + "[DATA]" + ANSI_RESET;
+    private final String FILE_NAME = "GameData.json";
 
     GameData(Monopoly monopoly) {
         this.monopoly = monopoly;
@@ -24,19 +27,19 @@ public class GameData {
 
     public boolean save() {
         ArrayList<Player> players = monopoly.getPlayers();
-        JSONObject gameObject = new JSONObject();
-        JSONArray createPlayerObjectArray = new JSONArray();
+        JSONObject gameObj = new JSONObject();
+        JSONArray playerObjArr = new JSONArray();
 
         // pushing player information
         for (int i = 0; i < players.size(); i++) {
 
-            JSONObject playerObject = new JSONObject();
+            JSONObject playerObj = new JSONObject();
             Player player = players.get(i);
-            playerObject.put("name", player.getName()); // String type
-            playerObject.put("token", player.getToken()); // String type
-            playerObject.put("balance", player.getBalance()); // Integer to String
+            playerObj.put("name", player.getName()); // String type
+            playerObj.put("token", player.getToken()); // String type
+            playerObj.put("balance", player.getBalance()); // Integer to String
 
-            // Player property
+            // Store player property name
             JSONArray propertyArray = new JSONArray();
             if (player.getProperty().size() > 0) {
                 // Loop through the player property
@@ -45,53 +48,66 @@ public class GameData {
                 }
             }
 
-            playerObject.put("property", propertyArray);
-            playerObject.put("position", player.getPosition());
-            playerObject.put("currentRound", player.getCurrentRound());
-            playerObject.put("inJailRound", player.getJailRound());
-            playerObject.put("getLostStatus", player.getLost());
+            playerObj.put("balance", player.getBalance());
+            playerObj.put("position", player.getPosition());
+            playerObj.put("inJailRound", player.getInJailRound());
+            playerObj.put("currentRound", player.getCurrentRound());
+            playerObj.put("inJail", player.getInJail());
 
-            createPlayerObjectArray.add(playerObject);
+            playerObj.put("ownedProperty", propertyArray);
+
+            playerObjArr.add(playerObj);
         }
 
-        gameObject.put("playerDetails", createPlayerObjectArray);
-        gameObject.put("gameRound", monopoly.getGameRound());
-        gameObject.put("currentPlayerIndex", monopoly.getCurrentPlayerIndex());
+        gameObj.put("gameRound", monopoly.getGameRound());
+        gameObj.put("players", playerObjArr);
+        gameObj.put("currentPlayerIndex", monopoly.getCurrentPlayerIndex());
+        gameObj.put("currentPlayer", monopoly.getCurrentPlayer().getToken()); // Store the token of current player
+        gameObj.put("roundCounter", monopoly.getRoundCounter());
+        gameObj.put("numLostPlayer", monopoly.getNumLostPlayer());
 
         // Write JSON file
-        try (FileWriter file = new FileWriter("Gamedata.json")) {
+        try (FileWriter file = new FileWriter(FILE_NAME)) {
             // We can write any JSONArray or JSONObject instance to the file
-            file.write(gameObject.toString());
+            file.write(gameObj.toString());
             file.flush();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         System.out.println("Game Saved");
+        // TODO: Back to main menu
 
         return true;
     }
 
+    private int objToInt(Object object) {
+        return ((Long) object).intValue();
+    }
+
+    // Load the game data
     public boolean load() throws IOException, ParseException {
-        // create json parser
-        JSONParser parser = new JSONParser();
+        if (new File(FILE_NAME).exists()) {
+            JSONParser parser = new JSONParser(); // create json parser
+            Reader reader = new FileReader("GameData.json"); // reader for reading json file
+            JSONObject gameObj = (JSONObject) parser.parse(reader); // Parse the file content
+            System.out.println(TAG + " Restoring game save!");
 
-        // reader for reading json file
-        Reader reader = new FileReader("GameData.json");
+            int gameRound = objToInt(gameObj.get("gameRound")); // get round variable in json file
+            int currentPlayerIndex = objToInt(gameObj.get("currentPlayerIndex")); // get number of player variable in
+                                                                                  // json file
 
-        // set json object for getting content of json file
-        JSONObject gameObject = (JSONObject) parser.parse(reader);
+            System.out.println("Game Round / Rounds: " + gameRound);
 
-        // get round variable in json file
-        long gameRound = (long) gameObject.get("gameRound");
-        System.out.println("Game Round / Rounds: " + gameRound);
+            System.out.println("Current Player Index: " + currentPlayerIndex);
 
-        // get number of player variable in json file
-        long currentPlayerIndex = (long) gameObject.get("currentPlayerIndex");
-        System.out.println("Current Player Index: " + currentPlayerIndex);
+            JSONArray playerArray = (JSONArray) gameObj.get("players");
+            playerArray.forEach(pObj -> getJsonProperty((JSONObject) pObj));
 
-        JSONArray playerArray = (JSONArray) gameObject.get("playerDetails");
-        playerArray.forEach(pObj -> getJsonProperty((JSONObject) pObj));
+        } else {
+            System.out.println(TAG + " No game save!");
+            // TODO: Back to main menu
+        }
 
         return true;
     }
