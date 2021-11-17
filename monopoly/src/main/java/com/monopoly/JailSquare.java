@@ -76,10 +76,10 @@ public class JailSquare extends Square implements EffectSquareAPI {
                     payToOut();
                     // The player have a chance to move and roll the dice
                     dice.roll();
-                    
+
                 } else if (answer && player.getBalance() < OUT_JAIL_PRICE) {
                     System.out.printf("%s You don't have enough money, now roll the dice.%n%n", TAG);
-                    utils.delay(2000);
+                    utils.delay(2000); // TODO: monopoly.SHORT_DELAY_TIME
                     rollDiceGetOut();
                 } else {
                     rollDiceGetOut();
