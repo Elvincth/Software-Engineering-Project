@@ -110,7 +110,7 @@ public class GameData extends Utils {
 
             monopoly.nextTurn();
         } else {
-            System.out.println(TAG + " No game saved!");
+            System.out.println(TAG + " No game save found!");
             // TODO: Back to main menu
         }
 
@@ -188,14 +188,6 @@ public class GameData extends Utils {
         int roundCounter = objToInt(gameObj.get("roundCounter"));
         int gameRound = objToInt(gameObj.get("gameRound"));
         int numLostPlayer = objToInt(gameObj.get("numLostPlayer"));
-
-        // System.out.println(currentPlayer.getName());
-        // System.out.println(currentPlayerIndex);
-        // System.out.println(roundCounter);
-        // System.out.println(gameRound);
-        // System.out.println(numLostPlayer);
-
-        // System.out.println(nameToProperty("Mong Kok"));
 
         // Restore the game data
         monopoly.setCurrentPlayer(currentPlayer);

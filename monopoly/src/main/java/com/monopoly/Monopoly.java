@@ -120,6 +120,10 @@ public class Monopoly {
             gameData.load();
         }
 
+        if (userChoice.equals(choicesInfo[2])) {
+            exit();
+        }
+
         // // Add a fake player for test
         // if (TEST) {1
         // players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
@@ -338,17 +342,29 @@ public class Monopoly {
         System.out.printf("--------------------------------\n");
     }
 
+    // Exit - New
+    private void exit() {
+        System.out.println(utils.ANSI_YELLOW + "  ______     ________   ______     ________ ");
+        System.out.println(" |  _ \\ \\   / /  ____| |  _ \\ \\   / /  ____|");
+        System.out.println(" | |_) \\ \\_/ /| |__    | |_) \\ \\_/ /| |__   ");
+        System.out.println(" |  _ < \\   / |  __|   |  _ < \\   / |  __|  ");
+        System.out.println(" | |_) | | |  | |____  | |_) | | |  | |____");
+        System.out.println(" |____/  |_|  |______| |____/  |_|  |______|\n" + utils.ANSI_RESET);
+        System.out.println("See you next time! \n\n");
+    }
+
     public void endGame() {
         String[] commands = { "1", "2" };
         String[] choicesInfo = { "Back to main menu", "Exit" };
         Menu endMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo); // End game menu
 
-        System.out.println("   _____          __  __ ______    ______      ________ _____  ");
+        System.out.println(utils.ANSI_YELLOW + "   _____          __  __ ______    ______      ________ _____  ");
         System.out.println("  / ____|   /\\   |  \\/  |  ____|  / __ \\ \\    / /  ____|  __ \\ ");
         System.out.println(" | |  __   /  \\  | \\  / | |__    | |  | \\ \\  / /| |__  | |__) |");
         System.out.println(" | | |_ | / /\\ \\ | |\\/| |  __|   | |  | |\\ \\/ / |  __| |  _  / ");
         System.out.println(" | |__| |/ ____ \\| |  | | |____  | |__| | \\  /  | |____| | \\ \\ ");
-        System.out.println("  \\_____/_/    \\_\\_|  |_|______|  \\____/   \\/   |______|_|  \\_\\ \n\n");
+        System.out.println(
+                "  \\_____/_/    \\_\\_|  |_|______|  \\____/   \\/   |______|_|  \\_\\ \n\n" + utils.ANSI_RESET);
 
         int higherBalance = 0;
         for (int i = 0; i < players.size(); i++) {

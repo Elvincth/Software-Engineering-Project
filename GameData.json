@@ -2,7 +2,7 @@
     "game": {
         "currentPlayerIndex": 2,
         "currentPlayer": "🚗",
-        "roundCounter": 0,
+        "roundCounter": 1,
         "gameRound": 1,
         "numLostPlayer": 0
     },
@@ -38,7 +38,7 @@
             "lost": false,
             "name": "TEST3",
             "inJailRound": 0,
-            "position": 6,
+            "position": 11,
             "token": "🚗",
             "ownedProperty": [
                 "Shek O"
