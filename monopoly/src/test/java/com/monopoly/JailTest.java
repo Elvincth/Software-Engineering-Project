@@ -60,7 +60,7 @@ public class JailTest extends TestUtils {
         int[] rolledDice = { 3, 4 };// set the dice to not the same face
 
         player.setBalance(DEFAULT_BAL);// Set player balance to $500
-        player.setJailRound(3);// set player jail round to 3 which should be the last round
+        player.setInJailRound(3);// set player jail round to 3 which should be the last round
         assertTrue(player.getInJailRound() == 3, description);
 
         jailSquare.checkRound(rolledDice); // check jail round, if player jail round is 3 and the rolled dice is not the

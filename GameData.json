@@ -1,6 +1,11 @@
 {
-    "currentPlayerIndex": 0,
-    "currentPlayer": "🐶",
+    "game": {
+        "roundCounter": 1,
+        "gameRound": 2,
+        "numLostPlayer": 0,
+        "currentPlayerIndex": 0,
+        "currentPlayer": "🐶"
+    },
     "players": [
         {
             "currentRound": 0,
@@ -39,8 +44,5 @@
             "token": "🚗",
             "ownedProperty": []
         }
-    ],
-    "roundCounter": 1,
-    "gameRound": 2,
-    "numLostPlayer": 0
+    ]
 }

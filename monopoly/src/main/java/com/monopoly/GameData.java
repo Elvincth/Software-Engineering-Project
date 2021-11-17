@@ -106,7 +106,8 @@ public class GameData extends Utils {
             // System.out.println("Current Player Index: " + currentPlayerIndex);
 
             JSONArray playerArray = (JSONArray) gameObj.get("players");
-            restorePlayer(playerArray);
+            restoreGame(); // Restore essential data for the game
+            restorePlayer(playerArray);// Restore the player list
 
         } else {
             System.out.println(TAG + " No game save!");
@@ -116,8 +117,14 @@ public class GameData extends Utils {
         return true;
     }
 
+    //Restore essential game data
+    private void restoreGame(){
+        
+    }
+
     // Restore the player list
     private void restorePlayer(JSONArray playerArray) {
+        ArrayList<Player> players = new ArrayList<Player>();
 
         playerArray.forEach(item -> {
             JSONObject playerObj = (JSONObject) item;
@@ -130,22 +137,27 @@ public class GameData extends Utils {
             String name = (String) playerObj.get("name");
             String token = (String) playerObj.get("token");
             boolean lost = (Boolean) playerObj.get("lost");
-            JSONArray ownedProperty = (JSONArray) playerObj.get("ownedProperty"); // Array of string
+            // JSONArray ownedProperty = (JSONArray) playerObj.get("ownedProperty"); //
+            // Array of string
 
             Player player = new Player(name, token);
 
             player.setBalance(balance);
-            player.setPosition(pos);
+            player.setPosition(position);
+            player.setInJailRound(inJailRound);
+            player.setCurrentRound(currentRound);
+            player.setInJail(inJail);
+            player.setLost(lost);
 
-            System.out.println(balance);
-            System.out.println(position);
-            System.out.println(inJailRound);
-            System.out.println(currentRound);
-            System.out.println(inJail);
-            System.out.println(lost);
-            System.out.println(ownedProperty);
+            // push the player into our player list
+            players.add(player);
+
+            // System.out.println(ownedProperty);
 
         });
+
+        // Set the players list
+        monopoly.setPlayers(players);
     }
 
 }

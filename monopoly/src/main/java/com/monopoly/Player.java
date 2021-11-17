@@ -89,15 +89,15 @@ public class Player implements PlayerAPI {
         // Send the player to jail
         position = 5;
         setInJail(true);
-        setJailRound(1);
+        setInJailRound(1);
     }
 
     public void outOfJail() {
         setInJail(false);
-        setJailRound(0);
+        setInJailRound(0);
     }
 
-    public void setJailRound(int num) {
+    public void setInJailRound(int num) {
         inJailRound = num;
     }
 
@@ -133,6 +133,10 @@ public class Player implements PlayerAPI {
 
     public void setPosition(int pos) {
         position = pos;
+    }
+
+    public void setLost(boolean isLost) {
+        lost = isLost;
     }
 
 }
