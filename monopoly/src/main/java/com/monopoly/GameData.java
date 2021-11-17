@@ -120,13 +120,17 @@ public class GameData extends Utils {
             // last phase restore property
             restoreProperty(playerArr);
 
-            System.out.println(TAG + " Loaded the game!"); // Message
+            System.out.println(TAG + " Game have been loaded!"); // Message
 
             printArt(ANSI_GREEN);
 
             delay(monopoly.SHORT_DELAY_TIME);
 
-            monopoly.nextTurn();
+            if (!monopoly.isTest()) {
+                // Continue the game play
+                monopoly.nextTurn();
+            }
+
         } else {
             System.out.println(TAG + " No game save found!");
             printArt(ANSI_RED);
@@ -189,12 +193,6 @@ public class GameData extends Utils {
 
                 // Restore the owner
                 nameToProperty(propertyName).setOwner(player);
-
-                // // For debug
-                // for (int j = 0; j < player.getOwnedProperty().size(); j++) {
-                // System.out.println(player.getOwnedProperty().get(j).getName() + ",");
-                // }
-
             }
 
         });
@@ -245,8 +243,6 @@ public class GameData extends Utils {
 
             // push the player into our player list
             players.add(player);
-
-            // System.out.println(ownedProperty);
 
         });
 

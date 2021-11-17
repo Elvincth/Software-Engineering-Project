@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class SquareTest extends TestUtils {
-    private Monopoly monopoly = new Monopoly();
+    private Monopoly monopoly = new Monopoly(true);
     private Square[] squares = monopoly.getSquares();
 
     // The position of square will start at 0 since we are using array for storing

@@ -46,6 +46,7 @@ public class Monopoly {
 
     Monopoly(boolean TEST) {
         this.TEST = TEST;
+        reset(); // Init all
     }
 
     Monopoly() {
