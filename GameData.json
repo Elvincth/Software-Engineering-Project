@@ -1,1 +1,36 @@
-{"currentPlayerIndex":0,"playerDetails":[{"currentRound":0,"balance":500,"name":"TEST1","property":[],"inJailRound":0,"getLostStatus":false,"position":4,"token":"🐶"},{"currentRound":0,"balance":500,"name":"TEST2","property":[],"inJailRound":0,"getLostStatus":false,"position":0,"token":"🐱"},{"currentRound":0,"balance":500,"name":"TEST3","property":[],"inJailRound":0,"getLostStatus":false,"position":0,"token":"🚗"}],"gameRound":101}
+{
+    "currentPlayerIndex": 2,
+    "playerDetails": [
+        {
+            "currentRound": 0,
+            "balance": 110,
+            "name": "TEST1",
+            "property": [],
+            "inJailRound": 0,
+            "getLostStatus": false,
+            "position": 16,
+            "token": "🐶"
+        },
+        {
+            "currentRound": 0,
+            "balance": 710,
+            "name": "TEST2",
+            "property": [],
+            "inJailRound": 0,
+            "getLostStatus": false,
+            "position": 18,
+            "token": "🐱"
+        },
+        {
+            "currentRound": 1,
+            "balance": 1590,
+            "name": "TEST3",
+            "property": [],
+            "inJailRound": 0,
+            "getLostStatus": false,
+            "position": 5,
+            "token": "🚗"
+        }
+    ],
+    "gameRound": 11
+}
