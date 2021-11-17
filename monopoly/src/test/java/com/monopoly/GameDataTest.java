@@ -1,5 +1,6 @@
 package com.monopoly;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -15,10 +16,8 @@ public class GameDataTest extends TestUtils {
     private Player player3 = new Player("TEST 3", "🚗");
     GameData gameData = new GameData(monopoly);
 
-    // For checking can the game can be saved
-    @Test
-    void saveTest() {
-        String description = "Successfully saved the game";
+    @BeforeAll
+    void init() {
         // First, we add some data to the monopoly
         // Set some simulation data for player1
         player1.setBalance(450);
@@ -38,28 +37,24 @@ public class GameDataTest extends TestUtils {
         // Set some simulation data for the game
         monopoly.setRoundCounter(1);
         monopoly.setCurrentPlayer(player1);
+    }
+
+    // For testing if the game data save and load correctly
+    // We will check if the game data is successfully saved
+    // Also we will check if the
+    @Test
+    void gameDataTest() {
+        String description = "Successfully saved and load the game";
 
         // The save() method will throw exception when error occur
         // if it can successfully call the save() method, it will return boolean true
         // which mean it can save the game successfully
         assertTrue(gameData.save(), description);
 
-        passed(description);
-    }
+        // Reset the game
+        monopoly.reset();
 
-    @Test
-    void loadTest() throws IOException, ParseException {
-        
-        // for generating the save file first then load back for getting data
-        gameData.save();
-
-        String description = "Load test correct";
-
-        // The load() method will throw exception when error occur
-        // it will print out some of the data that is get from the GameData.json file
-        // and also return true boolean value
-        // which mean it can successful get the data from the json file
-        assertTrue(gameData.load(), description);
+        //Load the game from the save
 
         passed(description);
     }

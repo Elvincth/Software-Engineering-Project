@@ -54,7 +54,7 @@ public class Monopoly {
     }
 
     // Reset game, set all var to init
-    private void reset() {
+    public void reset() {
         // Reset all
         gameRound = 0;
         players = new ArrayList<Player>();

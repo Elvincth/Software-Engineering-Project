@@ -120,13 +120,13 @@ public class GameData extends Utils {
             // last phase restore property
             restoreProperty(playerArr);
 
-            System.out.println(TAG + " Game have been loaded!"); // Message
-
-            printArt(ANSI_GREEN);
-
-            delay(monopoly.SHORT_DELAY_TIME);
-
             if (!monopoly.isTest()) {
+                System.out.println(TAG + " Game have been loaded!"); // Message
+
+                printArt(ANSI_GREEN);
+
+                delay(monopoly.SHORT_DELAY_TIME);
+
                 // Continue the game play
                 monopoly.nextTurn();
             }
