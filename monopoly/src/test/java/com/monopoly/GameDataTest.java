@@ -49,12 +49,13 @@ public class GameDataTest extends TestUtils {
         // The save() method will throw exception when error occur
         // if it can successfully call the save() method, it will return boolean true
         // which mean it can save the game successfully
-        assertTrue(gameData.save(), description);
+        assertTrue(gameData.save(), "Game saved successfully");
 
         // Reset the game
         monopoly.reset();
 
-        //Load the game from the save
+        // Load the game from the saved data
+       // assertTrue(gameData.load(), "Game loaded successfully");
 
         passed(description);
     }
