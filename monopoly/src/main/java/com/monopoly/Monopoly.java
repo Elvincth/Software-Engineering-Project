@@ -150,7 +150,7 @@ public class Monopoly {
                 nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed
                                                                              // go
                                                                              // square
-                currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
+                currentPlayer.movePosition(dice.getTotal()); // Set the position as the rolled dice number
             }
 
             landedSquare = getLandedSquare();// Set user landed square

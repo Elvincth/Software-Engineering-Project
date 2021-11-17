@@ -11,11 +11,12 @@ public class GoTest extends TestUtils {
     @Test
     void passGoTest() {
         String description = "Player is pass the Go square and gain HKD1500 ";
-        player.setPosition(19); // position 19 is the last square of the monopoly, therefore whether what number
-                                // of dice player roll,the player will pass the Go square
+        player.movePosition(19); // position 19 is the last square of the monopoly, therefore whether what number
+                                 // of dice player roll,the player will pass the Go square
         dice.roll(); // Roll the dice
-        player.setPosition(dice.getTotal()); // move the player, which will pass the Go Square (19(position of player) +
-                                             // 2(minium number of two dice) > 20(position of Go square))
+        player.movePosition(dice.getTotal()); // move the player, which will pass the Go Square (19(position of player)
+                                              // +
+                                              // 2(minium number of two dice) > 20(position of Go square))
         assertTrue(player.getBalance() == 2000, description); // 500(default balance of the player) + 1500(Money gain
                                                               // after player passed the Go)
         passed(description);
@@ -24,8 +25,8 @@ public class GoTest extends TestUtils {
     @Test
     void onGoTest() {
         String description = "Player is on the Go square and gain HKD1500 ";
-        player.setPosition(20); // setPosition 20 mean player need to move 20 square which will back to the go
-                                // Square
+        player.movePosition(20); // movePosition 20 mean player need to move 20 square which will back to the go
+                                 // Square
         assertTrue(player.getBalance() == 2000, description); // 500(default balance of the player) + 1500(Money gain
                                                               // after player passed the Go)
         passed(description);

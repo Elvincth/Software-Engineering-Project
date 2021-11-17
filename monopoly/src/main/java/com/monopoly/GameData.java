@@ -40,11 +40,11 @@ public class GameData extends Utils {
             playerObj.put("balance", player.getBalance()); // Integer to String
 
             // Store player property name
-            JSONArray propertyArray = new JSONArray();
+            JSONArray ownedPropertyArr = new JSONArray();
             if (player.getProperty().size() > 0) {
                 // Loop through the player property
                 for (int j = 0; j < player.getProperty().size(); j++) {
-                    propertyArray.add(player.getProperty().get(j).getName());
+                    ownedPropertyArr.add(player.getProperty().get(j).getName());
                 }
             }
 
@@ -53,8 +53,10 @@ public class GameData extends Utils {
             playerObj.put("inJailRound", player.getInJailRound());
             playerObj.put("currentRound", player.getCurrentRound());
             playerObj.put("inJail", player.getInJail());
-
-            playerObj.put("ownedProperty", propertyArray);
+            playerObj.put("name", player.getName());
+            playerObj.put("token", player.getToken());
+            playerObj.put("lost", player.getLost());
+            playerObj.put("ownedProperty", ownedPropertyArr);
 
             playerObjArr.add(playerObj);
         }
@@ -91,18 +93,20 @@ public class GameData extends Utils {
             JSONParser parser = new JSONParser(); // create json parser
             Reader reader = new FileReader("GameData.json"); // reader for reading json file
             JSONObject gameObj = (JSONObject) parser.parse(reader); // Parse the file content
-            System.out.println(TAG + " Restoring game save!");
+            System.out.println(TAG + " Restoring game save!"); // Message
 
-            int gameRound = objToInt(gameObj.get("gameRound")); // get round variable in json file
-            int currentPlayerIndex = objToInt(gameObj.get("currentPlayerIndex")); // get number of player variable in
-                                                                                  // json file
+            // int gameRound = objToInt(gameObj.get("gameRound")); // get round variable in
+            // json file
+            // int currentPlayerIndex = objToInt(gameObj.get("currentPlayerIndex")); // get
+            // number of player variable in
+            // // json file
 
-            System.out.println("Game Round / Rounds: " + gameRound);
+            // System.out.println("Game Round / Rounds: " + gameRound);
 
-            System.out.println("Current Player Index: " + currentPlayerIndex);
+            // System.out.println("Current Player Index: " + currentPlayerIndex);
 
             JSONArray playerArray = (JSONArray) gameObj.get("players");
-            playerArray.forEach(pObj -> getJsonProperty((JSONObject) pObj));
+            restorePlayer(playerArray);
 
         } else {
             System.out.println(TAG + " No game save!");
@@ -112,16 +116,36 @@ public class GameData extends Utils {
         return true;
     }
 
-    private void getJsonProperty(JSONObject pObj) {
+    // Restore the player list
+    private void restorePlayer(JSONArray playerArray) {
 
-        JSONObject propertyObject = (JSONObject) pObj;
+        playerArray.forEach(item -> {
+            JSONObject playerObj = (JSONObject) item;
 
-        JSONArray property = (JSONArray) propertyObject.get("property");
+            int balance = objToInt(playerObj.get("balance"));
+            int position = objToInt(playerObj.get("position"));
+            int inJailRound = objToInt(playerObj.get("inJailRound"));
+            int currentRound = objToInt(playerObj.get("currentRound"));
+            boolean inJail = (Boolean) playerObj.get("inJail");
+            String name = (String) playerObj.get("name");
+            String token = (String) playerObj.get("token");
+            boolean lost = (Boolean) playerObj.get("lost");
+            JSONArray ownedProperty = (JSONArray) playerObj.get("ownedProperty"); // Array of string
 
-        Iterator<String> iterator = property.iterator();
-        System.out.println("Number of Property: ");
-        while (iterator.hasNext()) {
-            System.out.println(iterator.next());
-        }
+            Player player = new Player(name, token);
+
+            player.setBalance(balance);
+            player.setPosition(pos);
+
+            System.out.println(balance);
+            System.out.println(position);
+            System.out.println(inJailRound);
+            System.out.println(currentRound);
+            System.out.println(inJail);
+            System.out.println(lost);
+            System.out.println(ownedProperty);
+
+        });
     }
+
 }

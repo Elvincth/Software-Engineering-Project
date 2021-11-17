@@ -19,7 +19,7 @@ public class JailSquare extends Square implements EffectSquareAPI {
         // Set player out of jail
         player.outOfJail();
 
-        player.setPosition(dice.getTotal());
+        player.movePosition(dice.getTotal());
 
         monopoly.display();
 

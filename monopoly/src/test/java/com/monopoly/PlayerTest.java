@@ -36,11 +36,11 @@ public class PlayerTest extends TestUtils {
         passed(description);
     }
 
-    // Check whether the setPosition method successfully set the player position
+    // Check whether the movePosition method successfully set the player position
     @Test
-    void setPositionTest() {
-        String description = "setPosition method run correctly";
-        player.setPosition(10);// Set the user position to 10
+    void movePositionTest() {
+        String description = "movePosition method run correctly";
+        player.movePosition(10);// Set the user position to 10
         assertTrue(player.getPosition() == 10, description);
         passed(description);
     }

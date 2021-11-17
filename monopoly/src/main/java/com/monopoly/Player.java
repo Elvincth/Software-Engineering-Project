@@ -47,7 +47,7 @@ public class Player implements PlayerAPI {
     }
 
     // Warning: Used to ADD pos not really set
-    public void setPosition(int pos) {
+    public void movePosition(int pos) {
         int nextPosition = position + pos;
         if (nextPosition > 19) {
             position = nextPosition - 20;
@@ -131,6 +131,8 @@ public class Player implements PlayerAPI {
         return lost;
     }
 
-    // For game data
+    public void setPosition(int pos) {
+        position = pos;
+    }
 
 }
