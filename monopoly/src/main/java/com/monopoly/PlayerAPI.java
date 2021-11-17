@@ -14,7 +14,7 @@ public interface PlayerAPI {
 
     public int getPosition(); // Return player position
 
-    public void setPosition(int pos); // move to a square position
+    public void movePosition(int pos); // move to a square position
 
     public int getBalance(); // Return player balance
 
@@ -26,8 +26,8 @@ public interface PlayerAPI {
 
     public void addProperty(PropertySquare property); // add the property to user after they bought
 
-    public boolean isInJail(); // Check is user in jail or not
+    public boolean getInJail(); // Check is user in jail or not
 
-    public int getJailRound(); // Get current user in jail round (IF any)
+    public int getInJailRound(); // Get current user in jail round (IF any)
 
 }

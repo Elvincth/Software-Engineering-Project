@@ -3,17 +3,17 @@ package com.monopoly;
 import java.util.ArrayList;
 
 public class Player implements PlayerAPI {
-    private int balance = 500; // User current bank balance TODO: save
-    private int position = 0; // Current position of the user TODO: save
+    private int balance = 500; // User current bank balance
+    private int position = 0; // Current position of the user
     private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
-    private boolean justOutJail = false;
+    private boolean justOutJail = false;// mean the player in just out jail in this round
                                  // TODO: save
     private int currentRound = 0;// TODO: save
     private boolean inJail = false;// TODO: save
     private String name = "";// TODO: save
     private String token = "";// TODO: save
     private boolean lost = false;
-    private boolean ThreeRoundOut = false;
+    private boolean ThreeRoundOut = false; //jailRound
     private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>(); // TODO: save (player token or id
                                                                                        // sth like this)
     // private Utils utils = new Utils();
@@ -72,7 +72,7 @@ public class Player implements PlayerAPI {
     }
 
     // Warning: Used to ADD pos not really set
-    public void setPosition(int pos) {
+    public void movePosition(int pos) {
         int nextPosition = position + pos;
         if (nextPosition > 19) {
             position = nextPosition - 20;
@@ -114,15 +114,15 @@ public class Player implements PlayerAPI {
         // Send the player to jail
         position = 5;
         setInJail(true);
-        setJailRound(1);
+        setInJailRound(1);
     }
 
     public void outOfJail() {
         setInJail(false);
-        setJailRound(0);
+        setInJailRound(0);
     }
 
-    public void setJailRound(int num) {
+    public void setInJailRound(int num) {
         inJailRound = num;
     }
 
@@ -130,11 +130,11 @@ public class Player implements PlayerAPI {
         inJail = myInJail;
     }
 
-    public boolean isInJail() {
+    public boolean getInJail() {
         return inJail;
     }
 
-    public int getJailRound() {
+    public int getInJailRound() {
         return inJailRound;
     }
 
@@ -155,4 +155,13 @@ public class Player implements PlayerAPI {
     public boolean getLost() {
         return lost;
     }
+
+    public void setPosition(int pos) {
+        position = pos;
+    }
+
+    public void setLost(boolean isLost) {
+        lost = isLost;
+    }
+
 }

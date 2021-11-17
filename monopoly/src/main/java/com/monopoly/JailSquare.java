@@ -66,8 +66,8 @@ public class JailSquare extends Square implements EffectSquareAPI {
 
         if (!monopoly.isTest()) {
             // Handle the user in jail
-            if (player.isInJail()) {
-                player.setJailRound(player.getJailRound() + 1); // Add jail round
+            if (player.getInJail()) {
+                player.setInJailRound(player.getInJailRound() + 1); // Add jail round
 
                 YesNo payQuestion = new YesNo(monopoly.scanner, "Do you want to pay $150 to get out of jail?");
                 Boolean answer = payQuestion.ask();
@@ -77,7 +77,7 @@ public class JailSquare extends Square implements EffectSquareAPI {
                     payToOut();
                 } else if (answer && player.getBalance() < OUT_JAIL_PRICE) {
                     System.out.printf("%s You don't have enough money, now roll the dice.%n%n", TAG);
-                    utils.delay(monopoly.SHORT_DELAY_TIME);
+                    utils.delay(2000); // TODO: monopoly.SHORT_DELAY_TIME
                     rollDiceGetOut();
                 } else {
                     rollDiceGetOut();

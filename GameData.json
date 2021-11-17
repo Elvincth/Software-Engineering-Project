@@ -1,1 +1,48 @@
-{"currentPlayerIndex":1,"playerDetails":[{"currentRound":2,"balance":1780,"name":"TEST1","property":["Shek O","Shatin"],"inJailRound":2,"getLostStatus":false,"position":5,"token":"🐶"},{"currentRound":2,"balance":2070,"name":"TEST2","property":["Tsing Yi","Central"],"inJailRound":0,"getLostStatus":false,"position":19,"token":"🐱"},{"currentRound":3,"balance":3930,"name":"TEST3","property":[],"inJailRound":0,"getLostStatus":false,"position":3,"token":"🚗"}],"gameRound":12}
+{
+    "game": {
+        "roundCounter": 1,
+        "gameRound": 2,
+        "numLostPlayer": 0,
+        "currentPlayerIndex": 0,
+        "currentPlayer": "🐶"
+    },
+    "players": [
+        {
+            "currentRound": 0,
+            "inJail": false,
+            "balance": 50,
+            "lost": false,
+            "name": "TEST1",
+            "inJailRound": 0,
+            "position": 13,
+            "token": "🐶",
+            "ownedProperty": [
+                "Tuen Mun"
+            ]
+        },
+        {
+            "currentRound": 0,
+            "inJail": false,
+            "balance": 100,
+            "lost": false,
+            "name": "TEST2",
+            "inJailRound": 0,
+            "position": 9,
+            "token": "🐱",
+            "ownedProperty": [
+                "Tsing Yi"
+            ]
+        },
+        {
+            "currentRound": 0,
+            "inJail": false,
+            "balance": 0,
+            "lost": true,
+            "name": "TEST3",
+            "inJailRound": 0,
+            "position": 8,
+            "token": "🚗",
+            "ownedProperty": []
+        }
+    ]
+}
