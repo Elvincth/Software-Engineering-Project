@@ -26,7 +26,6 @@ public class GameData {
         ArrayList<Player> players = monopoly.getPlayers();
         JSONObject gameObject = new JSONObject();
         JSONArray createPlayerObjectArray = new JSONArray();
-        String arrayProperty[];
 
         // pushing player information
         for (int i = 0; i < players.size(); i++) {
@@ -37,13 +36,15 @@ public class GameData {
             playerObject.put("token", player.getToken()); // String type
             playerObject.put("balance", player.getBalance()); // Integer to String
 
-            // testing
+            // Player property
             JSONArray propertyArray = new JSONArray();
             if (player.getProperty().size() > 0) {
+                // Loop through the player property
                 for (int j = 0; j < player.getProperty().size(); j++) {
                     propertyArray.add(player.getProperty().get(j).getName());
                 }
             }
+
             playerObject.put("property", propertyArray);
             playerObject.put("position", player.getPosition());
             playerObject.put("currentRound", player.getCurrentRound());
