@@ -1,7 +1,6 @@
 
 package com.monopoly;
 
-
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,6 +15,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings("unchecked")
 public class GameData {
     Monopoly monopoly = null;
 
@@ -28,7 +28,6 @@ public class GameData {
         JSONObject putMain = new JSONObject();
         JSONArray createPlayerObjectArray = new JSONArray();
         String arrayProperty[];
-        Map<String, Object> forJsonObj = new HashMap<>();
 
         // pushing player information
         for (int i = 0; i < players.size(); i++) {
