@@ -7,13 +7,13 @@ public class Player implements PlayerAPI {
     private int position = 0; // Current position of the user
     private int inJailRound = 0; // Will reset after the user out of jail, start counting when the user is in
     private boolean justOutJail = false;// mean the player in just out jail in this round
-                                 // TODO: save
+    // TODO: save
     private int currentRound = 0;// TODO: save
     private boolean inJail = false;// TODO: save
     private String name = "";// TODO: save
     private String token = "";// TODO: save
     private boolean lost = false;
-    private boolean ThreeRoundOut = false; //jailRound
+    private boolean ThreeRoundOut = false; // jailRound
     private ArrayList<PropertySquare> ownedProperty = new ArrayList<PropertySquare>(); // TODO: save (player token or id
                                                                                        // sth like this)
     // private Utils utils = new Utils();
@@ -40,26 +40,28 @@ public class Player implements PlayerAPI {
     public void setToken(String token) {
         this.token = token;
     }
-    public void isJustOutJail(){
+
+    public void isJustOutJail() {
         justOutJail = true;
     }
 
-    public void isThreeRoundOut(){
+    public void isThreeRoundOut() {
         ThreeRoundOut = true;
     }
-    public void clearThreeRoundOut(){
+
+    public void clearThreeRoundOut() {
         ThreeRoundOut = false;
     }
 
-    public boolean getIsThreeRoundOut(){
+    public boolean getIsThreeRoundOut() {
         return ThreeRoundOut;
     }
 
-    public boolean getJustOutJail(){
+    public boolean getJustOutJail() {
         return justOutJail;
     }
 
-    public void clearJustOutJail(){
+    public void clearJustOutJail() {
         justOutJail = false;
     }
 
@@ -102,7 +104,7 @@ public class Player implements PlayerAPI {
         return balance;
     }
 
-    public ArrayList<PropertySquare> getProperty() {
+    public ArrayList<PropertySquare> getOwnedProperty() {
         return ownedProperty;
     }
 

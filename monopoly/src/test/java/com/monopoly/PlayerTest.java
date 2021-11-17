@@ -62,7 +62,7 @@ public class PlayerTest extends TestUtils {
         // Check if player balance is 0
         assertTrue(player.getBalance() == 0, description);
         // Check if the player have released all the owned property
-        assertTrue(player.getProperty().size() == 0, description);
+        assertTrue(player.getOwnedProperty().size() == 0, description);
         passed(description);
     }
 

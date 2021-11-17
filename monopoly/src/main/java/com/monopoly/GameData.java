@@ -42,10 +42,10 @@ public class GameData extends Utils {
 
             // Store player property name
             JSONArray ownedPropertyArr = new JSONArray();
-            if (player.getProperty().size() > 0) {
+            if (player.getOwnedProperty().size() > 0) {
                 // Loop through the player property
-                for (int j = 0; j < player.getProperty().size(); j++) {
-                    ownedPropertyArr.add(player.getProperty().get(j).getName());
+                for (int j = 0; j < player.getOwnedProperty().size(); j++) {
+                    ownedPropertyArr.add(player.getOwnedProperty().get(j).getName());
                 }
             }
 
@@ -106,6 +106,7 @@ public class GameData extends Utils {
             // Restore player before restoring the game data
             restoreGame(gameObj); // Restore essential data for the game
             // last phase restore property
+            restoreProperty(playerArr);
 
         } else {
             System.out.println(TAG + " No game saved!");
@@ -152,8 +153,21 @@ public class GameData extends Utils {
 
     // Restore the property owners
     private void restoreProperty(JSONArray playerArray) {
+        // loop through all players
         playerArray.forEach(item -> {
-            // JSONArray ownedProperty = (JSONArray) playerObj.get("ownedProperty"); //
+            JSONObject playerObj = (JSONObject) item;
+            JSONArray ownedProperty = (JSONArray) playerObj.get("ownedProperty");
+            String token = (String) playerObj.get("token");
+            Player player = tokenToPlayer(token);
+
+            for (int i = 0; i < ownedProperty.size(); i++) {
+                String propertyName = (String) ownedProperty.get(i);
+                System.out.println(nameToProperty(propertyName).getDisplayName());
+                // Add the owned property to the user
+                player.addProperty(nameToProperty(propertyName));
+
+                System.out.println(player.getOwnedProperty());
+            }
         });
     }
 
@@ -171,7 +185,7 @@ public class GameData extends Utils {
         // System.out.println(gameRound);
         // System.out.println(numLostPlayer);
 
-        System.out.println(nameToProperty("Mong Kok"));
+        // System.out.println(nameToProperty("Mong Kok"));
 
         // Restore the game data
         monopoly.setCurrentPlayer(currentPlayer);

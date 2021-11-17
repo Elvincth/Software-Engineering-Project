@@ -409,7 +409,7 @@ public class Monopoly {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getBalance() < 0) {
                 Player mynumLostPlayer = players.get(i);
-                ArrayList<PropertySquare> lostProperty = mynumLostPlayer.getProperty();
+                ArrayList<PropertySquare> lostProperty = mynumLostPlayer.getOwnedProperty();
 
                 System.out.printf("%s is Bankruptcy\n", mynumLostPlayer.getName());
                 utils.delay(SHORT_DELAY_TIME);
@@ -529,7 +529,7 @@ public class Monopoly {
                             + "Current Player: %s, Token: %s, Balance: $%d, Number of property: %d, Game round: %s \n"
                             + utils.ANSI_RESET,
                     currentPlayer.getName(), currentPlayer.getToken(), currentPlayer.getBalance(),
-                    currentPlayer.getProperty().size(), gameRound);
+                    currentPlayer.getOwnedProperty().size(), gameRound);
 
             if (DEBUG) {
                 System.out.printf("[DEBUG] Dice total: %s, Player round: %s, Jail Counter: %d%n%n", dice.getTotal(),
