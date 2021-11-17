@@ -1,7 +1,7 @@
 
 package com.monopoly;
 
-import java.io.FileNotFoundException;
+
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -13,6 +13,8 @@ import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GameData {
     Monopoly monopoly = null;
@@ -26,6 +28,7 @@ public class GameData {
         JSONObject putMain = new JSONObject();
         JSONArray createPlayerObjectArray = new JSONArray();
         String arrayProperty[];
+        Map<String, Object> forJsonObj = new HashMap<>();
 
         // pushing player information
         for (int i = 0; i < players.size(); i++) {
@@ -39,15 +42,15 @@ public class GameData {
             // testing
             JSONArray propertyArray = new JSONArray();
             if (player.getProperty().size() > 0) {
-                for(int j = 0; j < player.getProperty().size(); j++){
+                for (int j = 0; j < player.getProperty().size(); j++) {
                     propertyArray.add(player.getProperty().get(j).getName());
                 }
             }
             addPlayerObject.put("property", propertyArray);
-            addPlayerObject.put("position", player.getPosition()); 
-            addPlayerObject.put("currentRound", player.getCurrentRound()); 
-            addPlayerObject.put("inJailRound", player.getJailRound()); 
-            addPlayerObject.put("getLostStatus", player.getLost()); 
+            addPlayerObject.put("position", player.getPosition());
+            addPlayerObject.put("currentRound", player.getCurrentRound());
+            addPlayerObject.put("inJailRound", player.getJailRound());
+            addPlayerObject.put("getLostStatus", player.getLost());
 
             createPlayerObjectArray.add(addPlayerObject);
         }
@@ -70,7 +73,7 @@ public class GameData {
         return true;
     }
 
-    public boolean load() throws IOException, ParseException{
+    public boolean load() throws IOException, ParseException {
         // create json parser
         JSONParser parser = new JSONParser();
 

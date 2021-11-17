@@ -25,7 +25,7 @@ public class GameDataTest extends TestUtils{
         assertTrue(gameData.save(), description);
 
         passed(description);
-    } 
+    }
 
     @Test
     void loadTest() throws IOException, ParseException{
