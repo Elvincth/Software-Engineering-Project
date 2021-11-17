@@ -23,18 +23,18 @@ public class GameData {
 
     public boolean save() {
         ArrayList<Player> players = monopoly.getPlayers();
-        JSONObject putMain = new JSONObject();
+        JSONObject gameObject = new JSONObject();
         JSONArray createPlayerObjectArray = new JSONArray();
         String arrayProperty[];
 
         // pushing player information
         for (int i = 0; i < players.size(); i++) {
 
-            JSONObject addPlayerObject = new JSONObject();
+            JSONObject playerObject = new JSONObject();
             Player player = players.get(i);
-            addPlayerObject.put("name", player.getName()); // String type
-            addPlayerObject.put("token", player.getToken()); // String type
-            addPlayerObject.put("balance", player.getBalance()); // Integer to String
+            playerObject.put("name", player.getName()); // String type
+            playerObject.put("token", player.getToken()); // String type
+            playerObject.put("balance", player.getBalance()); // Integer to String
 
             // testing
             JSONArray propertyArray = new JSONArray();
@@ -43,23 +43,23 @@ public class GameData {
                     propertyArray.add(player.getProperty().get(j).getName());
                 }
             }
-            addPlayerObject.put("property", propertyArray);
-            addPlayerObject.put("position", player.getPosition());
-            addPlayerObject.put("currentRound", player.getCurrentRound());
-            addPlayerObject.put("inJailRound", player.getJailRound());
-            addPlayerObject.put("getLostStatus", player.getLost());
+            playerObject.put("property", propertyArray);
+            playerObject.put("position", player.getPosition());
+            playerObject.put("currentRound", player.getCurrentRound());
+            playerObject.put("inJailRound", player.getJailRound());
+            playerObject.put("getLostStatus", player.getLost());
 
-            createPlayerObjectArray.add(addPlayerObject);
+            createPlayerObjectArray.add(playerObject);
         }
 
-        putMain.put("playerDetails", createPlayerObjectArray);
-        putMain.put("gameRound", monopoly.getGameRound());
-        putMain.put("currentPlayerIndex", monopoly.getCurrentPlayerIndex());
+        gameObject.put("playerDetails", createPlayerObjectArray);
+        gameObject.put("gameRound", monopoly.getGameRound());
+        gameObject.put("currentPlayerIndex", monopoly.getCurrentPlayerIndex());
 
         // Write JSON file
         try (FileWriter file = new FileWriter("Gamedata.json")) {
             // We can write any JSONArray or JSONObject instance to the file
-            file.write(putMain.toString());
+            file.write(gameObject.toString());
             file.flush();
         } catch (IOException e) {
             e.printStackTrace();
