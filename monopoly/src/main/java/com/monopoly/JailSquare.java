@@ -19,14 +19,11 @@ public class JailSquare extends Square implements EffectSquareAPI {
         // Set player out of jail
         player.outOfJail();
 
-        player.setPosition(dice.getTotal());
-
-        monopoly.display();
-
+        player.isJustOutJail();
+        if (player.getIsThreeRoundOut() == true) {
+            System.out.printf("%s Round 3 now, you must pay $150 to leave the Jail \n", TAG);
+        }
         System.out.printf("%s %s You're out of jail.%n%n", TAG, isPay ? "Paid $150!" : "Same dice!");
-
-        monopoly.displayLanded();
-
     }
 
     private void rollDiceGetOut() {
@@ -39,21 +36,26 @@ public class JailSquare extends Square implements EffectSquareAPI {
     public void checkRound(int[] rolledDice) {
         // If same the user is free to go
         if (rolledDice[0] == rolledDice[1]) {
-            System.out.printf("%s Same dice! You're out of jail.%n%n", TAG);
             utils.delay(monopoly.SHORT_DELAY_TIME);
             outOfJail(false);
         } else {
             if (player.getJailRound() < 3) {
+                monopoly.display();
                 System.out.printf("%s Uh oh! Dice not the same, cannot get out of jail.%n%n", TAG);
-                utils.delay(monopoly.SHORT_DELAY_TIME);
                 player.setJailRound(player.getJailRound() + 1);
             } else {
-                payToOut();
+                roundThreeOut();
             }
         }
     }
 
     public void payToOut() {
+        outOfJail(true);
+        player.deductBalance(OUT_JAIL_PRICE);
+    }
+
+    public void roundThreeOut() {
+        player.isThreeRoundOut();
         outOfJail(true);
         player.deductBalance(OUT_JAIL_PRICE);
     }
@@ -73,7 +75,6 @@ public class JailSquare extends Square implements EffectSquareAPI {
                 // Yes and have enough money
                 if (answer && player.getBalance() >= OUT_JAIL_PRICE) {
                     payToOut();
-                    dice.roll();
                 } else if (answer && player.getBalance() < OUT_JAIL_PRICE) {
                     System.out.printf("%s You don't have enough money, now roll the dice.%n%n", TAG);
                     utils.delay(monopoly.SHORT_DELAY_TIME);

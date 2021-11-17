@@ -29,7 +29,7 @@ public class Monopoly {
     private ArrayList<String> tokenChoices = new ArrayList<String>();
     private ArrayList<String> tokenChoicesInfo = new ArrayList<String>();
     // Settings
-    private final boolean DEBUG = true;
+    private final boolean DEBUG = false;
     private boolean TEST = false; // is in testing mode, will skip display and next round
     protected final int SHORT_DELAY_TIME = DEBUG ? 10 : 1000;
     // Dice
@@ -146,6 +146,7 @@ public class Monopoly {
                                                                              // go
                                                                              // square
                 currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
+
             }
 
             landedSquare = getLandedSquare();// Set user landed square
@@ -167,15 +168,42 @@ public class Monopoly {
                 ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
             }
 
+            if(currentPlayer.getJustOutJail() == true){
+
+                utils.delay(SHORT_DELAY_TIME);
+
+                if(!currentPlayer.getIsThreeRoundOut()){
+                    dice.roll(); // Roll the dice
+                }
+
+
+                nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed
+
+                currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
+
+                
+                displayLanded();
+
+                landedSquare = getLandedSquare();// Set user landed square
+
+                display(); // Display the game board
+
+                if (landedSquare instanceof EffectSquareAPI) {
+                    ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
+                }
+            }
+
             // Ask for next turn or save the game
             selectedChoice = turnMenu.ask();
 
             checkPlayerLost();
+
+            currentPlayer.clearJustOutJail();
         }
 
         // check game round
         checkGameRound();
-
+        
         // User selected end my turn option
         if (selectedChoice.equals(commands[0])) {
             // Pass to next player
