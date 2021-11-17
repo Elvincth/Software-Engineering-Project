@@ -181,7 +181,7 @@ public class Monopoly {
 
                 utils.delay(SHORT_DELAY_TIME);
 
-                if (!currentPlayer.getIsThreeRoundOut()) {
+                if (!currentPlayer.getIsjailThreeRoundOut()) {
                     dice.roll(); // Roll the dice
                 }
 
@@ -616,3 +616,5 @@ public class Monopoly {
     }
 
 }
+
+
