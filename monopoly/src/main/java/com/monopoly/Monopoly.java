@@ -272,7 +272,9 @@ public class Monopoly {
 
     @Generated
     public void displayLanded() {
-        dice.display(); // Tell user what he rolled
+        if(!currentPlayer.getIsJailThreeRoundOut()){
+            dice.display(); // Tell user what he rolled
+        }
 
         utils.delay(SHORT_DELAY_TIME);
 

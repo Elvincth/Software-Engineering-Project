@@ -20,7 +20,7 @@ public class JailSquare extends Square implements EffectSquareAPI {
         player.outOfJail();
 
         player.isJustOutJail();
-        if (player.getIsJailThreeRoundOut() == true) {
+        if (player.getIsJailThreeRoundOut() == true && player.getInJail() == false) {
             System.out.printf("%s Round 3 now, you must pay $150 to leave the Jail \n", TAG);
         }
         System.out.printf("%s %s You're out of jail.%n%n", TAG, isPay ? "Paid $150!" : "Same dice!");
