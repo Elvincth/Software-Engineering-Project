@@ -19,7 +19,7 @@ public class MonopolyTest extends TestUtils {
     // For testing if the token is removed
     @Test
     void removeTokenTest() {
-        String description = "removeTokenT method run correctly";
+        String description = "removeToken method run correctly";
         // If the token removed successfully it will return true
         assertTrue(monopoly.removeToken("🐶"));
         passed(description);
@@ -29,7 +29,6 @@ public class MonopolyTest extends TestUtils {
     @Test
     void exitTest() {
         String description = " exit method run correctly";
-        // If the token removed successfully it will return true
         assertTrue(monopoly.exit());
         passed(description);
     }
