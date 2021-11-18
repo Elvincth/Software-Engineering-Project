@@ -24,12 +24,14 @@ public class PropertySquare extends Square implements EffectSquareAPI {
 
     // Display name for our game board
     // * = have owner
+    @Generated
     public String getDisplayName() {
         String ownerName = haveOwner() ? "\nOwner: " + owner.getToken() : "";
 
         return String.format("%s %s\n$%s %s", colorToEmoji(color), name, price, ownerName);
     }
 
+    @Generated
     private String colorToEmoji(EColor color) {
         if (EColor.BLUE == color) {
             return "🟦";
@@ -71,6 +73,7 @@ public class PropertySquare extends Square implements EffectSquareAPI {
         return color;
     }
 
+    @Generated
     public void removeOwner() {
         owner = null;
     }
@@ -97,28 +100,29 @@ public class PropertySquare extends Square implements EffectSquareAPI {
     }
 
     public void effectTo(Player player, Monopoly monopoly) {
-        // If no owner we ask if the player want to buy
-        if (!haveOwner()) {
-            YesNo buyProperty = new YesNo(monopoly.scanner,
-                    String.format("%s Do you want to buy %s with $%d?", TAG, name, price));
+        if (!monopoly.isTest()) {
+            // If no owner we ask if the player want to buy
+            if (!haveOwner()) {
+                YesNo buyProperty = new YesNo(monopoly.scanner,
+                        String.format("%s Do you want to buy %s with $%d?", TAG, name, price));
 
-            // Ask if the user want to buy if yes buy it
-            if (buyProperty.ask()) {
-                buy(player, monopoly);
-            } else {
-                monopoly.display();
+                // Ask if the user want to buy if yes buy it
+                if (buyProperty.ask()) {
+                    buy(player, monopoly);
+                } else {
+                    monopoly.display();
+                }
+
             }
 
-        }
-
-        // Have owner and player is not owner
-        // We will get rent and pass it to the owner
-        if (haveOwner() && owner.getToken() != player.getToken()) {
-            System.out.printf("%s You have paid rent $%d to %s%n%n", TAG, rent, owner.getName());
-            // PAY RENT
-            player.deductBalance(rent);
-            owner.addBalance(rent);
+            // Have owner and player is not owner
+            // We will get rent and pass it to the owner
+            if (haveOwner() && owner.getToken() != player.getToken()) {
+                System.out.printf("%s You have paid rent $%d to %s%n%n", TAG, rent, owner.getName());
+                // PAY RENT
+                player.deductBalance(rent);
+                owner.addBalance(rent);
+            }
         }
     }
-
 }

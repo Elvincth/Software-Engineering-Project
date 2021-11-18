@@ -272,7 +272,7 @@ public class Monopoly {
 
     @Generated
     public void displayLanded() {
-        if(!currentPlayer.getIsJailThreeRoundOut()){
+        if (!currentPlayer.getIsJailThreeRoundOut()) {
             dice.display(); // Tell user what he rolled
         }
 
@@ -306,10 +306,12 @@ public class Monopoly {
 
     }
 
+    @Generated
     public Dice getDice() {
         return dice;
     }
 
+    @Generated
     private void addPlayers() {
         String name = "";
         String token = "";
@@ -503,6 +505,7 @@ public class Monopoly {
     }
 
     // Used to check if any player have lost the game
+    @Generated
     private void checkPlayerLost() {
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getBalance() < 0) {

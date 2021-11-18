@@ -9,15 +9,19 @@ public class Square {
         this.position = position;
     }
 
+    @Generated
     public String getName() {
         return name;
     }
 
+    @Generated
     public String getDisplayName() {
         return name;
     }
 
-    public void setName(String name) {
+    @Generated
+    public void setName(String newName) {
+        name = newName;
     }
 
     public int getPosition() {

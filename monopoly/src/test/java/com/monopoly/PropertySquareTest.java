@@ -26,6 +26,7 @@ public class PropertySquareTest extends TestUtils {
     @Test
     void effectToTest() {
         String description = "Property can be buy correctly (player without enough money)";
+        propertySquare2.effectTo(player, monopoly);
         propertySquare2.buy(player, monopoly);
         // The owner should be null (not enough money to buy property)
         assertTrue(propertySquare2.getOwner() != player, description);
