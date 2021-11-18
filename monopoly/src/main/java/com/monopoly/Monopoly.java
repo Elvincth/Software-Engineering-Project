@@ -104,41 +104,34 @@ public class Monopoly {
         String[] commands = { "1", "2", "3" };
         String[] choicesInfo = { "Start Game", "Load game", "Exit" };
         Menu startMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo);
-        if (!TEST) {
-            String userChoice = startMenu.askChoice();
 
-            if (userChoice.equals(choicesInfo[0]) && !TEST) {
-                if (DEBUG) {
-                    players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
-                    players.add(new Player("TEST2", tokenChoicesInfo.get(1)));
-                    players.add(new Player("TEST3", tokenChoicesInfo.get(2)));
-                } else {
-                    addPlayers();
-                }
+        String userChoice = startMenu.askChoice();
 
-                nextTurn(false);
+        if (userChoice.equals(choicesInfo[0]) && !TEST) {
+            if (DEBUG) {
+                players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
+                players.add(new Player("TEST2", tokenChoicesInfo.get(1)));
+                players.add(new Player("TEST3", tokenChoicesInfo.get(2)));
+            } else {
+                addPlayers();
             }
 
-            // Load a game data
-            if (userChoice.equals(choicesInfo[1])) {
-                gameData.load();
-            }
-
-            if (userChoice.equals(choicesInfo[2])) {
-                exit();
-            }
-        } else {
-            // For test
-            players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
-            players.add(new Player("TEST2", tokenChoicesInfo.get(1)));
-            players.add(new Player("TEST3", tokenChoicesInfo.get(2)));
+            nextTurn(false);
         }
-        // // Add a fake player for test
-        // if (TEST) {1
-        // players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
-        // }
 
+        // Load a game data
+        if (userChoice.equals(choicesInfo[1])) {
+            gameData.load();
+        }
+
+        if (userChoice.equals(choicesInfo[2])) {
+            exit();
+        }
     }
+    // // Add a fake player for test
+    // if (TEST) {1
+    // players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
+    // }
 
     // Handle what the user will do in the turn
     // IS it loading back the data or not?
