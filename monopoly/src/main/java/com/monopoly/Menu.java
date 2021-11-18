@@ -10,6 +10,7 @@ public class Menu extends Utils {
     private Scanner scanner = null;
     private boolean listLayout = false;
 
+    @Generated
     Menu(Scanner scanner, String message, String[] commands, String[] choices, Boolean listLayout) {
         this.scanner = scanner;
         this.message = message;
@@ -22,19 +23,23 @@ public class Menu extends Utils {
         }
     }
 
+    @Generated
     Menu(Scanner scanner, String message, String[] commands, String[] choices) {
         this(scanner, message, commands, choices, true);
     }
 
+    @Generated
     Menu(Scanner scanner, String message, ArrayList<String> commands, ArrayList<String> choices, Boolean listLayout) {
         this(scanner, message, commands.toArray(new String[0]), choices.toArray(new String[0]));
     }
 
+    @Generated
     Menu(Scanner scanner, String message, ArrayList<String> commands, ArrayList<String> choices) {
         this(scanner, message, commands, choices, true);
     }
 
     // Check if the input work in choice
+    @Generated
     private boolean inChoice(String word) {
         for (int i = 0; i < commands.length; i++) {
             if (word.equals(commands[i])) {
@@ -44,6 +49,7 @@ public class Menu extends Utils {
         return false;
     }
 
+    @Generated
     private String commandToChoice(String word) {
         for (int i = 0; i < commands.length; i++) {
             if (word.equals(commands[i])) {
@@ -53,6 +59,7 @@ public class Menu extends Utils {
         return "";
     }
 
+    @Generated
     private void displayMenu() {
         String separator = listLayout ? "\n" : " ";
         for (int i = 0; i < commands.length; i++) {
@@ -60,6 +67,7 @@ public class Menu extends Utils {
         }
     }
 
+    @Generated
     private String askHandler(Boolean returnCommand) {
         String userInput = "";
 
@@ -85,11 +93,13 @@ public class Menu extends Utils {
     }
 
     // Will return the user command
+    @Generated
     public String ask() {
         return askHandler(true);
     }
 
     // Will return the user picked choice
+    @Generated
     public String askChoice() {
         return askHandler(false);
     }
