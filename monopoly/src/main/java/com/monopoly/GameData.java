@@ -131,7 +131,7 @@ public class GameData extends Utils {
                 clearScreen();
 
                 // Continue the game play
-                monopoly.nextPlayer();
+                monopoly.nextTurn(true);
 
             }
 

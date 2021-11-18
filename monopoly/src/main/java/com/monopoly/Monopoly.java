@@ -113,7 +113,7 @@ public class Monopoly {
                 addPlayers();
             }
 
-            nextTurn();
+            nextTurn(false);
         }
 
         // Load a game data
@@ -133,7 +133,10 @@ public class Monopoly {
     }
 
     // Handle what the user will do in the turn
-    private void nextTurn() {
+    // IS it loading back the data or not?
+    // If yes skip all the dice and things
+    // Just display the menu
+    public void nextTurn(boolean isLoad) {
         int nextPosition = 0;
         String selectedChoice = "1";
         String[] commands = { "1", "2" };
@@ -143,74 +146,83 @@ public class Monopoly {
         currentPlayer = players.get(currentPlayerIndex);
         Square landedSquare = squares[0];// Store user landed square
 
-        if (!currentPlayer.getLost()) {
-            System.out.printf("It is your turn %s !\n", currentPlayer.getName());
+        if (!isLoad) {
+            if (!currentPlayer.getLost()) {
+                System.out.printf("It is your turn %s !\n", currentPlayer.getName());
 
-            // Player not in jail, we let user roll the dice
-
-            utils.delay(SHORT_DELAY_TIME);
-
-            if (!currentPlayer.getInJail()) {
-                dice.roll(); // Roll the dice
-
-                nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed
-                                                                             // go
-                                                                             // square
-                currentPlayer.movePosition(dice.getTotal()); // Set the position as the rolled dice number
-            }
-
-            landedSquare = getLandedSquare();// Set user landed square
-
-            if (!currentPlayer.getInJail()) {
-                displayLanded();
-            }
-
-            display(); // Display the game board
-
-            if (nextPosition > 19 && !currentPlayer.getInJail()) {
-                // Tell the player he got 1500 at GO or passed it
-                System.out.printf(utils.ANSI_GREEN + "[GO]" + utils.ANSI_RESET + " %s Passed GO +$1500! \n\n",
-                        currentPlayer.getName());
-            }
-
-            // Check is the square is a effect square
-            if (landedSquare instanceof EffectSquareAPI) {
-                ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
-            }
-
-            if (currentPlayer.getJustOutJail() == true) {
+                // Player not in jail, we let user roll the dice
 
                 utils.delay(SHORT_DELAY_TIME);
 
-                if (!currentPlayer.getIsJailThreeRoundOut()) {
+                if (!currentPlayer.getInJail()) {
                     dice.roll(); // Roll the dice
+
+                    nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting
+                                                                                 // passed
+                                                                                 // go
+                                                                                 // square
+                    currentPlayer.movePosition(dice.getTotal()); // Set the position as the rolled dice number
                 }
-
-                nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting passed
-
-                currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
-
-                displayLanded();
 
                 landedSquare = getLandedSquare();// Set user landed square
 
+                if (!currentPlayer.getInJail()) {
+                    displayLanded();
+                }
+
                 display(); // Display the game board
 
+                if (nextPosition > 19 && !currentPlayer.getInJail()) {
+                    // Tell the player he got 1500 at GO or passed it
+                    System.out.printf(utils.ANSI_GREEN + "[GO]" + utils.ANSI_RESET + " %s Passed GO +$1500! \n\n",
+                            currentPlayer.getName());
+                }
+
+                // Check is the square is a effect square
                 if (landedSquare instanceof EffectSquareAPI) {
                     ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
                 }
+
+                if (currentPlayer.getJustOutJail() == true) {
+
+                    utils.delay(SHORT_DELAY_TIME);
+
+                    if (!currentPlayer.getIsJailThreeRoundOut()) {
+                        dice.roll(); // Roll the dice
+                    }
+
+                    nextPosition = dice.getTotal() + currentPlayer.getPosition();// Get next position for detecting
+                                                                                 // passed
+
+                    currentPlayer.setPosition(dice.getTotal()); // Set the position as the rolled dice number
+
+                    displayLanded();
+
+                    landedSquare = getLandedSquare();// Set user landed square
+
+                    display(); // Display the game board
+
+                    if (landedSquare instanceof EffectSquareAPI) {
+                        ((EffectSquareAPI) landedSquare).effectTo(currentPlayer, this); // If yes execute effect to
+                    }
+                }
+
+                // Ask for next turn or save the game
+                selectedChoice = turnMenu.ask();
+
+                checkPlayerLost();
+
+                currentPlayer.clearJustOutJail();
             }
 
+            // check game round
+            checkGameRound();
+        } else {
+            // is load game skip to the turn menu part
+            display();
             // Ask for next turn or save the game
             selectedChoice = turnMenu.ask();
-
-            checkPlayerLost();
-
-            currentPlayer.clearJustOutJail();
         }
-
-        // check game round
-        checkGameRound();
 
         // User selected end my turn option
         if (selectedChoice.equals(commands[0])) {
@@ -268,7 +280,7 @@ public class Monopoly {
     }
 
     // Set the player index as next player (Pass turn to next player)
-    public void nextPlayer() {
+    private void nextPlayer() {
         // Set to the next player
         if (currentPlayerIndex == players.size() - 1) {
             currentPlayerIndex = 0;
@@ -276,7 +288,7 @@ public class Monopoly {
             currentPlayerIndex += 1;
         }
         if (!endGameCheck(gameRound)) {
-            nextTurn();
+            nextTurn(false);
         } else {
             // The game is end
             utils.clearScreen();
