@@ -89,7 +89,8 @@ public class Monopoly {
     }
 
     // Start the game - Edit for test
-    public boolean start() throws IOException, ParseException {
+    @Generated
+    public void start() throws IOException, ParseException {
         reset(); // Reset the game
         utils.clearScreen();
         System.out.println(
@@ -132,8 +133,6 @@ public class Monopoly {
             players.add(new Player("TEST2", tokenChoicesInfo.get(1)));
             players.add(new Player("TEST3", tokenChoicesInfo.get(2)));
         }
-
-        return true;
         // // Add a fake player for test
         // if (TEST) {1
         // players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
@@ -570,6 +569,7 @@ public class Monopoly {
 
     // For display the game board
     // Edited for test
+    @Generated
     public boolean display() {
         if (!TEST) {
             int height = 5;
