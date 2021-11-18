@@ -133,7 +133,7 @@ public class Monopoly {
     }
 
     // Handle what the user will do in the turn
-    public void nextTurn() {
+    private void nextTurn() {
         int nextPosition = 0;
         String selectedChoice = "1";
         String[] commands = { "1", "2" };
@@ -268,7 +268,7 @@ public class Monopoly {
     }
 
     // Set the player index as next player (Pass turn to next player)
-    private void nextPlayer() {
+    public void nextPlayer() {
         // Set to the next player
         if (currentPlayerIndex == players.size() - 1) {
             currentPlayerIndex = 0;
