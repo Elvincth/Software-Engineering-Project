@@ -560,9 +560,8 @@ public class Monopoly {
     }
 
     // For display the game board
-    // Edited for test
     @Generated
-    public boolean display() {
+    public void display() {
         if (!TEST) {
             int height = 5;
             int width = 20;
@@ -642,7 +641,6 @@ public class Monopoly {
                         currentPlayer.getCurrentRound(), currentPlayer.getInJailRound());
             }
         }
-        return true;
     };
 
     // Get all squares
