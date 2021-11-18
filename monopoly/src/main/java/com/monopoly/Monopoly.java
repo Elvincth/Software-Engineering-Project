@@ -88,9 +88,8 @@ public class Monopoly {
         squares[19] = new PropertySquare("Tai O", 19, 600, 25, EColor.YELLOW);
     }
 
-    // Start the game
-    @Generated
-    public void start() throws IOException, ParseException {
+    // Start the game - Edit for test
+    public boolean start() throws IOException, ParseException {
         reset(); // Reset the game
         utils.clearScreen();
         System.out.println(
@@ -104,29 +103,37 @@ public class Monopoly {
         String[] commands = { "1", "2", "3" };
         String[] choicesInfo = { "Start Game", "Load game", "Exit" };
         Menu startMenu = new Menu(scanner, "Enter a choice", commands, choicesInfo);
-        String userChoice = startMenu.askChoice();
+        if (!TEST) {
+            String userChoice = startMenu.askChoice();
 
-        if (userChoice.equals(choicesInfo[0]) && !TEST) {
-            if (DEBUG) {
-                players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
-                players.add(new Player("TEST2", tokenChoicesInfo.get(1)));
-                players.add(new Player("TEST3", tokenChoicesInfo.get(2)));
-            } else {
-                addPlayers();
+            if (userChoice.equals(choicesInfo[0]) && !TEST) {
+                if (DEBUG) {
+                    players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
+                    players.add(new Player("TEST2", tokenChoicesInfo.get(1)));
+                    players.add(new Player("TEST3", tokenChoicesInfo.get(2)));
+                } else {
+                    addPlayers();
+                }
+
+                nextTurn(false);
             }
 
-            nextTurn(false);
+            // Load a game data
+            if (userChoice.equals(choicesInfo[1])) {
+                gameData.load();
+            }
+
+            if (userChoice.equals(choicesInfo[2])) {
+                exit();
+            }
+        } else {
+            // For test
+            players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
+            players.add(new Player("TEST2", tokenChoicesInfo.get(1)));
+            players.add(new Player("TEST3", tokenChoicesInfo.get(2)));
         }
 
-        // Load a game data
-        if (userChoice.equals(choicesInfo[1])) {
-            gameData.load();
-        }
-
-        if (userChoice.equals(choicesInfo[2])) {
-            exit();
-        }
-
+        return true;
         // // Add a fake player for test
         // if (TEST) {1
         // players.add(new Player("TEST1", tokenChoicesInfo.get(0)));
@@ -306,7 +313,6 @@ public class Monopoly {
 
     }
 
-    @Generated
     public Dice getDice() {
         return dice;
     }
@@ -363,14 +369,16 @@ public class Monopoly {
 
     // Remove the selected token from commands since it have been picked by other
     // users
-    @Generated
-    private void removeToken(String token) {
+    // Edited for test
+    public boolean removeToken(String token) {
         for (int i = 0; i < tokenChoices.size(); i++) {
             if (token.equals(tokenChoicesInfo.get(i))) {
                 tokenChoices.remove(i);
                 tokenChoicesInfo.remove(i);
+                return true;
             }
         }
+        return false;
     }
 
     @Generated
@@ -383,8 +391,8 @@ public class Monopoly {
         }
     }
 
-    @Generated
-    private void printSettlementTable() {
+    // Edited for test
+    private boolean printSettlementTable() {
         System.out.printf("%-11s %-10s %-10s\n", "Player Name", "Balance", "Lose");
         System.out.printf("--------------------------------\n");
         for (int i = 0; i < players.size(); i++) {
@@ -392,11 +400,12 @@ public class Monopoly {
                     players.get(i).getLost() ? "Yes" : "No");
         }
         System.out.printf("--------------------------------\n");
+        return true;
     }
 
     // Exit - New
-    @Generated
-    private void exit() {
+    // Edited for test
+    public boolean exit() {
         System.out.println(utils.ANSI_YELLOW + "  ______     ________   ______     ________ ");
         System.out.println(" |  _ \\ \\   / /  ____| |  _ \\ \\   / /  ____|");
         System.out.println(" | |_) \\ \\_/ /| |__    | |_) \\ \\_/ /| |__   ");
@@ -433,6 +442,7 @@ public class Monopoly {
         System.out.println("       ██████████████████████████████   ");
         System.out.println("       ██████████████████████████       ");
         System.out.println("             ███████████████            \n" + utils.ANSI_RESET);
+        return true;
     }
 
     @Generated
@@ -559,8 +569,8 @@ public class Monopoly {
     }
 
     // For display the game board
-    @Generated
-    protected void display() {
+    // Edited for test
+    public boolean display() {
         if (!TEST) {
             int height = 5;
             int width = 20;
@@ -640,6 +650,7 @@ public class Monopoly {
                         currentPlayer.getCurrentRound(), currentPlayer.getInJailRound());
             }
         }
+        return true;
     };
 
     // Get all squares

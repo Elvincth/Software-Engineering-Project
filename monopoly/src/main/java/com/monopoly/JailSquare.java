@@ -61,6 +61,7 @@ public class JailSquare extends Square implements EffectSquareAPI {
         player.deductBalance(OUT_JAIL_PRICE);
     }
 
+    @Generated
     public void effectTo(Player player, Monopoly monopoly) {
         this.monopoly = monopoly;
         this.player = player;

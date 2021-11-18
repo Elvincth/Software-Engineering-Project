@@ -99,6 +99,7 @@ public class PropertySquare extends Square implements EffectSquareAPI {
         return owner != null;
     }
 
+    @Generated
     public void effectTo(Player player, Monopoly monopoly) {
         if (!monopoly.isTest()) {
             // If no owner we ask if the player want to buy
