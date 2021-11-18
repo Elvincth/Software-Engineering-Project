@@ -15,6 +15,7 @@ public class Utils {
         System.out.flush();
     }
 
+    @Generated
     public void delay(int ms) {
         try {
             Thread.sleep(ms);

@@ -6,11 +6,13 @@ public class YesNo extends Utils {
     private String message = "";
     private Scanner scanner = null;
 
+    @Generated
     YesNo(Scanner scanner, String message) {
         this.scanner = scanner;
         this.message = message;
     }
 
+    @Generated
     public boolean ask(boolean clearScreen) {
 
         String userInput = "";
@@ -40,6 +42,7 @@ public class YesNo extends Utils {
     }
 
     // Ask with clear screen as default
+    @Generated
     public boolean ask() {
         return ask(true);
     }

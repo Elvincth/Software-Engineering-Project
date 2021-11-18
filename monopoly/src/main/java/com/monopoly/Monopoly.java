@@ -49,6 +49,7 @@ public class Monopoly {
         reset(); // Init all
     }
 
+    @Generated
     Monopoly() {
         this(false);
     }
@@ -88,6 +89,7 @@ public class Monopoly {
     }
 
     // Start the game
+    @Generated
     public void start() throws IOException, ParseException {
         reset(); // Reset the game
         utils.clearScreen();
@@ -136,6 +138,7 @@ public class Monopoly {
     // IS it loading back the data or not?
     // If yes skip all the dice and things
     // Just display the menu
+    @Generated
     public void nextTurn(boolean isLoad) {
         int nextPosition = 0;
         String selectedChoice = "1";
@@ -238,6 +241,7 @@ public class Monopoly {
     }
 
     // Used to ask will the user save the game
+    @Generated
     private void askSave() {
         YesNo saveQuestion = new YesNo(scanner, "Do you want to save the game, before you back to main menu?");
         boolean saveGame = false;
@@ -261,10 +265,12 @@ public class Monopoly {
 
     }
 
+    @Generated
     public Square getLandedSquare() {
         return squares[currentPlayer.getPosition()];
     }
 
+    @Generated
     public void displayLanded() {
         dice.display(); // Tell user what he rolled
 
@@ -280,6 +286,7 @@ public class Monopoly {
     }
 
     // Set the player index as next player (Pass turn to next player)
+    @Generated
     private void nextPlayer() {
         // Set to the next player
         if (currentPlayerIndex == players.size() - 1) {
@@ -352,6 +359,7 @@ public class Monopoly {
 
     // Remove the selected token from commands since it have been picked by other
     // users
+    @Generated
     private void removeToken(String token) {
         for (int i = 0; i < tokenChoices.size(); i++) {
             if (token.equals(tokenChoicesInfo.get(i))) {
@@ -361,6 +369,7 @@ public class Monopoly {
         }
     }
 
+    @Generated
     private void checkGameRound() {// count the game round
         if (roundCounter >= players.size() - 1) {
             gameRound++;
@@ -370,6 +379,7 @@ public class Monopoly {
         }
     }
 
+    @Generated
     private void printSettlementTable() {
         System.out.printf("%-11s %-10s %-10s\n", "Player Name", "Balance", "Lose");
         System.out.printf("--------------------------------\n");
@@ -381,6 +391,7 @@ public class Monopoly {
     }
 
     // Exit - New
+    @Generated
     private void exit() {
         System.out.println(utils.ANSI_YELLOW + "  ______     ________   ______     ________ ");
         System.out.println(" |  _ \\ \\   / /  ____| |  _ \\ \\   / /  ____|");
@@ -420,6 +431,7 @@ public class Monopoly {
         System.out.println("             ███████████████            \n" + utils.ANSI_RESET);
     }
 
+    @Generated
     public void endGame() {
         String[] commands = { "1", "2" };
         String[] choicesInfo = { "Back to main menu", "Exit" };
@@ -471,6 +483,7 @@ public class Monopoly {
 
     }
 
+    @Generated
     public boolean endGameCheck(int gameRound) {// check wether the game is end or not
         for (int i = 0; i < players.size(); i++) {
             if (players.get(i).getLost()) {
@@ -508,6 +521,7 @@ public class Monopoly {
     }
 
     // Get user tokens by position
+    @Generated
     private String getTokensByPos(int pos) {
         String display = "";
 
@@ -524,6 +538,7 @@ public class Monopoly {
     }
 
     // Get user token that is in jail
+    @Generated
     private ArrayList<String> getJailedToken() {
         ArrayList<String> tokens = new ArrayList<String>();
 
@@ -539,7 +554,8 @@ public class Monopoly {
     }
 
     // For display the game board
-    public void display() {
+    @Generated
+    protected void display() {
         if (!TEST) {
             int height = 5;
             int width = 20;

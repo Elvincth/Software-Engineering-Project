@@ -1,20 +1,20 @@
 {
     "game": {
-        "currentPlayerIndex": 0,
-        "currentPlayer": "🐶",
-        "roundCounter": 0,
-        "gameRound": 3,
+        "currentPlayerIndex": 1,
+        "currentPlayer": "🐱",
+        "roundCounter": 2,
+        "gameRound": 1,
         "numLostPlayer": 0
     },
     "players": [
         {
             "currentRound": 0,
             "inJail": false,
-            "balance": 40,
+            "balance": 0,
             "lost": false,
             "name": "p1",
             "inJailRound": 0,
-            "position": 19,
+            "position": 7,
             "token": "🐶",
             "ownedProperty": [
                 "Mong Kok"
@@ -23,12 +23,23 @@
         {
             "currentRound": 0,
             "inJail": false,
-            "balance": 200,
+            "balance": 240,
             "lost": false,
             "name": "p2",
             "inJailRound": 0,
-            "position": 7,
+            "position": 12,
             "token": "🐱",
+            "ownedProperty": []
+        },
+        {
+            "currentRound": 0,
+            "inJail": false,
+            "balance": 500,
+            "lost": false,
+            "name": "p3",
+            "inJailRound": 0,
+            "position": 12,
+            "token": "🚗",
             "ownedProperty": []
         }
     ]
