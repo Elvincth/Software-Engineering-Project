@@ -390,8 +390,8 @@ public class Monopoly {
         }
     }
 
-    // Edited for test
-    private boolean printSettlementTable() {
+    @Generated
+    private void printSettlementTable() {
         System.out.printf("%-11s %-10s %-10s\n", "Player Name", "Balance", "Lose");
         System.out.printf("--------------------------------\n");
         for (int i = 0; i < players.size(); i++) {
@@ -399,7 +399,6 @@ public class Monopoly {
                     players.get(i).getLost() ? "Yes" : "No");
         }
         System.out.printf("--------------------------------\n");
-        return true;
     }
 
     // Exit - New
