@@ -47,7 +47,7 @@ public class Dice implements DiceAPI {
         // System.out.print("\033[?25h"); // restore the cursor
 
         // return dice[num1][num2];
-        return 3;
+        return dice[num1][num2];
     }
 
     // Random the dice
