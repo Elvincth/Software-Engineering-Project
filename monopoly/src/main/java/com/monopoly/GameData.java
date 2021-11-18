@@ -127,12 +127,11 @@ public class GameData extends Utils {
 
                 delay(monopoly.SHORT_DELAY_TIME);
 
-                //Clear the screen
+                // Clear the screen
                 clearScreen();
 
                 // Continue the game play
-                monopoly.nextTurn();
-
+                monopoly.nextPlayer();
 
             }
 
